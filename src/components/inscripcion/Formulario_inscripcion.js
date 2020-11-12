@@ -20,6 +20,7 @@ export class Formulario_inscripcion extends Component {
         inscrite: {
         },
       };
+      console.log("test type",this.props.match.params.nombre)
     }
     enCambio = (event) => {
         let nombre = event.target.name;
@@ -34,10 +35,9 @@ export class Formulario_inscripcion extends Component {
         egresadeAEnviar.celular = parseInt(egresadeAEnviar.celular);
         delete egresadeAEnviar.nombre;
         delete egresadeAEnviar.apellido;
-        console.log(egresadeAEnviar);
         egresadeAEnviar.estadoId=1
-        console.log(egresadeAEnviar.nivelInglesId)
         egresadeAEnviar.esEmpleado="false"
+        egresadeAEnviar.modulo=this.props.match.params.nombre
         axios.post(`http://localhost:8000/api/estudiantes/`, egresadeAEnviar)
           .then(function (respuesta) {
             window.open("/form", "_self");

@@ -5,14 +5,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Formulario_inscrites from './components/inscripcion/Formulario_inscripcion';
 import Navbar from './components/inscripcion/navbar/navbar.js';
 import Titulo_Inscripcion from './components/inscripcion/titulo_inscripcion.js';
+import Listar_Modulos from './components/inscripcion/listar_modulos';
 
 function App() {
   return (
     <div>
         <Navbar/>
         <Router>
-        <Route path="/formulario" exact component={Formulario_inscrites} />
-        <Route exact path="/form" render={ (props) =>(
+        <Route path="/" exact component={Listar_Modulos} />
+        <Route exact path="/formulario/:nombre" render={ (props) =>(
             <React.Fragment>   
             <Titulo_Inscripcion/> 
             <Formulario_inscrites {...props} />
