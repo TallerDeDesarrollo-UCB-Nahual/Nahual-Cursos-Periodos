@@ -6,10 +6,14 @@ export default class Navbar extends Component {
 
     render() {
         return (
+            
             <div className="menu">
                 <img src={logo} className="logo"></img>
                 <label className="nav-titulo">Inscripciones</label>
+                <div className="linea2"></div>
+
             </div>
+        
         )
     }
 }

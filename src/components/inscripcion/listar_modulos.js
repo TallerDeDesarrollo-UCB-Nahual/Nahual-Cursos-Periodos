@@ -40,15 +40,13 @@ class Listar_Modulos extends Component {
           <Table celled className="tarjeta-tabla">
             <Table.Header>
               <Table.Row >
-                <Table.HeaderCell className="cabeceras-tabla">Modulo Cursado</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-
             <Table.Body>
               {this.state.filasEncontradas.map((value) => (
                 <Table.Row key={value.id} >
                   <Table.Cell className="bordes-tabla">
-                    <Label className="tarjeta-verde">• {value.nombre}</Label></Table.Cell>
+                    <Label className="tarjeta-verde">{value.nombre}</Label></Table.Cell>
                     <Table.Cell colSpan="3" className="bordes-tabla">
                     {<Link to={`/formulario/${value.nombre}`}><Button className="view-button">
                       <i className="plus icon"></i>
@@ -59,7 +57,6 @@ class Listar_Modulos extends Component {
                 </Table.Row>
               ))}
             </Table.Body>
-
             <Table.Footer>
               <Table.Row>
                 <Table.HeaderCell colSpan='4' className="no-border">
