@@ -1,0 +1,14 @@
+.tabla{
+    margin: 40px;
+}
+
+.titulo{
+    font-size: 24px;
+    color: #808080;
+}
+
+.linea{
+    width: 100%;
+    border-bottom: 1px solid #BDBDBD;
+    color: #808080;
+}
