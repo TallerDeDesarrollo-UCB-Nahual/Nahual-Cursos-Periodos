@@ -40,7 +40,7 @@ export class Formulario_inscripcion extends Component {
         egresadeAEnviar.modulo=this.props.match.params.nombre
         axios.post(`http://localhost:8000/api/estudiantes/`, egresadeAEnviar)
           .then(function (respuesta) {
-            window.open("/form", "_self");
+            window.open("/", "_self");
           })
           .catch(function (error) {
             this.setState({ exito: false });
@@ -71,7 +71,12 @@ export class Formulario_inscripcion extends Component {
   }
 render() {
     return (
-      <div className="contenedor">
+      <div>
+          <div class="titulo">
+                <h1>Elegiste el curso {this.props.match.params.nombre}. Déjanos tus datos</h1>
+                <div className="linea"></div>
+          </div>
+        <div className="contenedor">
         <Form id="myForm" onSubmit={this.enConfirmacion} className="ui form">
           <Grid divided='vertically' stackable columns={2}>
             <Grid.Row>
@@ -175,8 +180,8 @@ render() {
                     maxLength="30"
                     placeholder="Zona"
                     value={this.state.inscrite.zona}
-                    validators={['required', 'matchRegexp:^[A-Za-z ]+$']}
-                    errorMessages={['Este campo es requerido', 'El campo no acepta valores numéricos']}
+                    validators={['required']}
+                    errorMessages={['Este campo es requerido']}
                     style={{ margin: "0px 15%" }}
                     onChange={this.enCambio}
                   />
@@ -187,7 +192,7 @@ render() {
           </Grid>
           <Grid centered rows={1} columns={1}>
             <GridRow>
-              <Link to={'/listaEgresades'}><Button className="ui basic negative button" style={{ margin: "0px 50px 10px 50px" }}>Cancelar</Button></Link>
+              <Link to={'/'}><Button class="ui grey button" style={{color:"white", margin: "0px 50px 10px 50px",background:"hsl(0, 0%, 50%)" }}>Cancelar</Button></Link>
               <Confirm
                 header='¿Está seguro que desea guardar los cambios?'
                 content="Si confirma el guardado, será redirigido a la lista principal"
@@ -197,7 +202,7 @@ render() {
                 onCancel={this.handleCancel}
                 onConfirm={this.handleConfirm}
               />
-              <Button className="ui basic positive button" style={{ margin: "0px 50px 10px 50px", background: "rgb(129,206,50)" }}>Confirmar</Button>
+              <Button class="ui green button" style={{ color:"white",margin: "0px 50px 10px 50px", background: "rgb(129,206,50)" }}>Confirmar</Button>
             </GridRow>
 
           </Grid>
@@ -205,7 +210,9 @@ render() {
         {(this.state.exito === false) && (
           <MensajeResultante encabezadoDelMensaje="Guardado no exitoso" cuerpoDelMensaje="Hubo un error al momento de guardar, intenta de nuevo más tarde" colorDeFondo="red" />)}
       </div>
-    );
+
+      </div>
+          );
   }
 }
 export default Formulario_inscripcion;
