@@ -7,6 +7,7 @@ import Navbar from './components/inscripcion/navbar/navbar.js';
 import Titulo_Inscripcion from './components/inscripcion/titulo_inscripcion.js';
 import Listar_Modulos from './components/inscripcion/listar_modulos';
 import CrearCurso from './components/cursos/crear_curso';
+import ListarPeriodos from './components/periodos/ListarPeriodos';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             </React.Fragment>
           )}/>
         <Route path="/crearCurso" exact component={CrearCurso} />
+        <Route path="/listarPeriodos" exact component={ListarPeriodos} />
         </Router>
 
     </div>
