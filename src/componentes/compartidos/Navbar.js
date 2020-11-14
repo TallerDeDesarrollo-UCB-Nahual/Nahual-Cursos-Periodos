@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../../recursos/imagenes/logo.png';
 import '../../estilos/Navbar.css';
-//import BarraNavegacionAutenticacion from "./../inicio-de-sesion/BarraNavegacionAutenticacion";
 
 export default class Navbar extends Component {
     render() {
