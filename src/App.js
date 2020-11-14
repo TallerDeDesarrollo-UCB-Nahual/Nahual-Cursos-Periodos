@@ -6,6 +6,7 @@ import Formulario_inscrites from './components/inscripcion/Formulario_inscripcio
 import Navbar from './components/inscripcion/navbar/navbar.js';
 import Titulo_Inscripcion from './components/inscripcion/titulo_inscripcion.js';
 import Listar_Modulos from './components/inscripcion/listar_modulos';
+import CrearCurso from './components/cursos/crear_curso';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Formulario_inscrites {...props} />
             </React.Fragment>
           )}/>
+        <Route path="/crearCurso" exact component={CrearCurso} />
         </Router>
 
     </div>
