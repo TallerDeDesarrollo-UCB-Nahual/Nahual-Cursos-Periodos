@@ -6,6 +6,10 @@
   justify-content: center;
 }
 
+.spacedBetween {
+  justify-content: space-between;
+}
+
 .columnGap {
   column-gap: 1em;
 }
@@ -25,4 +29,17 @@
 
 .selectBar {
   width: 15em;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.year-picker {
+  height: 3em;
+  width: 100% !important;
+}
+
+.jTime {
+  width: 100% !important;
 }

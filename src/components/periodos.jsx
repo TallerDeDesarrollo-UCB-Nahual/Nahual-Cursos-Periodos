@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Button } from "shards-react";
 import { obtenerPeriodos } from "../servicios/periodos";
-import {Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function Periodos() {
     const [periodos, setPeriodos] = useState([])
@@ -43,7 +43,7 @@ export default function Periodos() {
                                     <td>{p.topico.nombre}</td>
                                     <td>
                                         <div className={'displayFlex centered columnGap'}>
-                                                <Button theme="success">Editar</Button>
+                                                <Link to={`/periodos/${p.id}`} className={'linkElement'}>Editar</Link>
                                                 <Button theme="danger">Eliminar</Button>
                                         </div>
                                     </td>
