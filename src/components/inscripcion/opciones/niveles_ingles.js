@@ -13,10 +13,5 @@ export const NIVELES_INGLES = [
         key: '1',
         text: 'Basico',
         value: 1
-    },
-    {
-        key: '4',
-        text: 'En aprendizaje',
-        value: 4
     }
 ];

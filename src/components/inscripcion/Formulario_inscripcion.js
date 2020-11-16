@@ -22,31 +22,33 @@ export class Formulario_inscripcion extends Component {
       };
       console.log("test type",this.props.match.params.nombre)
     }
-    enCambio = (event) => {
-        let nombre = event.target.name;
-        let valor = event.target.value;
-        let estadoDepurado = this.state.inscrite;
-        delete estadoDepurado[`${nombre}`];
-        let nuevoEstado = { ...estadoDepurado, [`${nombre}`]: valor };
-        this.setState({ inscrite: nuevoEstado });
-      }
-    guardarEgresade() {
-        var egresadeAEnviar = this.state.inscrite;
-        egresadeAEnviar.celular = parseInt(egresadeAEnviar.celular);
-        delete egresadeAEnviar.nombre;
-        delete egresadeAEnviar.apellido;
-        egresadeAEnviar.estadoId=1
-        egresadeAEnviar.esEmpleado="false"
-        egresadeAEnviar.modulo=this.props.match.params.nombre
-        axios.post(`https://nahual-test.herokuapp.com/api/estudiantes/`, egresadeAEnviar)
-          .then(function (respuesta) {
-            window.open("/", "_self");
-          })
-          .catch(function (error) {
-            this.setState({ exito: false });
-          }.bind(this));
-        setTimeout(() => { this.setState({ exito: null }); }, 5000);
-      }
+      enCambio = (event) => {
+          let nombre = event.target.name;
+          let valor = event.target.value;
+          let estadoDepurado = this.state.inscrite;
+          delete estadoDepurado[`${nombre}`];
+          let nuevoEstado = { ...estadoDepurado, [`${nombre}`]: valor };
+          this.setState({ inscrite: nuevoEstado });
+        }
+      guardarEgresade() {
+          var egresadeAEnviar = this.state.inscrite;
+          egresadeAEnviar.celular = parseInt(egresadeAEnviar.celular);
+          delete egresadeAEnviar.nombre;
+          delete egresadeAEnviar.apellido;
+          egresadeAEnviar.estadoId=1
+          egresadeAEnviar.esEmpleado="false"
+          egresadeAEnviar.modulo=this.query.modulo
+          axios.post(`https://nahual-datos-estudiantes.herokuapp.com/api/estudiantes/`, egresadeAEnviar)
+            .then(function (respuesta) {
+              window.open("/", "_self");
+            })
+            .catch(function (error) {
+              this.setState({ exito: false });
+            }.bind(this));
+          setTimeout(() => { this.setState({ exito: null }); }, 5000);
+        }
+
+
       enConfirmacion = (evento) => {
         evento.preventDefault();
         var nombreConcatenado = this.state.inscrite.nombre + " " + this.state.inscrite.apellido;

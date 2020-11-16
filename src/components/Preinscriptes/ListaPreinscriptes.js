@@ -7,7 +7,7 @@ import Preinscripte from './Preinscripte';
 class ListaPreinscriptes extends Component {
 
     headers = ['Nombre Completo','Curso de interes','Zona','Acciones'];
-    URL_Preinscriptes = 'https://nahual-test.herokuapp.com/api/estudiantes/DTO?estadoId=1';
+    URL_Preinscriptes = 'https://nahual-datos-estudiantes.herokuapp.com/api/estudiantes/DTO?estadoId=1';
 
     constructor(){
         super();
