@@ -11,6 +11,8 @@ export default function Periodos() {
     const [filtroEstado, setFiltroEstado] = useState(true);
     const [cursosAMostrar, setCursosAMostrar] = useState([]);
     const [informacionListaCursos, setInformacionListaCursos] = useState(false)
+    const [idPeriodo, setIdPeriodo] = useState(0)
+
     useEffect(() => {
         obtenerPeriodos().then(response => response.json()).then(response => setPeriodos(response.response))
     }, [])
@@ -26,7 +28,7 @@ export default function Periodos() {
             <h1>Periodos</h1>
             <Link to="/formulario-registro-periodo" className={'linkElement'}>Nuevo Periodo</Link>
             </div>
-            <ListarCursosGuardados cursos={cursosAMostrar} estaAbierto={informacionListaCursos} setAbierto={setInformacionListaCursos}/>
+            <ListarCursosGuardados cursos={cursosAMostrar} estaAbierto={informacionListaCursos} setAbierto={setInformacionListaCursos} idPeriodo={idPeriodo}/>
             <table className={"table"}>
                     <thead className={"thead-dark"}>
                         <tr>
@@ -53,7 +55,8 @@ export default function Periodos() {
                                                         return cursoperiodo.json()
                                                     }).then(cursoperiodo => {
                                                         setCursosAMostrar(cursoperiodo.response)
-                                                        setInformacionListaCursos(true);
+                                                        setInformacionListaCursos(true)
+                                                        setIdPeriodo(p.id);
                                                     })
                                                 }} >Ver cursos</Button>
                                                 <Button theme="danger">Eliminar</Button>
