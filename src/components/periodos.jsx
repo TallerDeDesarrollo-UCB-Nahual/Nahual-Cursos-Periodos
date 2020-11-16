@@ -48,7 +48,10 @@ export default function Periodos() {
                                         <div className={'displayFlex centered columnGap'}>
                                                 <Button theme="success" onClick={x => {
                                                     obtenerCursosPorIdPeriodo(p.id).then(cursoperiodo => {
-                                                        console.log(cursoperiodo)
+                                                        return cursoperiodo.json()
+                                                    }).then(cursoperiodo => {
+                                                        setCursosAMostrar(cursoperiodo.response)
+                                                        setInformacionListaCursos(true);
                                                     })
                                                 }} >Ver cursos</Button>
                                                 <Button theme="danger">Eliminar</Button>
