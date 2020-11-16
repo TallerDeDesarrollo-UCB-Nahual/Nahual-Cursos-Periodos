@@ -38,7 +38,7 @@ export class Formulario_inscripcion extends Component {
         egresadeAEnviar.estadoId=1
         egresadeAEnviar.esEmpleado="false"
         egresadeAEnviar.modulo=this.props.match.params.nombre
-        axios.post(`https://nahual-test.herokuapp.com/api/estudiantes/`, egresadeAEnviar)
+        axios.post(`https://nahual-datos-estudiantes.herokuapp.com/api/estudiantes/`, egresadeAEnviar)
           .then(function (respuesta) {
             window.open("/", "_self");
           })

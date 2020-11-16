@@ -16,7 +16,7 @@ class Listar_Modulos extends Component {
     this.obtenerPeriodos().then(response => response.json()).then(response => this.setState({filasEncontradas: response.response}));
   }
   obtenerPeriodos() {
-    return fetch(`http://localhost:8000/api/periodos`);
+    return fetch(`https://nahual-datos-estudiantes.herokuapp.com/api/periodos`);
   }
   manejarProblemas = () => {
     this.setState({ mostrarMensajeDeEstado: false })
