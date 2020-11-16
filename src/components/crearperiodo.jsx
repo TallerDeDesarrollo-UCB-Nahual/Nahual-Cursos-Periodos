@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css"
 import {obtenerModulos} from "../servicios/modulos";
-import { Button, ButtonGroup  } from "shards-react";
+import { Button, ButtonGroup, Container  } from "shards-react";
 import CrearCurso from "./crearcurso";
 import {useHistory} from "react-router-dom"
 import { crearPeriodo } from "../servicios/periodos";
 import { crearCurso, obtenerCursos } from "../servicios/cursos";
 import ListaCursosACrear from "./listaCursosACrear";
-
 
 export default function NuevoPeriodo() {
     const [modulos, setModulos] = useState([]);
@@ -41,28 +40,32 @@ export default function NuevoPeriodo() {
         <CrearCurso aceptar={(element) => {
                 setCursos([...cursos, element])
             }} estaAbierto={modalabierto} setAbierto={setModalabierto}/>
+            
         <ListaCursosACrear cursos={cursos} estaAbierto={mostrarListaCursosAGuardar} setAbierto={setMostrarListaCursosAGuardar} />
-            <div>
+        
+            <div>            
+                <Container className="container-creacion" class="container">
                 <div className={"form-row"}>
-                    <div className={"form-group col-md-6"}>
+                    <div className={"form-group col-md-12"}>
                     <label>Nombre del periodo</label>
                     <input type="text" className={"form-control"} onChange={(e) => setPeriodo(e.target.value)} />
                     </div>
-                    <div className={"form-group col-md-6"}>
-                        <label >Estado</label>
-                        <select className={"form-control"} onChange={(e) => setEstadoPeriodo(e.target.value)}>
-                            <option value={true}>Activo</option>
-                            <option value={false}>Inactivo</option>
-                        </select>
-                    </div>
-                </div>
-                <div className={"form-row"}>
-                    <div className={"form-group col-md-6"}>
+                    <div className={"form-group col-md-12"}>
                         <label>Topico</label>
                         <select id="inputState" className={"form-control"} onChange={(e) => setTopico(e.target.value)}>
                             {
                                 modulos.map(m => <option key={`modulo-${m.id}`} value={m.id}>{m.nombre}</option>)
                             }
+                        </select>
+                    </div>
+                    
+                </div>
+                <div className={"form-row"}>
+                <div className={"form-group col-md-6"}>
+                        <label >Estado</label>
+                        <select className={"form-control"} onChange={(e) => setEstadoPeriodo(e.target.value)}>
+                            <option value={true}>Activo</option>
+                            <option value={false}>Inactivo</option>
                         </select>
                     </div>
                     <div className={"form-group col-md-6"}>
@@ -98,8 +101,11 @@ export default function NuevoPeriodo() {
                             }}>Ver {cursos.length} cursos</Button>
                     </ButtonGroup>
                      
-                </div>
+                </div> 
+                </Container>
+                
             </div> 
+
         </div>
     return ( 
         <div>
