@@ -1,0 +1,20 @@
+.yearinput {
+    width: 200px;
+}
+
+.loading {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.elementsloading {
+    display: flex;
+    flex-direction: column;
+}
+
+.loadingdots {
+    display: flex;
+    justify-content: center;
+}
