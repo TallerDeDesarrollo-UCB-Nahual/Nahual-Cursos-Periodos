@@ -67,7 +67,7 @@ export default function NuevoPeriodo() {
                     </div>
                     <div className={"form-group col-md-6"}>
                         <label>Año</label>
-                        <input type="number" onChange={(x) => setAnio(parseInt(x.target.value))} />
+                        <input type="number"  className={"form-control"} onChange={(x) => setAnio(parseInt(x.target.value))} />
                     </div>
                 </div>
                 <div className={'displayFlex spacedBetween'}>
