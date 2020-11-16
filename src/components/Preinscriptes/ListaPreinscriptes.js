@@ -7,27 +7,24 @@ import Preinscripte from './Preinscripte';
 class ListaPreinscriptes extends Component {
 
     headers = ['Nombre Completo','Curso de interes','Zona','Acciones'];
+    URL_Preinscriptes = 'https://nahual-test.herokuapp.com/api/estudiantes/DTO?estadoId=1';
 
     constructor(){
         super();
         this.state = {  
             abierto:false,
             preInscriptes: Array(0),
-            URL_Preinscriptes : 'https://nahual-test.herokuapp.com/api/egresades/DTO?estadoId=4'
         }
     }
 
     async obtenerPreinscriptes() {
-        var res = await fetch(this.state.URL_Preinscriptes);
+        var res = await fetch(this.URL_Preinscriptes);
         res = await res.json();
         this.setState({preInscriptes: res.response});
       }
 
     componentDidMount(){
        this.obtenerPreinscriptes();
-    }
-    mostrarModal(value){
-        this.setState({abierto:value})
     }
 
     obtenerPreinscripte(preinscripte){
@@ -43,7 +40,7 @@ class ListaPreinscriptes extends Component {
 
     render(){
         return(
-        <div style={{marginBottom:'30px',marginTop:'30px'}}>
+        <div style={{marginBottom:'30px',marginTop:'10px'}}>
             <Header center="true" as='h1' image={iconoPreinscripte} textAlign="center" content='Lista de Pre-Inscriptes'/>
             <Table singleLine selectable striped unstackable>
                 <Table.Header style={{backgroundColor:'#282c34'}}>
