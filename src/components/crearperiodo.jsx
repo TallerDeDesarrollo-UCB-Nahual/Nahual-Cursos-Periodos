@@ -1,103 +1,114 @@
 import React, {useEffect, useState} from "react";
-import YearPicker from "react-year-picker";
 import styles from "./styles.module.css"
 import {obtenerModulos} from "../servicios/modulos";
-import {obtenerSedes} from "../servicios/sedes"
-import { Button, Modal, ModalBody, ModalHeader } from "shards-react";
-import JTimepicker from 'reactjs-timepicker'
+import { Button } from "shards-react";
+import CrearCurso from "./crearcurso";
+import {useHistory} from "react-router-dom"
+import { crearPeriodo } from "../servicios/periodos";
+import { crearCurso, obtenerCursos } from "../servicios/cursos";
 
 
 export default function NuevoPeriodo() {
     const [modulos, setModulos] = useState([]);
-    const [sedes, setSedes] = useState([]);
     const [modalabierto, setModalabierto] = useState(false)
-    const [cursos, setCusos] = useState([]);
+    const [cursos, setCursos] = useState([]);
+    const [anio, setAnio] = useState(2020);
+    const [periodo, setPeriodo] = useState(null);
+    const [topico, setTopico] = useState(null)
+    const [estadoPeriodo, setEstadoPeriodo] = useState(true);
+    const [enviandSolicitud, setEnviandSolicitud] = useState(false);
+    const history = useHistory();
+    function resetValores(){
+        setAnio(null);
+        setPeriodo(2020);
+        setAnio(null);
+    }
+
+    function inicializar() {
+        obtenerModulos().then(response => response.json()).then(response => {
+            setModulos(response.response)
+            setTopico(response.response[0].id)
+        })
+    }
     useEffect(() => {
-        obtenerModulos().then(response => response.json()).then(response => setModulos(response.response))
-        obtenerSedes().then(response => response.json()).then(response => setSedes(response.response))
+        if(enviandSolicitud === false) {
+            inicializar()
+        }
     }, [])
-    return ( 
-        
-        <div>
-            <Modal size="lg" open={modalabierto} toggle={() => setModalabierto(!modalabierto)}>
-            <ModalHeader>Nuevo curso</ModalHeader>
-            <ModalBody>
-                <div>
-                    <div class="form-group">
-                        <select class="form-control">
-                            {
-                                sedes.map(s =>  <option key={`sede-${s.id}`}>{s.nombre} - {s.nodo.nombre}</option>)
-                            }
-                            <option>Activo</option>
-                            <option>Inactivo</option>
-                        </select>
+    const formulariodeperiodos = <div>
+        <CrearCurso aceptar={(element) => {
+                setCursos([...cursos, element])
+            }} estaAbierto={modalabierto} setAbierto={setModalabierto}/>
+            <div>
+                <div className={"form-row"}>
+                    <div className={"form-group col-md-6"}>
+                    <label>Nombre del periodo</label>
+                    <input type="text" className={"form-control"} onChange={(e) => setPeriodo(e.target.value)} />
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                        <label for="inputCity">Inicio</label>
-                        <JTimepicker
-                            onChange={console.log}
-                            color={"#81ce32"}
-                        />
-                        </div>
-                        <div class="form-group col-md-6">
-                        <label for="inputCity">Inicio</label>
-                            <JTimepicker
-                                onChange={console.log}
-                                color={"#81ce32"}
-                            />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                        <label>Notas</label>
-                        <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-6">
-                        <label>Profesor</label>
-                        <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div className={'displayFlex spacedBetween'}>
-                        <Button theme="success">Crear curso</Button>
-                        <Button theme="danger" onClick={() => setModalabierto(true)}>Cancelar</Button>  
-                    </div>
-                </div>
-            </ModalBody>
-            </Modal>
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                    <label for="inputCity">Año</label>
-                    <input type="text" class="form-control"/>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputState">Estado</label>
-                        <select class="form-control">
-                            <option>Activo</option>
-                            <option>Inactivo</option>
+                    <div className={"form-group col-md-6"}>
+                        <label >Estado</label>
+                        <select className={"form-control"} onChange={(e) => setEstadoPeriodo(e.target.value)}>
+                            <option value={true}>Activo</option>
+                            <option value={false}>Inactivo</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
+                <div className={"form-row"}>
+                    <div className={"form-group col-md-6"}>
                         <label>Topico</label>
-                        <select id="inputState" class="form-control">
+                        <select id="inputState" className={"form-control"} onChange={(e) => setTopico(e.target.value)}>
                             {
-                                modulos.map(m => <option key={`modulo-${m.id}`} value={m.nombre}>{m.nombre}</option>)
+                                modulos.map(m => <option key={`modulo-${m.id}`} value={m.id}>{m.nombre}</option>)
                             }
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div className={"form-group col-md-6"}>
                         <label>Año</label>
-                        <YearPicker className={styles.yearinput} onChange={(x) => console.log(x)} />
+                        <input type="number" onChange={(x) => setAnio(parseInt(x.target.value))} />
                     </div>
                 </div>
                 <div className={'displayFlex spacedBetween'}>
-                    <Button theme="success">Crear periodo</Button>
-                    <Button theme="secondary" onClick={() => setModalabierto(true)}>Nuevo curso</Button>  
+                    <Button theme="success" onClick={() => {
+                        setEnviandSolicitud(true)
+                        crearPeriodo({
+                                    anio: anio,
+                                    periodo: periodo,
+                                    estado: estadoPeriodo,
+                                    TopicoId: parseInt(topico)
+                                    })
+                        .then(response => {
+                            return cursos.forEach(c => {
+                                c.PeriodoId = response.data.result.id;
+                                crearCurso(c).then(x => console.log(x)).catch(() => setEnviandSolicitud(false))
+                            })
+                        }).then(() => {
+                            history.push("/periodos")
+                            setEnviandSolicitud(false)
+                        }).catch(() => {
+                            setEnviandSolicitud(false)
+                        })
+                    }}>Crear periodo</Button>
+                    <Button theme="secondary" onClick={() => setModalabierto(true)}>Nuevo cursos</Button>  
                 </div>
-            </form> 
+            </div> 
+        </div>
+    return ( 
+        <div>
+            {enviandSolicitud ? <div className={styles.loading}>
+                <div className={styles.elementsloading}>
+                    <div className={styles.loadingdots}>
+                        <div className={"spinner-grow text-secondary"} role="status">
+                            <span className={"sr-only"}>Loading...</span>
+                        </div>
+                        <div className={"spinner-grow text-success"} role="status">
+                            <span className={"sr-only"}>Loading...</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h5>Creando Periodo</h5>
+                    </div>
+                </div>
+            </div> : formulariodeperiodos}
         </div>
     )
 }

@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { Button } from "shards-react";
-import { obtenerPeriodos } from "../servicios/periodos";
+import { obtenerPeriodos, obtenerCursosPorIdPeriodo } from "../servicios/periodos";
 import { Link } from "react-router-dom"
+import ListarCursosGuardados from "./listarCursosGuadados";
 
 export default function Periodos() {
     const [periodos, setPeriodos] = useState([])
     const [filtroEstado, setFiltroEstado] = useState(true);
+    const [cursosAMostrar, setCursosAMostrar] = useState([]);
+    const [informacionListaCursos, setInformacionListaCursos] = useState(false)
     useEffect(() => {
         obtenerPeriodos().then(response => response.json()).then(response => setPeriodos(response.response))
     }, [])
@@ -21,7 +24,7 @@ export default function Periodos() {
 
             <Link to="/formulario-registro-periodo" className={'linkElement'}>Nuevo</Link>
             </div>
-
+            <ListarCursosGuardados cursos={cursosAMostrar} estaAbierto={informacionListaCursos} setAbierto={setInformacionListaCursos}/>
             <table className={"table"}>
                     <thead className={"thead-dark"}>
                         <tr>
@@ -43,7 +46,11 @@ export default function Periodos() {
                                     <td>{p.topico.nombre}</td>
                                     <td>
                                         <div className={'displayFlex centered columnGap'}>
-                                                <Link to={`/periodos/${p.id}`} className={'linkElement'}>Editar</Link>
+                                                <Button theme="success" onClick={x => {
+                                                    obtenerCursosPorIdPeriodo(p.id).then(cursoperiodo => {
+                                                        console.log(cursoperiodo)
+                                                    })
+                                                }} >Ver cursos</Button>
                                                 <Button theme="danger">Eliminar</Button>
                                         </div>
                                     </td>
