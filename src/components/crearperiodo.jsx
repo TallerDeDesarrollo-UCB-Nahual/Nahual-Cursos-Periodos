@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css"
 import {obtenerModulos} from "../servicios/modulos";
-import { Button } from "shards-react";
+import { Button, ButtonGroup  } from "shards-react";
 import CrearCurso from "./crearcurso";
 import {useHistory} from "react-router-dom"
 import { crearPeriodo } from "../servicios/periodos";
 import { crearCurso, obtenerCursos } from "../servicios/cursos";
+import ListaCursosACrear from "./listaCursosACrear";
 
 
 export default function NuevoPeriodo() {
@@ -17,8 +18,9 @@ export default function NuevoPeriodo() {
     const [topico, setTopico] = useState(null)
     const [estadoPeriodo, setEstadoPeriodo] = useState(true);
     const [enviandSolicitud, setEnviandSolicitud] = useState(false);
+    const [mostrarListaCursosAGuardar, setMostrarListaCursosAGuardar] = useState(false);
     const history = useHistory();
-    function resetValores(){
+    function resetValores() {
         setAnio(null);
         setPeriodo(2020);
         setAnio(null);
@@ -39,6 +41,7 @@ export default function NuevoPeriodo() {
         <CrearCurso aceptar={(element) => {
                 setCursos([...cursos, element])
             }} estaAbierto={modalabierto} setAbierto={setModalabierto}/>
+        <ListaCursosACrear cursos={cursos} estaAbierto={mostrarListaCursosAGuardar} setAbierto={setMostrarListaCursosAGuardar} />
             <div>
                 <div className={"form-row"}>
                     <div className={"form-group col-md-6"}>
@@ -79,7 +82,7 @@ export default function NuevoPeriodo() {
                         .then(response => {
                             return cursos.forEach(c => {
                                 c.PeriodoId = response.data.result.id;
-                                crearCurso(c).then(x => console.log(x)).catch(() => setEnviandSolicitud(false))
+                                crearCurso(c).then(() => {}).catch(() => setEnviandSolicitud(false))
                             })
                         }).then(() => {
                             history.push("/periodos")
@@ -88,7 +91,13 @@ export default function NuevoPeriodo() {
                             setEnviandSolicitud(false)
                         })
                     }}>Crear periodo</Button>
-                    <Button theme="secondary" onClick={() => setModalabierto(true)}>Nuevo cursos</Button>  
+                    <ButtonGroup size="lg" className="mr-2">
+                        <Button theme="secondary" onClick={() => setModalabierto(true)}>Nuevo cursos</Button> 
+                        <Button onClick={() => {
+                            setMostrarListaCursosAGuardar(true)
+                            }}>Ver {cursos.length} cursos</Button>
+                    </ButtonGroup>
+                     
                 </div>
             </div> 
         </div>

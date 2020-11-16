@@ -1,13 +1,13 @@
 import React from "react";
 import { Modal, ModalBody, ModalHeader, Alert } from "shards-react";
 
-export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto}) {
+export default function ListaCursosACrear({cursos, estaAbierto, setAbierto}) {
     const listacursos = <div>
         {cursos.map(c => {
             return (
             <Alert theme="light">
-                {c.horarioInicio} - {c.horarioFin} - <span class="badge badge-pill badge-primary">Nodo: {c.nodo.nombre}</span>{" "}
-                <span class="badge badge-pill badge-success">Sede: {c.sede.nombre}</span>
+                {c.horarioInicio} - {c.horarioFin} - <span class="badge badge-pill badge-primary">Notas: {c.notas}</span>{" "}
+                <span class="badge badge-pill badge-success">Profesores: {c.profesores}</span>
             </Alert>)
         })}
     </div>;
