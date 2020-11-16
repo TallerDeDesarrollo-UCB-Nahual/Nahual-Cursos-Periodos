@@ -14,4 +14,8 @@ function obtenerCursosPorIdPeriodo(id) {
   return fetch(`${BASE_ROUTE}/periodos/${id}/cursos`);
 }
 
-export { obtenerPeriodos, crearPeriodo, obtenerCursosPorIdPeriodo };
+function eliminarPeriodo(id){
+  return axios.delete(`${BASE_ROUTE}/periodos/${id}`);
+}
+
+export { obtenerPeriodos, crearPeriodo, obtenerCursosPorIdPeriodo, eliminarPeriodo };
