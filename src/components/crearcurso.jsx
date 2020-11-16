@@ -71,6 +71,10 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
                         </div>
                     </div>
                     <div className={'displayFlex spacedBetween'}>
+                        <Button theme="danger" onClick={() => {
+                            resetValores()
+                            setAbierto(!estaAbierto)
+                            }}>Cancelar</Button>  
                         <Button theme="success" onClick={()=> {
                             aceptar(
                                 {
@@ -85,10 +89,7 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
                         }
                             
                             }>Crear curso</Button>
-                        <Button theme="danger" onClick={() => {
-                            resetValores()
-                            setAbierto(!estaAbierto)
-                            }}>Cancelar</Button>  
+                        
                     </div>
                 </div>
             </ModalBody>

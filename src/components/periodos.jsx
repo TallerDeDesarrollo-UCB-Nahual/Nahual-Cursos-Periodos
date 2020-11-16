@@ -3,6 +3,8 @@ import { Button } from "shards-react";
 import { obtenerPeriodos, obtenerCursosPorIdPeriodo } from "../servicios/periodos";
 import { Link } from "react-router-dom"
 import ListarCursosGuardados from "./listarCursosGuadados";
+import styles from "./styles.module.css";
+
 
 export default function Periodos() {
     const [periodos, setPeriodos] = useState([])
@@ -13,7 +15,7 @@ export default function Periodos() {
         obtenerPeriodos().then(response => response.json()).then(response => setPeriodos(response.response))
     }, [])
     return (
-        <div>
+        <div className={styles.vistaPeriodos}>
             <div className={'opcionesPeriodo'}>
                 <div className={"selectBar"}>
                     <select className={"custom-select"} onChange={(x) => {setFiltroEstado(x.target.value === 'true')}}>
@@ -21,8 +23,8 @@ export default function Periodos() {
                         <option value={false}>Inactivo</option>
                     </select>   
                 </div>
-
-            <Link to="/formulario-registro-periodo" className={'linkElement'}>Nuevo</Link>
+            <h1>Periodos</h1>
+            <Link to="/formulario-registro-periodo" className={'linkElement'}>Nuevo Periodo</Link>
             </div>
             <ListarCursosGuardados cursos={cursosAMostrar} estaAbierto={informacionListaCursos} setAbierto={setInformacionListaCursos}/>
             <table className={"table"}>
