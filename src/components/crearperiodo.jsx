@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import YearPicker from "react-year-picker";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 import {obtenerModulos} from "../servicios/modulos";
-import {obtenerSedes} from "../servicios/sedes"
+import {obtenerSedes} from "../servicios/sedes";
 import { Button, Modal, ModalBody, ModalHeader } from "shards-react";
-import JTimepicker from 'reactjs-timepicker'
+import JTimepicker from 'reactjs-timepicker';
+import {Card, Container, Row, Col } from "shards-react";
 
 
 export default function NuevoPeriodo() {
@@ -17,8 +18,10 @@ export default function NuevoPeriodo() {
         obtenerSedes().then(response => response.json()).then(response => setSedes(response.response))
     }, [])
     return ( 
+
         
-        <div>
+        
+        <div >
             <Modal size="lg" open={modalabierto} toggle={() => setModalabierto(!modalabierto)}>
             <ModalHeader>Nuevo curso</ModalHeader>
             <ModalBody>
@@ -65,13 +68,17 @@ export default function NuevoPeriodo() {
                 </div>
             </ModalBody>
             </Modal>
+            <Container className="dr-example-container" class="dr-example-container">
             <form>
+                
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                     <label for="inputCity">Año</label>
                     <input type="text" class="form-control"/>
                     </div>
-                    <div class="form-group col-md-6">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
                         <label for="inputState">Estado</label>
                         <select class="form-control">
                             <option>Activo</option>
@@ -80,7 +87,7 @@ export default function NuevoPeriodo() {
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label>Topico</label>
                         <select id="inputState" class="form-control">
                             {
@@ -88,7 +95,9 @@ export default function NuevoPeriodo() {
                             }
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
                         <label>Año</label>
                         <YearPicker className={styles.yearinput} onChange={(x) => console.log(x)} />
                     </div>
@@ -98,6 +107,10 @@ export default function NuevoPeriodo() {
                     <Button theme="secondary" onClick={() => setModalabierto(true)}>Nuevo curso</Button>  
                 </div>
             </form> 
+            </Container>
+            
         </div>
+
+
     )
 }
