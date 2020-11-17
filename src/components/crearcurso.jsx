@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Button, Modal, ModalBody, ModalHeader } from "shards-react";
+import { Button, Modal } from 'semantic-ui-react'
 import {obtenerSedes} from "../servicios/sedes"
 import JTimepicker from 'reactjs-timepicker'
 
@@ -30,8 +30,8 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
     }, [])
     return (            
         <Modal size="lg" open={estaAbierto} toggle={() => setAbierto(!estaAbierto)}>
-            <ModalHeader>Nuevo curso</ModalHeader>
-            <ModalBody>
+            <Modal.Header>Nuevo curso</Modal.Header>
+            <Modal.Content>
                 <div>
                     <div class="form-group">
                         <select class="form-control" onChange={(e) =>{
@@ -70,27 +70,28 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
                         <input type="text" class="form-control" onChange={x => setProfesor(x.target.value)} />
                         </div>
                     </div>
-                    <div className={'displayFlex spacedBetween'}>
-                        <Button theme="success" onClick={()=> {
-                            aceptar(
-                                {
-                                    horarioInicio: horaInicio,
-                                    horarioFin: horaFin,
-                                    ...sedeNodo,
-                                    notas: nota,
-                                    profesores: profesor
-                                }
-                            )
-                            resetValores()
-                        }
-                            
+                    <Modal.Actions>
+                        <div className={'displayFlex spacedBetween'}>
+                            <Button theme="success" onClick={()=> {
+                                aceptar(
+                                    {
+                                        horarioInicio: horaInicio,
+                                        horarioFin: horaFin,
+                                        ...sedeNodo,
+                                        notas: nota,
+                                        profesores: profesor
+                                    }
+                                )
+                                resetValores()
+                            }
                             }>Crear curso</Button>
-                        <Button theme="danger" onClick={() => {
-                            resetValores()
-                            setAbierto(!estaAbierto)
-                            }}>Cancelar</Button>  
-                    </div>
+                            <Button theme="danger" onClick={() => {
+                                resetValores()
+                                setAbierto(!estaAbierto)
+                                }}>Cancelar</Button>  
+                        </div>
+                    </Modal.Actions>
                 </div>
-            </ModalBody>
+            </Modal.Content>
         </Modal>)
 }

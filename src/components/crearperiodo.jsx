@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css"
 import {obtenerModulos} from "../servicios/modulos";
-import { Button, ButtonGroup, Container  } from "shards-react";
+import { Container, Button } from 'semantic-ui-react'
 import CrearCurso from "./crearcurso";
 import {useHistory} from "react-router-dom"
 import { crearPeriodo } from "../servicios/periodos";
-import { crearCurso, obtenerCursos } from "../servicios/cursos";
+import { crearCurso } from "../servicios/cursos";
 import ListaCursosACrear from "./listaCursosACrear";
 
 export default function NuevoPeriodo() {
@@ -24,7 +24,6 @@ export default function NuevoPeriodo() {
         setPeriodo(2020);
         setAnio(null);
     }
-
     function inicializar() {
         obtenerModulos().then(response => response.json()).then(response => {
             setModulos(response.response)
@@ -94,18 +93,15 @@ export default function NuevoPeriodo() {
                             setEnviandSolicitud(false)
                         })
                     }}>Crear periodo</Button>
-                    <ButtonGroup size="lg" className="mr-2">
+                    <Button.Group size="lg" className="mr-2">
                         <Button theme="secondary" onClick={() => setModalabierto(true)}>Nuevo cursos</Button> 
                         <Button onClick={() => {
                             setMostrarListaCursosAGuardar(true)
                             }}>Ver {cursos.length} cursos</Button>
-                    </ButtonGroup>
-                     
+                    </Button.Group>
                 </div> 
                 </Container>
-                
             </div> 
-
         </div>
     return ( 
         <div>
