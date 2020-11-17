@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
+import { Button, Table, Select } from 'semantic-ui-react'
 import { obtenerPeriodos, obtenerCursosPorIdPeriodo } from "../servicios/periodos";
 import { Link } from "react-router-dom"
 import ListarCursosGuardados from "./listarCursosGuadados";
 import styles from "./styles.module.css";
-
 import Eliminar from './eliminarPeriodo';
-
-import { Button } from "shards-react";
 
 export default function Periodos() {
     const [periodos, setPeriodos] = useState([])
@@ -23,37 +21,42 @@ export default function Periodos() {
         <div className={styles.vistaPeriodos}>
             <div className={'opcionesPeriodo'}>
                 <div className={"selectBar"}>
-                    <select className={"custom-select"} onChange={(x) => { setFiltroEstado(x.target.value === 'true') }}>
-                        <option value={true}>Activo</option>
-                        <option value={false}>Inactivo</option>
-                    </select>
+                    
+                    <Select placeholder={"Ingrese el estado"} className={"custom-select"} options={[
+                        { key: 'activo', value: true, text: 'Activo' },
+                        { key: 'inactivo', value: false, text: 'Inactivo' }
+                    ]} onChange={(x, data) => {
+                        setFiltroEstado(data.value === true)
+                        }
+                    }/>
                 </div>
             <h1>Periodos</h1>
             <Link to="/formulario-registro-periodo" className={'linkElement'}>Nuevo Periodo</Link>
             </div>
             <ListarCursosGuardados cursos={cursosAMostrar} estaAbierto={informacionListaCursos} setAbierto={setInformacionListaCursos} idPeriodo={idPeriodo}/>
-            <table className={"table"}>
-                <thead className={"thead-dark"}>
-                    <tr>
-                        <th scope="col">Periodo</th>
-                        <th scope="col">Año</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Topico</th>
-                        <th scope="col"><div className={'displayFlex centered'}>Acciones</div></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {periodos.map(p => {
-                        if (p.estado === filtroEstado) {
-                            return (
-                                <tr key={`periodo-${p.id}`}>
-                                    <td>{p.periodo}</td>
-                                    <td>{p.anio}</td>
-                                    <td>{p.estado ? 'Activo' : 'Inactivo'}</td>
-                                    <td>{p.topico.nombre}</td>
-                                    <td>
+            <Table >
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Periodo</Table.HeaderCell>
+                        <Table.HeaderCell>Año</Table.HeaderCell>
+                        <Table.HeaderCell>Estado</Table.HeaderCell>
+                        <Table.HeaderCell>Topico</Table.HeaderCell>
+                        <Table.HeaderCell className={"displayFlex  centered"}>Acciones</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                    <Table.Body>
+                        {periodos.map(p => {
+                            if (p.estado == filtroEstado){
+                                return (
+        
+                                <Table.Row key={`periodo-${p.id}`}>
+                                    <Table.Cell>{p.periodo}</Table.Cell>
+                                    <Table.Cell>{p.anio}</Table.Cell>
+                                    <Table.Cell>{p.estado ? 'Activo':'Inactivo'}</Table.Cell>
+                                    <Table.Cell>{p.topico.nombre}</Table.Cell>
+                                    <Table.Cell>
                                         <div className={'displayFlex centered columnGap'}>
-                                                <Button theme="success" onClick={x => {
+                                                <Button color="green" onClick={x => {
                                                     obtenerCursosPorIdPeriodo(p.id).then(cursoperiodo => {
                                                         return cursoperiodo.json()
                                                     }).then(cursoperiodo => {
@@ -64,13 +67,13 @@ export default function Periodos() {
                                                 }} >Ver cursos</Button>
                                             <Eliminar egresadeId={p.id}></Eliminar>
                                         </div>
-                                    </td>
-                                </tr>
-                            )
-                        }
-                    })}
-                </tbody>
-            </table>
+                                    </Table.Cell>
+                                </Table.Row>
+                                )
+                            }
+                        })}
+                    </Table.Body>
+            </Table>
         </div>
     )
 }
