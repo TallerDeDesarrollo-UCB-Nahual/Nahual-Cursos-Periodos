@@ -48,7 +48,6 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
                         } 
                         }/>
                     </div>
-<<<<<<< HEAD
                     <div class="fullHeight forceFlex columnGap">
                         <div className={"dosentradasformulario"}>
                             <label>Inicio</label>
@@ -59,18 +58,11 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
                         </div>
                         <div className={"dosentradasformulario"}>
                             <label>Fin</label>
-=======
-                        <JTimepicker
-                            onChange={setHoraInicio}
-                            color={"#81ce32"}
-                        />
->>>>>>> 902fac8... semantic-first-migration
                             <JTimepicker
                                 onChange={setHoraFin}
                                 color={"#81ce32"}
                             />
                         </div>
-<<<<<<< HEAD
                     </div>
                     <div class="forceFlex columnGap">
                         <div className={"dosentradasformulario"}>
@@ -79,11 +71,6 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
                         <div className={"dosentradasformulario"}>
                             <Form.Input label="Profesor" fluid type="text" class="form-control" onChange={(x, data) => setProfesor(data.value)} />
                         </div>
-=======
-                    <div class="form-row">
-                        <Form.Input type="text" onChange={(x, data) => setNota(data.value)} />
-                        <Form.Input type="text" onChange={(x, data) => setProfesor(data.value)} />
->>>>>>> 902fac8... semantic-first-migration
                     </div>
                     <br/>
                     <Modal.Actions>
@@ -107,6 +94,7 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
                                 }}>Cancelar</Button>  
                         </div>
                     </Modal.Actions>
+                </div>
             </Modal.Content>
         </Modal>)
 }
