@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "shards-react";
+import { Button, Modal} from 'semantic-ui-react'
 import { eliminarPeriodo } from "../servicios/periodos";
 
 
@@ -17,7 +17,6 @@ function Eliminar({ egresadeId }) {
     const eliminarPeriodoDeBD = (egresadeId) => {
         onClose();
         eliminarPeriodo(egresadeId).then(cursoperiodo => {
-            console.log(cursoperiodo);
             if(cursoperiodo.status == 200){
                 window.location.reload();
             }
@@ -26,17 +25,17 @@ function Eliminar({ egresadeId }) {
 
     return (
         <>
-            <Button onClick={onOpen}>
+            <Button color="red" onClick={onOpen}>
                 <i className="user delete icon"></i>
                 <label className="icon-delete">Eliminar</label>
             </Button>
             <Modal size="m" open={abierto} >
-                <ModalHeader>Atencion!</ModalHeader>
-                <ModalBody>Estas seguro que deseas elimnar este periodo?</ModalBody>
-                <ModalFooter>
+                <Modal.Header>Atencion!</Modal.Header>
+                <Modal.Content>Estas seguro que deseas elimnar este periodo?</Modal.Content>
+                <Modal.Actions>
                     <Button onClick = {() => eliminarPeriodoDeBD(egresadeId)}>Confirmar</Button>
                     <Button onClick = {onClose}>Cancelar</Button>
-                </ModalFooter>
+                </Modal.Actions>
             </Modal>
         </>
     );

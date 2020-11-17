@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Button, Modal, ModalBody, ModalHeader } from "shards-react";
+import { Button, Modal, Form } from 'semantic-ui-react'
 import {obtenerSedes} from "../servicios/sedes"
 import JTimepicker from 'reactjs-timepicker'
 
@@ -29,69 +29,72 @@ export default function CrearCurso({aceptar, estaAbierto, setAbierto}) {
         inicializarSedes();
     }, [])
     return (            
-        <Modal size="lg" open={estaAbierto} toggle={() => setAbierto(!estaAbierto)}>
-            <ModalHeader>Nuevo curso</ModalHeader>
-            <ModalBody>
+        <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
+            <Modal.Header>Nuevo curso</Modal.Header>
+            <Modal.Content>
                 <div>
                     <div class="form-group">
-                        <select class="form-control" onChange={(e) =>{
-                            const selected = e.target.value.split(",");
+                        <Form.Select fluid label="Sede - Nodo"
+                        options={sedes.map(s => {
+                            return {
+                                key: `sede-${s.id}`,
+                                value: [s.nodo.id, s.id],
+                                text: s.nombre + " - " + s.nodo.nombre
+                            }
+                        })}
+                        onChange={(e, data) =>{
+                            const selected = data.value
                             setSedeNodo({"SedeId": selected[1], "NodoId": selected[0]})
                         } 
-                        }>
-                            {
-                                sedes.map(s =>  <option key={`sede-${s.id}`} value={[s.nodo.id, s.id]}>{s.nombre} - {s.nodo.nombre}</option>)
-                            }11
-                        </select>
+                        }/>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                        <label>Inicio</label>
-                        <JTimepicker
-                            onChange={setHoraInicio}
-                            color={"#81ce32"}
-                        />
+                    <div class="fullHeight forceFlex columnGap">
+                        <div className={"dosentradasformulario"}>
+                            <label>Inicio</label>
+                            <JTimepicker
+                                onChange={setHoraInicio}
+                                color={"#81ce32"}
+                            />
                         </div>
-                        <div class="form-group col-md-6">
-                        <label>Fin</label>
+                        <div className={"dosentradasformulario"}>
+                            <label>Fin</label>
                             <JTimepicker
                                 onChange={setHoraFin}
                                 color={"#81ce32"}
                             />
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                        <label>Notas</label>
-                        <input type="text" class="form-control" onChange={x => setNota(x.target.value)} />
+                    <div class="forceFlex columnGap">
+                        <div className={"dosentradasformulario"}>
+                            <Form.Input label="Notas" fluid type="text" class="form-control" onChange={(x, data) => setNota(data.value)} />
                         </div>
-                        <div class="form-group col-md-6">
-                        <label>Profesor</label>
-                        <input type="text" class="form-control" onChange={x => setProfesor(x.target.value)} />
+                        <div className={"dosentradasformulario"}>
+                            <Form.Input label="Profesor" fluid type="text" class="form-control" onChange={(x, data) => setProfesor(data.value)} />
                         </div>
                     </div>
-                    <div className={'displayFlex spacedBetween'}>
-                        <Button theme="danger" onClick={() => {
-                            resetValores()
-                            setAbierto(!estaAbierto)
-                            }}>Cancelar</Button>  
-                        <Button theme="success" onClick={()=> {
-                            aceptar(
-                                {
-                                    horarioInicio: horaInicio,
-                                    horarioFin: horaFin,
-                                    ...sedeNodo,
-                                    notas: nota,
-                                    profesores: profesor
-                                }
-                            )
-                            resetValores()
-                        }
-                            
+                    <br/>
+                    <Modal.Actions>
+                        <div className={'displayFlex spacedBetween'}>
+                            <Button theme="success" onClick={()=> {
+                                aceptar(
+                                    {
+                                        horarioInicio: horaInicio,
+                                        horarioFin: horaFin,
+                                        ...sedeNodo,
+                                        notas: nota,
+                                        profesores: profesor
+                                    }
+                                )
+                                resetValores()
+                            }
                             }>Crear curso</Button>
-                        
-                    </div>
+                            <Button theme="danger" onClick={() => {
+                                resetValores()
+                                setAbierto(!estaAbierto)
+                                }}>Cancelar</Button>  
+                        </div>
+                    </Modal.Actions>
                 </div>
-            </ModalBody>
+            </Modal.Content>
         </Modal>)
 }

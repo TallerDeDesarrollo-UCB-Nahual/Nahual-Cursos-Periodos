@@ -1,26 +1,28 @@
 import React from "react";
-import { Modal, ModalBody, ModalHeader, Alert } from "shards-react";
-import EliminarCurso from "./eliminarCurso"
+import { Modal, Header, Advertisement, Button } from 'semantic-ui-react';
+import EliminarCurso from "./eliminarCurso";
 
 export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, idPeriodo}) {
-    const listacursos = <div>
+    console.log(cursos)
+    const listacursos = 
+    <div className={"forceFlex isColumn rowGap"}>
         {cursos.map(c => {
             return (
-            <Alert theme="light">
-                {c.horarioInicio} - {c.horarioFin} - <span class="badge badge-pill badge-primary">Nodo: {c.nodo.nombre}</span>{" "}
-                <span class="badge badge-pill badge-success">Sede: {c.sede.nombre}</span>{" "}
-                <span class="badge badge-pill badge-info">Profesores: {c.profesores}</span>{" "}
-                <span class="badge badge-pill badge-secondary">Notas: {c.notas}</span>
-
+            <Advertisement>
+                {c.horarioInicio} - {c.horarioFin} - {" "}
+                <Button color="blue" size="tiny">Nodo: {c.nodo.nombre}</Button>{" "}
+                <Button color="teal" size="tiny">Sede: {c.sede.nombre}</Button>{" "}
+                <Button color="yellow" size="tiny">Profesores: {c.profesores}</Button>
+                <Button color="violet" size="tiny">Notas: {c.notas}</Button>
                 <EliminarCurso idPeriodo={idPeriodo} idCurso={c.id}></EliminarCurso>
-            </Alert>)
+            </Advertisement>)
         })}
     </div>;
     return (            
-        <Modal size="lg" open={estaAbierto} toggle={() => setAbierto(!estaAbierto)}>
-            <ModalHeader>Cursos</ModalHeader>
-            <ModalBody>
+        <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
+            <Header>Cursos</Header>
+            <Modal.Content>
                 {cursos.length > 0 ? listacursos : <h2>No hay cursos</h2>}
-            </ModalBody>
+            </Modal.Content>
         </Modal>)
 }

@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { Button } from "shards-react";
+import { Button } from 'semantic-ui-react'
 import { eliminarCursoDePeriodo } from "../servicios/periodos";
 
 
@@ -12,7 +12,7 @@ function EliminarCurso({ idPeriodo, idCurso }) {
 
     return (
         <>
-            <Button style={{ float: "right" }} theme="danger" size="sm" onClick={() => eliminarCursoDeAPI(idPeriodo, idCurso)}>Eliminar</Button>
+            <Button color="red" size="small" onClick={() => eliminarCursoDeAPI(idPeriodo, idCurso)}>Eliminar</Button>
         </>
     );
 }
