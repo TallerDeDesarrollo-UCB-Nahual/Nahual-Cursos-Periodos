@@ -19,11 +19,9 @@ function Eliminar({ egresadeId }) {
         eliminarPeriodo(egresadeId).then(cursoperiodo => {
             console.log(cursoperiodo);
             if(cursoperiodo.status == 200){
-                //mostrar "se ha eliminado correctamente"
                 window.location.reload();
             }
             else{
-                //fallo al eliminar
             }
         })
     }
