@@ -21,8 +21,6 @@ function Eliminar({ egresadeId }) {
             if(cursoperiodo.status == 200){
                 window.location.reload();
             }
-            else{
-            }
         })
     }
 
