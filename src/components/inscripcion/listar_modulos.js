@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Label, Button, Message, Table, Search } from 'semantic-ui-react'
+import { Label, Button, Table, Header } from 'semantic-ui-react'
 import '../../public/stylesheet/listar_modulos.css';
 import { Link } from 'react-router-dom';
 class Listar_Modulos extends Component {
@@ -26,7 +26,7 @@ class Listar_Modulos extends Component {
     return (
       <div>
         <div className="tabla">
-          <p className="titulo">Lista de Modulos</p>
+          <Header center="true" as='h1' textAlign="center" content='Lista de Cursos Disponibles'/>
           <div className="linea"></div>
           <br /><br />
           <Table celled className="tarjeta-tabla">
@@ -38,14 +38,15 @@ class Listar_Modulos extends Component {
               {this.state.filasEncontradas.map((value) => (
                 <Table.Row key={value.id} >
                   <Table.Cell className="bordes-tabla">
-                    <Label className="tarjeta-verde">{value.topico.nombre}</Label></Table.Cell>
+                    <Label className="tarjeta-verde">{value.anio} - {value.periodo} - {value.topico.nombre}</Label></Table.Cell>
                     <Table.Cell colSpan="3" className="bordes-tabla">
-                    {<Link to={`/formulario/${value.topico.nombre}`}><Button className="view-button">
-                      <i className="plus icon"></i>
-                      <label className="icon-text">INSCRIBIRME</label>
-                    </Button></Link>
-                    }
-                  </Table.Cell>
+                      {<Link to={`/formulario?modulo=${value.anio} - ${value.periodo} - ${value.topico.nombre}`}>
+                          <Button className="view-button">
+                            <i className="plus icon"></i>
+                            <label className="icon-text">QUIERO INSCRIBIRME</label>
+                          </Button>
+                      </Link>}
+                    </Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>

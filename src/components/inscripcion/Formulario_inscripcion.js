@@ -6,21 +6,23 @@ import '../../public/stylesheet/formulario_inscripciones.css';
 import 'semantic-ui-css/semantic.min.css';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import queryString from 'query-string'
 import { NIVELES_INGLES } from './opciones/niveles_ingles.js';
-//import { OPCION_CURSOS} from './opciones/opcion_cursos.js';
 import { MensajeResultante } from './mensaje/mensaje.js';
 
 export class Formulario_inscripcion extends Component {
     state = {
       exito: null,
     };
+
+    query = queryString.parse(this.props.location.search);
+
     constructor(props) {
       super(props);
       this.state = {
         inscrite: {
         },
       };
-      console.log("test type",this.props.match.params.nombre)
     }
       enCambio = (event) => {
           let nombre = event.target.name;
@@ -56,26 +58,29 @@ export class Formulario_inscripcion extends Component {
         this.setState({ abrirModal: true })
         console.log(this.state);
       }
+
+
       handleButtonClick = () => this.setState({ abrirModal: true })
 
-  handleCancel = () => this.setState({ abrirModal: false })
+      handleCancel = () => this.setState({ abrirModal: false })
 
-  handleConfirm = () => {
-    this.setState({ abrirModal: false })
-    this.guardarEgresade();
-  }
-  onChangeDropdown = (e, { value, name }) => {
-    console.log(name);
-    let valor = this.state.inscrite[name];
-    this.setState({ selectedType: valor })
-    valor = value;
-    this.state.inscrite[name] = valor;
-  }
+      handleConfirm = () => {
+        this.setState({ abrirModal: false })
+        this.guardarEgresade();
+      }
+      onChangeDropdown = (e, { value, name }) => {
+        console.log(name);
+        let valor = this.state.inscrite[name];
+        this.setState({ selectedType: valor })
+        valor = value;
+        this.state.inscrite[name] = valor;
+      }
 render() {
     return (
       <div>
-          <div class="titulo">
-                <h1>Elegiste el curso {this.props.match.params.nombre}. Déjanos tus datos</h1>
+          <div className="titulo">
+                <h1>Elegiste el curso "{this.query.modulo}"</h1>
+                <h3>Por favor déjanos tus datos</h3>
                 <div className="linea"></div>
           </div>
         <div className="contenedor">
@@ -85,7 +90,7 @@ render() {
               <Grid.Column className="centrarColumnas">
                 <span className="etiquetas">
                   <label htmlFor="nombre">Nombre<br /></label>
-                  <Input class="ui one column stackable center aligned page grid" type="text"
+                  <Input type="text"
                     name="nombre"
                     maxLength="20"
                     placeholder="Nombre"
@@ -160,14 +165,14 @@ render() {
               </Grid.Column>
               <Grid.Column>
                 <span className="etiquetas">
-                  <label htmlFor="nivelIngles">Nivel de Ingles<br /></label>
+                  <label htmlFor="nivelIngles">Nivel de Inglés<br /></label>
                   <Dropdown type="text"
                     name="nivelInglesId"
-                    placeholder="Nivel de Ingles"
+                    placeholder="Nivel de Inglés"
                     value={this.state.inscrite.nivelInglesId}
                     onChange={this.onChangeDropdown}
                     options={NIVELES_INGLES}
-                    style={{ margin: "0px 11%" }}
+                    style={{ margin: "0px 11%",width:"75%" }}
                     selection
                     required
                   />
@@ -176,7 +181,7 @@ render() {
 
               <Grid.Column>
                 <span className="etiquetas">
-                  <label for="añoGraduacion">Zona<br /></label>
+                  <label htmlFor="añoGraduacion">Zona<br /></label>
                   <Input type="text"
                     name="zona"
                     maxLength="30"
@@ -189,12 +194,12 @@ render() {
                   />
                 </span>
               </Grid.Column>
-
+             
             </Grid.Row>
           </Grid>
           <Grid centered rows={1} columns={1}>
             <GridRow>
-              <Link to={'/'}><Button class="ui grey button" style={{color:"white", margin: "0px 50px 10px 50px",background:"hsl(0, 0%, 50%)" }}>Cancelar</Button></Link>
+              <Link to={'/'} style={{textDecoration:"none",color:"white"}}><Button className="ui grey button" style={{color:"white", margin: "0px 50px 10px 50px",background:"hsl(0, 0%, 50%)" }}>Cancelar</Button></Link>
               <Confirm
                 header='¿Está seguro que desea guardar los cambios?'
                 content="Si confirma el guardado, será redirigido a la lista principal"
@@ -204,7 +209,7 @@ render() {
                 onCancel={this.handleCancel}
                 onConfirm={this.handleConfirm}
               />
-              <Button class="ui green button" style={{ color:"white",margin: "0px 50px 10px 50px", background: "rgb(129,206,50)" }}>Confirmar</Button>
+              <Button className="ui green button" style={{ color:"white",margin: "0px 50px 10px 50px", background: "rgb(129,206,50)" }}>Confirmar</Button>
             </GridRow>
 
           </Grid>
@@ -218,5 +223,3 @@ render() {
   }
 }
 export default Formulario_inscripcion;
-
-

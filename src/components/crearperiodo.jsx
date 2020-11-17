@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css"
 import {obtenerModulos} from "../servicios/modulos";
-import { Container, Button, Form, ButtonGroup } from 'semantic-ui-react'
+import { Container, Button, Form, ButtonGroup, Header } from 'semantic-ui-react'
 import CrearCurso from "./crearcurso";
 import {useHistory} from "react-router-dom"
 import { crearPeriodo } from "../servicios/periodos";
@@ -44,6 +44,7 @@ export default function NuevoPeriodo() {
         
             <div>            
                 <Container>
+                  <Header as='h1'>Crear periodo</Header>
                     <Form.Input label="Periodo" fluid type="text"onChange={(e, data) => setPeriodo(data.value)} />
                     <br/>
                     <Form.Select id="inputState" label="Topico" fluid

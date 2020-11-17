@@ -24,17 +24,19 @@ function App() {
             <NuevoPeriodo />
           </Route>
           <Route path="/periodos/:id" children={<EditarPeriodo />} />
-          <Route path="/" exact component={Listar_Modulos} />
-          <Route exact path="/formulario" render={ (props) =>(
-              <React.Fragment>   
-              <Formulario_inscrites {...props} />
-              </React.Fragment>
+          <Container>
+            <Route path="/" exact component={Listar_Modulos} />
+            <Route exact path="/formulario" render={ (props) =>(
+                <React.Fragment>   
+                <Formulario_inscrites {...props} />
+                </React.Fragment>
+              )}/>
+            <Route exact path="/lista-preinscriptes" render={ (props) =>(
+                <React.Fragment>
+                  <ListaPreinscriptes/>
+                </React.Fragment>
             )}/>
-          <Route exact path="/lista-preinscriptes" render={ (props) =>(
-              <React.Fragment>
-                <ListaPreinscriptes/>
-              </React.Fragment>
-          )}/>
+          </Container>
         </Switch>
       </div>
     </Router>
