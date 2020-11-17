@@ -17,10 +17,10 @@ function Eliminar({ egresadeId }) {
     const eliminarPeriodoDeBD = (egresadeId) => {
         onClose();
         eliminarPeriodo(egresadeId).then(cursoperiodo => {
-            return cursoperiodo.json()
-        }).then(cursoperiodo => {
-            if(cursoperiodo == 200){
+            console.log(cursoperiodo);
+            if(cursoperiodo.status == 200){
                 //mostrar "se ha eliminado correctamente"
+                window.location.reload();
             }
             else{
                 //fallo al eliminar
