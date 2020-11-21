@@ -14,6 +14,7 @@ class ListaPreinscriptes extends Component {
         this.state = {  
             abierto:false,
             preInscriptes: Array(0),
+            preinscriptesSeleccionados: Array(0)
         }
     }
 
@@ -30,11 +31,44 @@ class ListaPreinscriptes extends Component {
     obtenerPreinscripte(preinscripte){
         return(
             <GenericModal 
-                trigger={<Button circular basic color="green" icon><Icon color="black" name="eye"></Icon> </Button>}
+                trigger={<Button circular basic color="green" icon><Icon color="black" name="eye"></Icon></Button>}
             >
                 <Preinscripte preinscripte={preinscripte} />
             </GenericModal>
         )
+    }
+
+    seleccionarPreinscripte(preinscripte,event){
+        if (event.target.checked) {
+            this.setState({
+              preinscriptesSeleccionados: this.state.preinscriptesSeleccionados.concat(
+                preinscripte
+              )
+            });
+          } else {
+            this.state.preinscriptesSeleccionados.map(() => {
+              return this.setState({
+                  preinscriptesSeleccionados: this.state.preinscriptesSeleccionados.filter(
+                  (e) => e.id !== preinscripte.id
+                )
+              });
+            });
+        }
+    }
+
+    seleccionarTodosPreinscriptes(event){
+        this.cambiarEstadoCheckBoxes(event.target.checked)
+        if(event.target.checked){
+            this.setState({preinscriptesSeleccionados:this.state.preInscriptes});
+        }
+        else{
+            this.setState({preinscriptesSeleccionados:Array(0)});
+        }
+    }
+
+    cambiarEstadoCheckBoxes(estado){
+        var checkboxes = Array.from(document.getElementsByName("checkBox"));
+        checkboxes = checkboxes.map((checkbox)=>checkbox.checked=estado);
     }
 
 
@@ -45,6 +79,14 @@ class ListaPreinscriptes extends Component {
             <Table singleLine selectable striped unstackable>
                 <Table.Header style={{backgroundColor:'#282c34'}}>
                 <Table.Row>
+                    <Table.HeaderCell textAlign="center">
+                        <input
+                            type="checkbox"
+                            name="checkBoxAll"
+                            onClick={(e) => this.seleccionarTodosPreinscriptes(e)}
+                            style={{ transform: "scale(1.4)" }}
+                        />
+                    </Table.HeaderCell>
                     {this.headers.map((data,index)=>
                         <Table.HeaderCell key={index} >{data}</Table.HeaderCell>
                     )}
@@ -53,6 +95,15 @@ class ListaPreinscriptes extends Component {
                 <Table.Body>
                     {this.state.preInscriptes.map((preinscripte)=>
                         <Table.Row key={preinscripte.id}>
+                            <Table.Cell textAlign='center' >
+                                <input
+                                    type="checkbox"
+                                    name="checkBox"
+                                    id={preinscripte.id}
+                                    style={{ transform: "scale(1.4)" }}
+                                    onClick={(e) => this.seleccionarPreinscripte(preinscripte,e)}
+                                />
+                            </Table.Cell>
                             <Table.Cell>{preinscripte.nombreCompleto}</Table.Cell>
                             <Table.Cell>{preinscripte.modulo}</Table.Cell>
                             <Table.Cell>{preinscripte.zona}</Table.Cell>
