@@ -13,6 +13,11 @@ function crearPeriodo(body) {
 function obtenerCursosPorIdPeriodo(id) {
   return fetch(`${BASE_ROUTE}/periodos/${id}/cursos`);
 }
+
+function editarPeriodo(id) {
+  return fetch(`${BASE_ROUTE}/periodos/${id}/editar`);
+}
+
 function eliminarCursoDePeriodo(id,idCurso) {
   return axios.delete(`${BASE_ROUTE}/periodos/${id}/cursos/${idCurso}`);
 }
@@ -21,4 +26,4 @@ function eliminarPeriodo(id){
   return axios.delete(`${BASE_ROUTE}/periodos/${id}`);
 }
 
-export { obtenerPeriodos, crearPeriodo, obtenerCursosPorIdPeriodo, eliminarCursoDePeriodo ,eliminarPeriodo };
+export { obtenerPeriodos, crearPeriodo, obtenerCursosPorIdPeriodo, eliminarCursoDePeriodo ,eliminarPeriodo, editarPeriodo };
