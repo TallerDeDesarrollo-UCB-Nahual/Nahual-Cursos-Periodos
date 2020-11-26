@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import ListarCursosGuardados from "./listarCursosGuadados";
 import styles from "./styles.module.css";
 import Eliminar from './eliminarPeriodo';
+import EditarPeriodo from './editarperiodo';
 
 export default function Periodos() {
     const [periodos, setPeriodos] = useState([])
@@ -12,7 +13,14 @@ export default function Periodos() {
     const [cursosAMostrar, setCursosAMostrar] = useState([]);
     const [informacionListaCursos, setInformacionListaCursos] = useState(false)
     const [idPeriodo, setIdPeriodo] = useState(0)
-
+    const [abrirModal] = useState(false);
+//    const [idPeriodoParaModal] = useState(0);
+   /* 
+    const configuracionParaModal = ( confAbrirModal, idDelPeriodo) => {
+        abrirModal(confAbrirModal);
+        idPeriodoParaModal(idDelPeriodo);
+    }
+*/
     useEffect(() => {
         obtenerPeriodos().then(response => response.json()).then(response => setPeriodos(response.response))
     }, [])
@@ -46,7 +54,7 @@ export default function Periodos() {
                 </Table.Header>
                     <Table.Body>
                         {periodos.map(p => {
-                            if (p.estado == filtroEstado){
+                            if (p.estado === filtroEstado){
                                 return (
         
                                 <Table.Row key={`periodo-${p.id}`}>
@@ -56,15 +64,23 @@ export default function Periodos() {
                                     <Table.Cell>{p.topico.nombre}</Table.Cell>
                                     <Table.Cell>
                                         <div className={'displayFlex centered columnGap'}>
-                                                <Button color="green" onClick={x => {
-                                                    obtenerCursosPorIdPeriodo(p.id).then(cursoperiodo => {
-                                                        return cursoperiodo.json()
-                                                    }).then(cursoperiodo => {
-                                                        setCursosAMostrar(cursoperiodo.response)
-                                                        setInformacionListaCursos(true)
-                                                        setIdPeriodo(p.id);
-                                                    })
-                                                }} >Ver cursos</Button>
+                                            <Button color="green" onClick={x => {
+                                                obtenerCursosPorIdPeriodo(p.id).then(cursoperiodo => {
+                                                    return cursoperiodo.json()
+                                                }).then(cursoperiodo => {
+                                                    setCursosAMostrar(cursoperiodo.response)
+                                                    setInformacionListaCursos(true)
+                                                    setIdPeriodo(p.id);
+                                                })
+                                            }} >Ver cursos</Button>
+                                            {/*
+                                            <Button color="ui blue button" onClick={x => { abrirModal(true) }}>
+                                                <i className="edit icon"></i>
+                                                <label class="ui blue">Editar</label>
+                                            </Button>
+                                            */}    
+                                            <EditarPeriodo periodoId={idPeriodo} estaAbierto={ false } setAbierto= { abrirModal }/>
+                                            {/* <EditarPeriodo egresadeId={p.id} estaAbierto={ true } setAbierto={ true }></EditarPeriodo>*/}
                                             <Eliminar egresadeId={p.id}></Eliminar>
                                         </div>
                                     </Table.Cell>
