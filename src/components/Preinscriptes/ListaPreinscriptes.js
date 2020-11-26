@@ -14,30 +14,31 @@ class ListaPreinscriptes extends Component {
     constructor(){
         super();
         this.state = {  
-            abierto:false,
+            abierto: false,
             preInscriptes: Array(0),
             preinscriptesSeleccionados: Array(0),
-            cursos: [],
-            cursoSeleccionado:'',
-            estaCargando:false,
-            mensaje:''
+            periodos: [],
+            periodoSeleccionado: {
+                id: null,
+            },
+            estaCargando: false,
+            mensaje: '',
         }
     }
 
     async obtenerPeriodos(){
-        let cursoslist = Array(0);
+        let periodosList = Array(0);
         try {
             let res = await Axios.get(this.URL_Periodos);
-            res.data.response.map((curso)=>{
-                cursoslist.push({
-                    key:curso.id,
-                    value:curso.anio + ' - ' + curso.periodo + ' - ' + curso.topico.nombre,
-                    text: curso.anio + ' - ' + curso.periodo + ' - ' + curso.topico.nombre
-                })
-            })
-            this.setState({cursoSeleccionado: cursoslist[0].text})
-            this.setState({cursos: cursoslist})
-            return cursoslist[0].text;
+            periodosList = res.data.response.map(periodo => {
+                return {
+                    key: periodo.id,
+                    value: periodo.id,
+                    text: periodo.anio + ' - ' + periodo.periodo + ' - ' + periodo.topico.nombre
+                };
+            });
+            this.setState({ periodoSeleccionado: { id: periodosList[0].value }, periodos: periodosList });
+            return periodosList[0].text;
         } catch (error) {
             throw error;
         }
@@ -47,27 +48,25 @@ class ListaPreinscriptes extends Component {
     async obtenerPreinscriptes(modulo) {
         try {
             var res = await Axios.get(this.URL_Preinscriptes+`&modulo=${modulo}`);
-            this.setState({preInscriptes: res.data.response});
-            this.setState({estaCargando:false});
+            this.setState({ preInscriptes: res.data.response, estaCargando: false });
         } catch (error) {
             throw error;
         }
-      }
+    }
 
     async cargarDatos(){
-        this.setState({estaCargando:true});
+        this.setState({ estaCargando: true });
         try {
             var primerModulo = await this.obtenerPeriodos();
             await this.obtenerPreinscriptes(primerModulo);
         } catch (error) {
-            this.setState({estaCargando:false});
-            this.setState({mensaje:"Oops..algo malo pasó"});
+            this.setState({ estaCargando: false, mensaje: "Oops..algo malo pasó" });
         }
         
     }
 
     componentDidMount(){
-       this.cargarDatos();
+        this.cargarDatos();
     }
 
     obtenerPreinscripte(preinscripte){
@@ -77,7 +76,7 @@ class ListaPreinscriptes extends Component {
             >
                 <Preinscripte preinscripte={preinscripte} />
             </GenericModal>
-        )
+        );
     }
 
     seleccionarPreinscripte(preinscripte,event){
@@ -99,43 +98,60 @@ class ListaPreinscriptes extends Component {
     }
 
     seleccionarTodosPreinscriptes(event){
-        this.cambiarEstadoCheckBoxes(event.target.checked)
+        this.cambiarEstadoCheckBoxes(event.target.checked);
         if(event.target.checked){
-            this.setState({preinscriptesSeleccionados:this.state.preInscriptes});
+            this.setState({ preinscriptesSeleccionados: this.state.preInscriptes });
         }
         else{
-            this.setState({preinscriptesSeleccionados:Array(0)});
+            this.setState({ preinscriptesSeleccionados: Array(0) });
         }
     }
 
     cambiarEstadoCheckBoxes(estado){
         var checkboxes = Array.from(document.getElementsByName("checkBox"));
-        checkboxes = checkboxes.map((checkbox)=>checkbox.checked=estado);
+        checkboxes = checkboxes.map((checkbox) => checkbox.checked=estado);
     }
 
-    cambiarCurso(curso){
-        this.setState({cursoSeleccionado: curso });
-        this.obtenerPreinscriptes(curso);
+    cambiarPeriodo(periodoId){
+        this.setState({ periodoSeleccionado: { id: periodoId }, estaCargando: true });
+        const modulo = this.state.periodos.find(periodo => periodo.value === periodoId).text;
+        this.obtenerPreinscriptes(modulo);
     }
 
     mostrarMensaje(){
-        if(this.state.mensaje==="" && this.state.preInscriptes.length===0){
-            this.setState({mensaje:`Actualmente no existen personas registradas en este curso.`})
+        if(this.state.mensaje === "" && this.state.preInscriptes.length === 0){
+            this.setState({ mensaje: `Actualmente no existen personas registradas en este curso.` });
         }
         return(
-            this.state.preInscriptes.length===0&&
+            this.state.preInscriptes.length === 0 &&
             <Message
             icon="warning sign"
             warning
             header={this.state.mensaje}
             content={`Intenta mas tarde.`}
             />
-        )
+        );
     }
 
-    handleChange = (e, { value }) => this.cambiarCurso(value);
+    handleChange = (e, { value }) => this.cambiarPeriodo(value);
 
     render(){
+        const preinscripteFilas = this.state.preInscriptes.map((preinscripte)=>
+        <Table.Row key={preinscripte.id}>
+            <Table.Cell textAlign='center' >
+                <input
+                    type="checkbox"
+                    name="checkBox"
+                    id={preinscripte.id}
+                    style={{ transform: "scale(1.4)" }}
+                    onClick={(e) => this.seleccionarPreinscripte(preinscripte,e)}
+                />
+            </Table.Cell>
+            <Table.Cell>{preinscripte.nombreCompleto}</Table.Cell>
+            <Table.Cell>{preinscripte.zona}</Table.Cell>
+            <Table.Cell>{this.obtenerPreinscripte(preinscripte)}</Table.Cell>
+        </Table.Row>
+    );
         return(
         <Container>
             {this.state.estaCargando &&
@@ -147,11 +163,10 @@ class ListaPreinscriptes extends Component {
             <Header center="true" as='h1' image={iconoPreinscripte} textAlign="center" content='Lista de Pre-Inscriptes'/>
             <Container textAlign="center">
             <Dropdown
-                placeholder={this.state.cursos[0] && this.state.cursos[0].text}
                 selection
-                options={this.state.cursos}
-                value={this.state.cursoSeleccionado}
-                onChange={this.handleChange}
+                options = { this.state.periodos }
+                onChange = { this.handleChange }
+                value = { this.state.periodoSeleccionado.id }
             />
             </Container>
             <Table singleLine selectable striped unstackable>
@@ -171,22 +186,7 @@ class ListaPreinscriptes extends Component {
                 </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {this.state.preInscriptes.map((preinscripte)=>
-                        <Table.Row key={preinscripte.id}>
-                            <Table.Cell textAlign='center' >
-                                <input
-                                    type="checkbox"
-                                    name="checkBox"
-                                    id={preinscripte.id}
-                                    style={{ transform: "scale(1.4)" }}
-                                    onClick={(e) => this.seleccionarPreinscripte(preinscripte,e)}
-                                />
-                            </Table.Cell>
-                            <Table.Cell>{preinscripte.nombreCompleto}</Table.Cell>
-                            <Table.Cell>{preinscripte.zona}</Table.Cell>
-                            <Table.Cell>{this.obtenerPreinscripte(preinscripte)}</Table.Cell>
-                        </Table.Row>
-                    )}
+                    { preinscripteFilas }
                 </Table.Body>
 
             </Table>
