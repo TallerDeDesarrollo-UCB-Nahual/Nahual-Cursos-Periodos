@@ -3,13 +3,31 @@ import React, { Component } from 'react';
 import {Button, Container, Dimmer, Dropdown, Header, Icon, Loader, Message, Select, Table} from "semantic-ui-react";
 import iconoPreinscripte from '../../assets/reading-book.png';
 import GenericModal from '../Modal/GenericModal';
+import ElegirCurso from './ElegirCurso';
 import Preinscripte from './Preinscripte';
+
+const opciones = [{
+    key: 1,
+    value: 1,
+    text: '1',
+},
+{
+    key: 2,
+    value: 2,
+    text: '2',
+},
+{
+    key: 3,
+    value: 3,
+    text: '3',
+}];
 
 class ListaPreinscriptes extends Component {
 
     headers = ['Nombre Completo','Zona','Información'];
     URL_Preinscriptes = 'https://nahual-datos-estudiantes.herokuapp.com/api/estudiantes/DTO?estadoId=1';
     URL_Periodos = 'https://nahual-datos-estudiantes.herokuapp.com/api/periodos?estado=true';
+    URL_Cursos = 'localhost:8000/api/cursos';
 
     constructor(){
         super();
@@ -21,6 +39,7 @@ class ListaPreinscriptes extends Component {
             periodoSeleccionado: {
                 id: null,
             },
+            cursos: [],
             estaCargando: false,
             mensaje: '',
         }
@@ -133,6 +152,16 @@ class ListaPreinscriptes extends Component {
         );
     }
 
+    async conseguirCursos(PeriodoId){
+        let cursos = [];
+        try {
+            cursos = await Axios.get(this.URL_Cursos+`?PeriodoId=${PeriodoId}`);
+        } catch (error) {
+            throw error;
+        }
+        this.setState({ cursos });
+    }
+
     handleChange = (e, { value }) => this.cambiarPeriodo(value);
 
     render(){
@@ -191,6 +220,9 @@ class ListaPreinscriptes extends Component {
 
             </Table>
             {this.mostrarMensaje()}
+            <GenericModal trigger = { <Button basic color='grey' floated='right'>Inscribir</Button>}>
+                <ElegirCurso opciones={ this.state.cursos }></ElegirCurso>
+            </GenericModal>
             </Container>
             )
         }
