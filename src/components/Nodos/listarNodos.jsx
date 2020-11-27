@@ -1,28 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Table, Icon } from 'semantic-ui-react'
-import { obtenerNodos, obtenerSedesPorIdNodo } from "../../servicios/nodos";
+import { obtenerNodos } from "../../servicios/nodos";
 import styles from "../styles.module.css";
-
-
+import ListaSedes from "./listaSedes";
 
 export default function ListarNodos() {
-
     const [nodos, setNodos] = useState([]);
-    const [sedes, setSedes] = useState([]);
 
     useEffect(() => {
-        obtenerNodos().then(
-            response => response.json()
-            ).then(
-                response => 
-                setNodos(response.response)
-            )
+        obtenerNodos().then(response => response.json()).then(response => setNodos(response.response))
     }, [])
+
     return (
         <div className={styles.vistaPeriodos}>
-
-            <h1>Periodos</h1>
-
             <Table celled>
                 <Table.Header>
                     <Table.Row>
@@ -33,7 +23,7 @@ export default function ListarNodos() {
                 <Table.Body>
                     {nodos.map(nodo => {
                         return (
-                            <Table.Row key={`periodo-${nodo.id}`}>
+                            <Table.Row key={`nodo-${nodo.id}`}>
                                 <Table.Cell>
                                     {nodo.nombre}
                                     <div align="right">
@@ -43,38 +33,13 @@ export default function ListarNodos() {
                                     </div>
                                 </Table.Cell>
                                 <Table.Cell verticalAlign='top'>
-                                    {obtenerSedesPorIdNodo(nodo.id).then(sedeNodo => {
-                                        return sedeNodo.json()
-                                    }).then(sedeNodo => {
-                                        setSedes(sedeNodo.response)
-                                    })
-                                    }
-                                    <ul>{
-                                       sedes.map(sede => {
-                                        return(
-                     
-                                            <l1>{sede.nombre}</l1>
-                                        )
-                                    })
-                                }</ul>
-                                    {/* <div className={'displayFlex centered columnGap'}>
-                                        <Button color="green" onClick={x => {
-                                            obtenerCursosPorIdPeriodo(nodo.id).then(cursoperiodo => {
-                                                return cursoperiodo.json()
-                                            }).then(cursoperiodo => {
-                                                setCursosAMostrar(cursoperiodo.response)
-                                                setInformacionListaCursos(true)
-                                                setIdPeriodo(p.id);
-                                            })
-                                        }} >Ver cursos</Button>
-                                        <Eliminar egresadeId={p.id}></Eliminar>
-                                    </div> */}
+                                    <ListaSedes nodoId={nodo.id} />
                                 </Table.Cell>
                             </Table.Row>
                         )
                     })}
                 </Table.Body>
             </Table>
-        </div>
+        </div >
     )
 }

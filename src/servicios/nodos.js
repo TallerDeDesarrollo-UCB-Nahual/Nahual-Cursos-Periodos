@@ -6,7 +6,7 @@ function obtenerNodos() {
 }
 
 function obtenerSedesPorIdNodo(id) {
-  return fetch(`${BASE_ROUTE}/nodos/${id}`);
+  return fetch(`${BASE_ROUTE}/nodos/${id}/sedes`);
 }
 
 export { obtenerNodos, obtenerSedesPorIdNodo };
