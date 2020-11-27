@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { Component } from "react";
+import OpcionesDeCurso from './OpcionesDeCurso'
 import {
   Dimmer,
   Form,
@@ -20,8 +21,8 @@ class ListaDeAlumnesPorCurso extends Component {
     };
   }
 
-  componentDidMount() {
-    this.obtenerAlumnes();
+  async componentDidMount() {
+    this.obtenerAlumnes(1);
   }
 
   obtenerAlumnes() {
@@ -44,9 +45,16 @@ class ListaDeAlumnesPorCurso extends Component {
       });
   }
 
-  cuandoCambiaElCurso() {
-    this.obtenerAlumnes();
+  enviarDatosAlEstado(data) {
+    this.setState({
+      curso:data
+    });
   }
+  
+  cuandoCambiaElCurso = (data) => {
+    this.enviarDatosAlEstado(data);
+    this.obtenerAlumnes();
+  };
 
   iconoDeCarga() {
     return (
@@ -84,21 +92,9 @@ class ListaDeAlumnesPorCurso extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={() => this.cuandoCambiaElCurso()}>
-          <Form.Group>
-            <Form.Input
-              placeholder="Curso"
-              name="curso"
-              onChange={(e, { value }) => {
-                this.setState({ curso: value });
-              }}
-              value={this.state.curso}
-            />
-            <Form.Button content="Cambiar" />
-          </Form.Group>
-        </Form>
         {this.iconoDeCarga()}
         <Header as="h2" textAlign="center" content="Lista Alumnes" />
+        <OpcionesDeCurso/>
         <div style={{ overflowX: "auto" }}>
           <Table singleLine selectable striped unstackable>
             <Table.Header>
