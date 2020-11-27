@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
+import DetalleDeAlumne from "./DetalleDeAlumne/DetalleDeAlumne";
 
 function Alumne(props) {
   function PrimeraLetraEnMayuscula(nombreCompleto) {
@@ -27,6 +28,9 @@ function Alumne(props) {
       <Table.Cell>
         {PrimeraLetraEnMayuscula(props.item.nombre+" "+props.item.apellido)}
       </Table.Cell>
+      <Table.Cell textAlign='center'>
+				<DetalleDeAlumne id={props.item.id}></DetalleDeAlumne>
+			</Table.Cell>
     </Table.Row>
   );
 }
