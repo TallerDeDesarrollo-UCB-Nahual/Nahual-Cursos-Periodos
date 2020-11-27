@@ -6,6 +6,8 @@ import Periodos from "./components/periodos";
 import NuevoPeriodo from "./components/crearperiodo";
 import EditarPeriodo from "./components/editarperiodo";
 import ListarNodos from "./components/Nodos/listarNodos";
+import ListaNodosSedes from "./components/listaNodos-Sedes";
+import TabExamplePointing from "./components/tabsgenerales";
 
 function App() {
   return (
@@ -20,6 +22,12 @@ function App() {
           </Route>
           <Route exact path="/formulario-registro-periodo">
             <NuevoPeriodo />
+            </Route>
+          <Route exact path="/tabs">
+            <TabExamplePointing/>
+          </Route>
+          <Route exact path="/nodos-sedes">
+            <ListaNodosSedes />
           </Route>
           <Route path="/periodos/:id" children={<EditarPeriodo />} />
           <Route path="/">no estas permitido</Route>
