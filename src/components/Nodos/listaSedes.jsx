@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { obtenerSedesPorIdNodo } from "../../servicios/nodos";
-import { Icon, Label, Table } from 'semantic-ui-react'
+import EliminarSede from "./eliminarSede";
+import { Label, Table } from 'semantic-ui-react'
 import styles from "../styles.module.css";
 
 export default function ListaSedes({ nodoId }) {
@@ -27,7 +28,7 @@ export default function ListaSedes({ nodoId }) {
                     </Table.Cell>
 
                     <Table.Cell align="right">
-                        <Icon color='red' name='trash alternate outline' />
+                        <EliminarSede id={sede.id}/>
                     </Table.Cell>
 
                     {/* <Label className={styles.tarjetaAzul}>• {sede.nombre}</Label>

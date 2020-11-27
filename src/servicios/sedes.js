@@ -5,4 +5,8 @@ function obtenerSedes() {
   return fetch(`${BASE_ROUTE}/sedes`);
 }
 
-export { obtenerSedes };
+function eliminarSede(id) {
+  return fetch(`${BASE_ROUTE}/sedes/${id}`);
+}
+
+export { obtenerSedes, eliminarSede };
