@@ -40,6 +40,14 @@ class OpcionesDeCurso extends Component{
     this.setState({opcionesDeCurso:opcionesDeCurso})
   }
 
+  manejarEvento(opcionSeleccionada){
+    this.setState({
+       valor: opcionSeleccionada.key,
+       textoDropdown: opcionSeleccionada.text
+      });
+    this.props.cuandoCambiaElCurso(opcionSeleccionada.key);
+  }  
+
   opcionesDeFiltro(){
      return (
       <Dropdown.Menu >
@@ -50,6 +58,7 @@ class OpcionesDeCurso extends Component{
             value={opcionSeleccionada.value}
             text={opcionSeleccionada.text}
             {... opcionSeleccionada}
+            onClick={() => this.manejarEvento(opcionSeleccionada)}
           />
         ))}
       </Dropdown.Menu>
