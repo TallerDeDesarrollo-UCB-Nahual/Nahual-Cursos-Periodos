@@ -2,7 +2,11 @@ import React from "react";
 import BASE_ROUTE from "./rutas";
 
 function obtenerNodos() {
-  return fetch(`${BASE_ROUTE}/sedes`);
+  return fetch(`${BASE_ROUTE}/nodos`);
 }
 
-export { obtenerSedes };
+function obtenerSedesPorIdNodo(id) {
+  return fetch(`${BASE_ROUTE}/nodos/${id}`);
+}
+
+export { obtenerNodos, obtenerSedesPorIdNodo };

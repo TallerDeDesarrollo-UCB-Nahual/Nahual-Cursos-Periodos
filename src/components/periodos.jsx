@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table, Select } from 'semantic-ui-react'
 import { obtenerPeriodos, obtenerCursosPorIdPeriodo } from "../servicios/periodos";
 import { Link } from "react-router-dom"
@@ -21,20 +21,20 @@ export default function Periodos() {
         <div className={styles.vistaPeriodos}>
             <div className={'opcionesPeriodo'}>
                 <div className={"selectBar"}>
-                    
+
                     <Select placeholder={"Ingrese el estado"} className={"custom-select"} options={[
                         { key: 'activo', value: true, text: 'Activo' },
                         { key: 'inactivo', value: false, text: 'Inactivo' }
                     ]} onChange={(x, data) => {
                         setFiltroEstado(data.value === true)
-                        }
-                    }/>
+                    }
+                    } />
                 </div>
-            <h1>Periodos</h1>
-            <Link to="/formulario-registro-periodo" className={'linkElement'}>Nuevo Periodo</Link>
+                <h1>Periodos</h1>
+                <Link to="/formulario-registro-periodo" className={'linkElement'}>Nuevo Periodo</Link>
             </div>
-            <ListarCursosGuardados cursos={cursosAMostrar} estaAbierto={informacionListaCursos} setAbierto={setInformacionListaCursos} idPeriodo={idPeriodo}/>
-            <Table >
+            <ListarCursosGuardados cursos={cursosAMostrar} estaAbierto={informacionListaCursos} setAbierto={setInformacionListaCursos} idPeriodo={idPeriodo} />
+            <Table>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Periodo</Table.HeaderCell>
@@ -44,35 +44,35 @@ export default function Periodos() {
                         <Table.HeaderCell className={"displayFlex  centered"}>Acciones</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
-                    <Table.Body>
-                        {periodos.map(p => {
-                            if (p.estado == filtroEstado){
-                                return (
-        
+                <Table.Body>
+                    {periodos.map(p => {
+                        if (p.estado == filtroEstado) {
+                            return (
+
                                 <Table.Row key={`periodo-${p.id}`}>
-                                    <Table.Cell>{p.periodo}</Table.Cell>
-                                    <Table.Cell>{p.anio}</Table.Cell>
-                                    <Table.Cell>{p.estado ? 'Activo':'Inactivo'}</Table.Cell>
+                                    <Table.Cell >{p.periodo}</Table.Cell>
+                                    <Table.Cell >{p.anio}</Table.Cell>
+                                    <Table.Cell>{p.estado ? 'Activo' : 'Inactivo'}</Table.Cell>
                                     <Table.Cell>{p.topico.nombre}</Table.Cell>
                                     <Table.Cell>
                                         <div className={'displayFlex centered columnGap'}>
-                                                <Button color="green" onClick={x => {
-                                                    obtenerCursosPorIdPeriodo(p.id).then(cursoperiodo => {
-                                                        return cursoperiodo.json()
-                                                    }).then(cursoperiodo => {
-                                                        setCursosAMostrar(cursoperiodo.response)
-                                                        setInformacionListaCursos(true)
-                                                        setIdPeriodo(p.id);
-                                                    })
-                                                }} >Ver cursos</Button>
+                                            <Button color="green" onClick={x => {
+                                                obtenerCursosPorIdPeriodo(p.id).then(cursoperiodo => {
+                                                    return cursoperiodo.json()
+                                                }).then(cursoperiodo => {
+                                                    setCursosAMostrar(cursoperiodo.response)
+                                                    setInformacionListaCursos(true)
+                                                    setIdPeriodo(p.id);
+                                                })
+                                            }} >Ver cursos</Button>
                                             <Eliminar egresadeId={p.id}></Eliminar>
                                         </div>
                                     </Table.Cell>
                                 </Table.Row>
-                                )
-                            }
-                        })}
-                    </Table.Body>
+                            )
+                        }
+                    })}
+                </Table.Body>
             </Table>
         </div>
     )
