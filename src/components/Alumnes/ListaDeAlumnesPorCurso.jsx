@@ -25,7 +25,7 @@ class ListaDeAlumnesPorCurso extends Component {
     this.obtenerAlumnes(1);
   }
 
-  obtenerAlumnes() {
+  obtenerAlumnes(idCurso) {
     this.setState({
       mostrarBotonDeCarga: true
     });
@@ -53,7 +53,7 @@ class ListaDeAlumnesPorCurso extends Component {
   
   cuandoCambiaElCurso = (data) => {
     this.enviarDatosAlEstado(data);
-    this.obtenerAlumnes();
+    this.obtenerAlumnes(data);
   };
 
   iconoDeCarga() {
@@ -94,7 +94,7 @@ class ListaDeAlumnesPorCurso extends Component {
       <div>
         {this.iconoDeCarga()}
         <Header as="h2" textAlign="center" content="Lista Alumnes" />
-        <OpcionesDeCurso/>
+        <OpcionesDeCurso cuandoCambiaElCurso={this.cuandoCambiaElCurso}/>
         <div style={{ overflowX: "auto" }}>
           <Table singleLine selectable striped unstackable>
             <Table.Header>
