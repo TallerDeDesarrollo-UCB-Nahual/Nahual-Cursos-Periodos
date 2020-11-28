@@ -117,6 +117,8 @@ cambiarEstadoSeleccionable(cambioCurso){
 }
 
 seleccionarAlumne = (alumne,estaSeleccionado)=>{
+  let checkboxes = Array.from(document.getElementsByName("checkbox"));
+  checkboxes[0].checked=false;
   if (estaSeleccionado) {
     this.setState({
       alumnesSeleccionados:this.state.alumnesSeleccionados.concat(alumne)
@@ -126,7 +128,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
     this.state.alumnesSeleccionados.map(() => {
         return this.setState({
           alumnesSeleccionados: this.state.alumnesSeleccionados.filter(
-            (e) => e.id !== alumne.id
+            (a) => a.estudiante.id !== alumne.estudiante.id
           )
         });
       })
