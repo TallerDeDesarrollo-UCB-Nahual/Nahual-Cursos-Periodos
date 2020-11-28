@@ -21,6 +21,7 @@ class OpcionesDeCurso extends Component{
     Axios.get(`${API_URL}/cursos`)
       .then((respuesta) => {
         this.agregarOpcionesDeFiltrado(respuesta.data.response);
+        this.props.cuandoCambiaElCurso(respuesta.data.response[0].id);
       })
       .catch(() => {
         alert("Error en la base de datos.");

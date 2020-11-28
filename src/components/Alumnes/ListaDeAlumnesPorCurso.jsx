@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import OpcionesDeCurso from './OpcionesDeCurso'
 import {
   Dimmer,
-  Form,
   Header,
   Loader,
   Message,
@@ -93,9 +92,9 @@ class ListaDeAlumnesPorCurso extends Component {
     return (
       <div>
         {this.iconoDeCarga()}
-        <Header as="h2" textAlign="center" content="Lista Alumnes" />
-        <OpcionesDeCurso cuandoCambiaElCurso={this.cuandoCambiaElCurso}/>
-        <div style={{ overflowX: "auto" }}>
+        <Header style={{ marginTop: 30}} as="h2" textAlign="center" content="Lista Alumnes"/>
+        <OpcionesDeCurso cuandoCambiaElCurso={this.cuandoCambiaElCurso}/> 
+        <div style={{ overflowX: "auto" }, { marginTop: 15}}>
           <Table singleLine selectable striped unstackable>
             <Table.Header>
               <Table.Row>
