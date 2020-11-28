@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { obtenerSedesPorIdNodo } from "../../servicios/nodos";
 import EliminarSede from "./eliminarSede";
+import EditarSede from "./editarSede";
 import { Label, Table } from 'semantic-ui-react'
 import styles from "../styles.module.css";
 
-export default function ListaSedes({ nodoId }) {
+export default function ListaSedes({ nodoId, nodoNombre }) {
     const [sedes, setSedes] = useState([]);
 
     const obtener = () => {
@@ -30,6 +31,7 @@ export default function ListaSedes({ nodoId }) {
 
                     <Table.Cell align="right">
                         <EliminarSede id={sede.id}/>
+                        <EditarSede id={sede.id} nombre={sede.nombre} nodoNombre={nodoNombre} nodoId={nodoId}/>
                     </Table.Cell>
                 </div>
             )

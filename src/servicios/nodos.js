@@ -13,4 +13,8 @@ function eliminarSede(id) {
   return axios.delete(`${BASE_ROUTE}/nodos/sedes/${id}`);
 }
 
+function obtenerSede(id){
+  return fetch(`${BASE_ROUTE}/nodos/`)
+}
+
 export { obtenerNodos, obtenerSedesPorIdNodo,eliminarSede };
