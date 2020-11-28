@@ -8,7 +8,10 @@ function Alumne(props) {
   
   function seleccionarUnAlumne(alumne){
     let checkboxes = Array.from(document.getElementsByName("checkbox"));
-    props.seleccionarAlumne(alumne, checkboxes[props.numeracion].checked);
+    const estudiante={
+      estudiante:alumne
+    }
+    props.seleccionarAlumne(estudiante, checkboxes[props.numeracion].checked);
   }  
 
   return (
