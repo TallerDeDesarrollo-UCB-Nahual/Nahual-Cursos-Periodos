@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { Component } from "react";
-import OpcionesDeCurso from './OpcionesDeCurso'
+import OpcionesDeCurso from "./OpcionesDeCurso";
 import {
   Dimmer,
   Header,
@@ -16,7 +16,8 @@ class ListaDeAlumnesPorCurso extends Component {
     this.state = {
       alumnes: [],
       curso: 1,
-      mostrarBotonDeCarga: true
+      mostrarBotonDeCarga: true,
+      alumnesSeleccionados:[]
     };
   }
 
@@ -33,7 +34,9 @@ class ListaDeAlumnesPorCurso extends Component {
       .then((respuesta) => {
         this.setState({
           mostrarBotonDeCarga: false,
-          alumnes: respuesta.data.response
+          alumnes: respuesta.data.response,
+          alumnesSeleccionados:[]
+          
         });
       })
       .catch(() => {
@@ -46,11 +49,13 @@ class ListaDeAlumnesPorCurso extends Component {
 
   enviarDatosAlEstado(data) {
     this.setState({
-      curso:data
+      curso: data,
+      alumnesSeleccionados:[]
     });
+    this.cambiarEstadoSeleccionable(true);
   }
-  
-  cuandoCambiaElCurso = (data) => {
+
+  cuandoCambiaElCurso = data => {
     this.enviarDatosAlEstado(data);
     this.obtenerAlumnes(data);
   };
@@ -70,8 +75,8 @@ class ListaDeAlumnesPorCurso extends Component {
   }
 
   mapeoListaAlumnes(listaAlumnes) {
-    return listaAlumnes.map((alumne) => {
-      return <Alumne item={alumne.estudiante} key={alumne.estudiante.id} />;
+    return listaAlumnes.map((alumne,contador) => {
+      return <Alumne item={alumne.estudiante} key={alumne.estudiante.id} seleccionarAlumne={this.seleccionarAlumne} numeracion={contador+1}/>;
     });
   }
 
@@ -88,6 +93,46 @@ class ListaDeAlumnesPorCurso extends Component {
     );
   }
 
+seleccionarTodosLosAlumes(){
+  let seleccionable = this.cambiarEstadoSeleccionable(false);
+  if(seleccionable[0].checked){
+    this.setState({
+      alumnesSeleccionados: this.state.alumnes
+    })
+  }else{
+    this.setState({
+      alumnesSeleccionados:[]
+    })
+  }
+}
+
+cambiarEstadoSeleccionable(cambioCurso){
+  let checkboxes = Array.from(document.getElementsByName("checkbox"));
+    checkboxes.map((checkbox) => {
+      return cambioCurso
+        ? (checkbox.checked = false)
+        : (checkbox.checked = checkboxes[0].checked);
+    });
+    return checkboxes;
+}
+
+seleccionarAlumne = (alumne,estaSeleccionado)=>{
+  if (estaSeleccionado) {
+    this.setState({
+      alumnesSeleccionados:this.state.alumnesSeleccionados.concat(alumne)
+    })
+  }
+  else{
+    this.state.alumnesSeleccionados.map(() => {
+        return this.setState({
+          alumnesSeleccionados: this.state.alumnesSeleccionados.filter(
+            (e) => e.id !== alumne.id
+          )
+        });
+      })
+  }
+}
+
   render() {
     return (
       <div>
@@ -98,6 +143,14 @@ class ListaDeAlumnesPorCurso extends Component {
           <Table singleLine selectable striped unstackable>
             <Table.Header>
               <Table.Row>
+                <Table.HeaderCell textAlign="center">
+                  <input
+                    type="checkbox"
+                    name="checkbox"
+                    onClick= {()=>this.seleccionarTodosLosAlumes()}
+                    style={{ transform: "scale(1.4)" }}
+                  />
+                </Table.HeaderCell>
                 <Table.HeaderCell>NOMBRE Y APELLIDO</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
@@ -109,5 +162,4 @@ class ListaDeAlumnesPorCurso extends Component {
     );
   }
 }
-
 export default ListaDeAlumnesPorCurso;
