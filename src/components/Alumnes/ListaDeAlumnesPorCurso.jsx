@@ -6,9 +6,11 @@ import {
   Header,
   Loader,
   Message,
-  Table
+  Table,
+  Button
 } from "semantic-ui-react";
 import Alumne from "./Alumne";
+import ModalCambioEstado from "./ModalCambioEstado.jsx";
 
 class ListaDeAlumnesPorCurso extends Component {
   constructor(props) {
@@ -158,6 +160,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
             </Table.Header>
             <Table.Body>{this.listaAlumnes()}</Table.Body>
           </Table>
+          <ModalCambioEstado alumnes={this.state.alumnesSeleccionados}/>
         </div>
         {this.listaVacia()}
       </div>
