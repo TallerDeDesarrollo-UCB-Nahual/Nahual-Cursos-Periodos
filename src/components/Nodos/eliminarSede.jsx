@@ -1,6 +1,7 @@
-import React, { useReducer } from "react";
-import { Button, Confirm } from 'semantic-ui-react'
-import { eliminarSede } from "../../servicios/sedes";
+import React from "react";
+import { Button, Confirm, Icon } from 'semantic-ui-react'
+import { eliminarSede } from "../../servicios/nodos";
+import styles from "../styles.module.css";
 
 
 function EliminarSede({ id }) {
@@ -9,16 +10,15 @@ function EliminarSede({ id }) {
     const onOpen = () => setAbierto(true);
     const onClose = () => setAbierto(false);
 
-    const eliminarSede = (id) => {
+    const eliminar = (id) => {
         eliminarSede(id);
         window.location.replace("/nodos");
     }
-
+    
     return (
         <>
-            <Button onClick={onOpen}>
-                <i className="user delete icon"></i>
-                <label className="icon-delete">Eliminar</label>
+            <Button className={styles.botonBasurero} onClick={onOpen}>
+                <Icon color="red" className={styles.basurero} name='trash alternate outline' />
             </Button>
             <Confirm
                 open={abierto}
@@ -26,7 +26,7 @@ function EliminarSede({ id }) {
                 cancelButton='Cancelar'
                 confirmButton="Confirmar"
                 onCancel={onClose}
-                onConfirm={() => eliminarSede(id)}
+                onConfirm={() => eliminar(id)}
             />
         </>
     );

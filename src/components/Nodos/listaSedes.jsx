@@ -14,6 +14,7 @@ export default function ListaSedes({ nodoId }) {
             setSedes(sedeNodo.response);
         })
     }
+
     useEffect(() => {
         obtener();
     }, []);
@@ -30,11 +31,6 @@ export default function ListaSedes({ nodoId }) {
                     <Table.Cell align="right">
                         <EliminarSede id={sede.id}/>
                     </Table.Cell>
-
-                    {/* <Label className={styles.tarjetaAzul}>• {sede.nombre}</Label>
-                    { sede.nombre}
-                    <Button color="red" size="small" onClick={() => eliminarCursoDeAPI(idPeriodo, idCurso)}>Eliminar</Button>
-                    <Icon color='red' name='trash alternate outline' /> */}
                 </div>
             )
         })}

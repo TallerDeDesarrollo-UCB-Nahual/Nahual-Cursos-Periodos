@@ -24,7 +24,16 @@
 }
 
 .sede{
-    background-color: #E6E6F2 !important;
-    border-radius: 40px !important;
-    padding: 5px 10px !important;
+    background-color: #E6E6F2 ;
+    border-radius: 40px ;
+    padding: 5px 10px ;
+}
+
+.botonBasurero{
+    padding: 2px 2px !important;
+    background-color: transparent !important;
+}
+
+.basurero{
+    display: contents !important;
 }
