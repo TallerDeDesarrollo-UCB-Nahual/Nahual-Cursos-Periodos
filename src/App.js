@@ -20,7 +20,7 @@ function App() {
           </Route>
           <Route exact path="/formulario-registro-periodo">
             <NuevoPeriodo />
-          </Route>
+            </Route>
           <Route path="/periodos/:id" children={<EditarPeriodo />} />
           <Route path="/">no estas permitido</Route>
         </Switch>

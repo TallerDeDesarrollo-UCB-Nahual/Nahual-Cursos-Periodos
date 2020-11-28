@@ -38,6 +38,7 @@ export default function ListaSedes({ nodoId }) {
             )
         })}
     </div>;
+
     return (
         <div>
             {sedes.length > 0 ? listaDeSedes : <h2>El nodo no tiene sedes</h2>}
