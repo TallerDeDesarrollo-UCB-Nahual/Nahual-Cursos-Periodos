@@ -39,10 +39,16 @@ function ModalCambioEstado(props) {
 		});
 		const datos = {
 			estudiantes: estudiantes,
-			estado: estadoACambiar
+      estado: estadoACambiar,
 		};
 		return datos;
-	};
+  };
+  const filtrarLista=(alumnesPorBorrar)=>{
+    alumnesPorBorrar.forEach(alumne => {
+      props.filtrarAlumneDeLaLista(alumne.id);
+    });
+    
+  }
 	const cambiarEstado = () => {
 		const API_URL = process.env.REACT_APP_API_URL;
 		Axios.post(
@@ -50,8 +56,8 @@ function ModalCambioEstado(props) {
 			prepararDatos()
 		).then((repuesta) => {
 			cambiarAbierto(false);
-			props.cambiarEstadoSeleccionable(true);
-			console.log(repuesta.data);
+      props.cambiarEstadoSeleccionable(true);
+      filtrarLista(prepararDatos().estudiantes);
 		});
 	};
 	return (
@@ -62,8 +68,6 @@ function ModalCambioEstado(props) {
 			open={abierto}
 			trigger={<Button disabled={props.alumnes.length===0?true:false}>Cambiar Estado</Button>}
 		>
-			{console.log(opcionSeleccionada)}
-			{console.log(props.alumnes)}
 			<Modal.Header>Cambio de Estado</Modal.Header>
 			<Modal.Content style={{ textAlign: "center" }}>
 				<Modal.Description>

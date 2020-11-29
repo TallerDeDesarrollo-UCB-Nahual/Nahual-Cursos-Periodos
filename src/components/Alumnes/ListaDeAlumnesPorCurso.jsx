@@ -7,7 +7,6 @@ import {
   Loader,
   Message,
   Table,
-  Button
 } from "semantic-ui-react";
 import Alumne from "./Alumne";
 import ModalCambioEstado from "./ModalCambioEstado.jsx";
@@ -74,6 +73,14 @@ class ListaDeAlumnesPorCurso extends Component {
 
   listaAlumnes() {
     return this.mapeoListaAlumnes(this.state.alumnes);
+  }
+
+  filtrarAlumneDeLaLista=(id)=> {
+    let alumnesFiltrado = this.state.alumnes.filter((alumne) => alumne.estudiante.id !== id);
+    this.setState({
+      alumnes: alumnesFiltrado,
+      alumnesSeleccionados:[]
+    });
   }
 
   mapeoListaAlumnes(listaAlumnes) {
@@ -160,7 +167,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
             </Table.Header>
             <Table.Body>{this.listaAlumnes()}</Table.Body>
           </Table>
-          <ModalCambioEstado alumnes={this.state.alumnesSeleccionados} cambiarEstadoSeleccionable={this.cambiarEstadoSeleccionable}/>
+          <ModalCambioEstado alumnes={this.state.alumnesSeleccionados} cambiarEstadoSeleccionable={this.cambiarEstadoSeleccionable} filtrarAlumneDeLaLista={this.filtrarAlumneDeLaLista} />
         </div>
         {this.listaVacia()}
       </div>
