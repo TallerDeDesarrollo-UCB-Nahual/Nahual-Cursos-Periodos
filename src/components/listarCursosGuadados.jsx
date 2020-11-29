@@ -39,8 +39,8 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
         </Table>
     </div>;
     return (            
-        <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
-            <Header>Cursos</Header>
+        <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
+            <Modal.Header>Cursos</Modal.Header>
             <Modal.Content scrolling={true} >
                 {cursos.length > 0 ? listacursos : <h2>No hay cursos</h2>}
             </Modal.Content>
