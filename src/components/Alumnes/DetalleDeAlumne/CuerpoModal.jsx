@@ -41,7 +41,7 @@ const CuerpoModal = ({ alumne, cerrarModal, filtrarAlumne }) => {
       .then(() => {
         setCargando(false);
         cerrarModal();
-        filtrarAlumne(id);
+        filtrarAlumne(alumne.id);
       })
       .catch((error) => {
         setCargando(false);
