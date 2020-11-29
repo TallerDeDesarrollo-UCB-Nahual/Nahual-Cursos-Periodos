@@ -22,6 +22,9 @@ class OpcionesDeCurso extends Component{
       .then((respuesta) => {
         this.agregarOpcionesDeFiltrado(respuesta.data.response);
         this.props.cuandoCambiaElCurso(respuesta.data.response[0].id);
+        this.setState({
+          textoDropdown:respuesta.data.response[0].nodo.nombre +" - "+respuesta.data.response[0].sede.nombre + " - " + respuesta.data.response[0].profesores + " - " + respuesta.data.response[0].horarioInicio+" a "+respuesta.data.response[0].horarioFin
+        });
       })
       .catch(() => {
         alert("Error en la base de datos.");
