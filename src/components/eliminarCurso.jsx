@@ -12,7 +12,7 @@ function EliminarCurso({ idPeriodo, idCurso }) {
 
     return (
         <>
-            <Button color="red" size="small" onClick={() => eliminarCursoDeAPI(idPeriodo, idCurso)}>Eliminar</Button>
+            <Button  negative color="red" size="small" onClick={() => eliminarCursoDeAPI(idPeriodo, idCurso)}>Eliminar</Button>
         </>
     );
 }

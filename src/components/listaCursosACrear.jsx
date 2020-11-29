@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Header, Advertisement, Button } from 'semantic-ui-react';
+import { Modal, Header, Advertisement, Button, Label } from 'semantic-ui-react';
 
 export default function ListaCursosACrear({cursos, estaAbierto, setAbierto}) {
     const listacursos = <div className={"forceFlex isColumn rowGap"}>
@@ -7,8 +7,8 @@ export default function ListaCursosACrear({cursos, estaAbierto, setAbierto}) {
             return (
             <Advertisement theme="light">
                 {c.horarioInicio} - {c.horarioFin} {" "}
-                <Button size="small" color="blue">Notas: {c.notas}</Button>{" "}
-                <Button size="small" color="green">Profesores: {c.profesores}</Button>
+                <Label size="small" color="blue">Notas: {c.notas}</Label>{" "}
+                <Label size="small" color="green">Profesores: {c.profesores}</Label>
             </Advertisement>)
         })}
     </div>;
