@@ -6,8 +6,7 @@ export default function ListaCursosACrear({cursos, estaAbierto, setAbierto}) {
         <Table>
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell>Horario Inicio</Table.HeaderCell>
-                    <Table.HeaderCell>Horario Fin</Table.HeaderCell>
+                    <Table.HeaderCell>Horario</Table.HeaderCell>
                     <Table.HeaderCell>Profesores</Table.HeaderCell>
                     <Table.HeaderCell>Notas</Table.HeaderCell>
                 </Table.Row>
@@ -16,8 +15,7 @@ export default function ListaCursosACrear({cursos, estaAbierto, setAbierto}) {
                 {cursos.map(c => {
                     return (       
                         <Table.Row key={`curso-${c.id}`}>
-                            <Table.Cell>{c.horarioInicio}</Table.Cell>
-                            <Table.Cell>{c.horarioFin}</Table.Cell>
+                            <Table.Cell>{c.horario}</Table.Cell>
                             <Table.Cell>{c.profesores}</Table.Cell>
                             <Table.Cell>{c.notas}</Table.Cell>
                         </Table.Row>

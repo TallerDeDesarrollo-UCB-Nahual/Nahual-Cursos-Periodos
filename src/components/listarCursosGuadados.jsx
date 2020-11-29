@@ -9,8 +9,7 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
         <Table>
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell>Horario Inicio</Table.HeaderCell>
-                    <Table.HeaderCell>Horario Fin</Table.HeaderCell>
+                    <Table.HeaderCell>Horario</Table.HeaderCell>
                     <Table.HeaderCell>Nodo</Table.HeaderCell>
                     <Table.HeaderCell>Sede</Table.HeaderCell>
                     <Table.HeaderCell>Profesores</Table.HeaderCell>
@@ -22,8 +21,7 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
                 {cursos.map(c => {
                     return (                                            
                         <Table.Row key={`curso-${c.id}`}>
-                            <Table.Cell>{c.horarioInicio}</Table.Cell>
-                            <Table.Cell>{c.horarioFin}</Table.Cell>
+                            <Table.Cell>{c.horario}</Table.Cell>
                             <Table.Cell>{c.nodo.nombre}</Table.Cell>
                             <Table.Cell>{c.sede.nombre}</Table.Cell>
                             <Table.Cell>{c.profesores}</Table.Cell>
