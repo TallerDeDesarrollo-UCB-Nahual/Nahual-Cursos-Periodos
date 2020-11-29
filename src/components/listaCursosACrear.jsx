@@ -1,16 +1,30 @@
 import React from "react";
-import { Modal, Header, Advertisement, Button, Label } from 'semantic-ui-react';
+import { Modal, Header, Table } from 'semantic-ui-react';
 
 export default function ListaCursosACrear({cursos, estaAbierto, setAbierto}) {
     const listacursos = <div className={"forceFlex isColumn rowGap"}>
-        {cursos.map(c => {
-            return (
-            <Advertisement theme="light">
-                {c.horarioInicio} - {c.horarioFin} {" "}
-                <Label size="small" color="blue">Notas: {c.notas}</Label>{" "}
-                <Label size="small" color="green">Profesores: {c.profesores}</Label>
-            </Advertisement>)
-        })}
+        <Table>
+            <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell>Horario Inicio</Table.HeaderCell>
+                    <Table.HeaderCell>Horario Fin</Table.HeaderCell>
+                    <Table.HeaderCell>Profesores</Table.HeaderCell>
+                    <Table.HeaderCell>Notas</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body> 
+                {cursos.map(c => {
+                    return (       
+                        <Table.Row key={`curso-${c.id}`}>
+                            <Table.Cell>{c.horarioInicio}</Table.Cell>
+                            <Table.Cell>{c.horarioFin}</Table.Cell>
+                            <Table.Cell>{c.profesores}</Table.Cell>
+                            <Table.Cell>{c.notas}</Table.Cell>
+                        </Table.Row>
+                    )}
+                )}
+            </Table.Body>
+        </Table>
     </div>;
     return (            
         <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
