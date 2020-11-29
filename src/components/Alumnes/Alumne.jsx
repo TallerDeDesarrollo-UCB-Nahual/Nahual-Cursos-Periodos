@@ -29,7 +29,7 @@ function Alumne(props) {
         {PrimeraLetraEnMayuscula(props.item.nombre+" "+props.item.apellido)}
       </Table.Cell>
       <Table.Cell textAlign='center'>
-				<DetalleDeAlumne id={props.item.id}></DetalleDeAlumne>
+				<DetalleDeAlumne id={props.item.id} filtrarAlumne={(id)=> props.filtrarAlumne(id)} ></DetalleDeAlumne>
 			</Table.Cell>
     </Table.Row>
   );

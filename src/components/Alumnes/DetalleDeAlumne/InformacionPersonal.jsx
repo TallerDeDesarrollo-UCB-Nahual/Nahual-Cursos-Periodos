@@ -8,9 +8,9 @@ function convertirAMayusculas(str) {
   return str.replace(/\b\w/g, l => l.toUpperCase())
 }
 
-function InformacionPersonal({ egresade }) {
+function InformacionPersonal({ alumne }) {
   moment.locale('es');
-  const fecha_convertida = moment(egresade.fechaNacimiento).format('LL');
+  const fecha_convertida = moment(alumne.fechaNacimiento).format('LL');
   return (
     <Item.Group>
       <Item>
@@ -20,17 +20,16 @@ function InformacionPersonal({ egresade }) {
         />
         <Item.Content verticalAlign='middle'>
             <div style={{ textAlign: "left" }}>
-              <Header as='h1'> {convertirAMayusculas(egresade.nombreCompleto)} </Header><br />
+              <Header as='h1'> {convertirAMayusculas(alumne.nombreCompleto)} </Header><br />
               <Item.Description>
-                <p> <Icon name='mail outline' /> <b>Correo: </b>{egresade.correo}</p>
-                <p> <Icon name='call' /> <b>Teléfono: </b>{egresade.celular}</p>
+                <p> <Icon name='mail outline' /> <b>Correo: </b>{alumne.correo}</p>
+                <p> <Icon name='call' /> <b>Teléfono: </b>{alumne.celular}</p>
                 <p> <Icon name='calendar outline' /><b>Fecha de nacimiento: </b>{fecha_convertida}</p>             
-                <p> <Icon name='level up alternate' /><b>Nivel de inglés: </b>{egresade.nivelIngles}</p>
-                <p> <Icon name='map marker alternate'/><b>Sede: </b> {egresade.sede}</p>
-                <p> <Icon name='map outline' /><b>Nodo: </b>{egresade.nodo}</p>
+                <p> <Icon name='level up alternate' /><b>Nivel de inglés: </b>{alumne.nivelIngles}</p>
+                <p> <Icon name='map marker alternate'/><b>Sede: </b> {alumne.sede}</p>
+                <p> <Icon name='map outline' /><b>Nodo: </b>{alumne.nodo}</p>
               </Item.Description>
             </div>
-          <Item.Extra> * Utilizar estos datos solo para fines laborales.</Item.Extra>
         </Item.Content>
       </Item>
     </Item.Group>

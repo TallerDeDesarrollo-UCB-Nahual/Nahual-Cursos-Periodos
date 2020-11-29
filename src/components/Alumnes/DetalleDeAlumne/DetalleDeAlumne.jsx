@@ -11,13 +11,13 @@ class DetalleDeAlumne extends Component {
     };
   }
 
-  obtenerAPIDeEgresade() {
+  obtenerAPIDealumne() {
     const API_URL = process.env.REACT_APP_API_URL;
     axios
       .get(`${API_URL}/estudiantes/${this.props.id}/DTO`)
       .then(respuesta => {
         this.setState({
-          egresade : respuesta.data.response
+          alumne : respuesta.data.response
         });
       })
       .catch(function (error) {
@@ -39,11 +39,11 @@ class DetalleDeAlumne extends Component {
         onOpen={() => this.mostrarModal (true)}
         size="small"
         closeIcon
-        trigger={<Button circular basic color="green" icon onClick={() => (this.obtenerAPIDeEgresade(this.props.id))}><Icon color="black" name="eye"></Icon> </Button>}
+        trigger={<Button circular basic color="green" icon onClick={() => (this.obtenerAPIDealumne(this.props.id))}><Icon color="black" name="eye"></Icon> </Button>}
       >
         {
-          this.state.egresade ?
-            <CuerpoModal egresade={this.state.egresade } cerrarModal={() => (this.mostrarModal (false))} />
+          this.state.alumne ?
+            <CuerpoModal alumne={this.state.alumne } filtrarAlumne={(id)=> this.props.filtrarAlumne(id)} cerrarModal={() => (this.mostrarModal (false))} />
             :
             <Segment>
               <Dimmer active inverted>
