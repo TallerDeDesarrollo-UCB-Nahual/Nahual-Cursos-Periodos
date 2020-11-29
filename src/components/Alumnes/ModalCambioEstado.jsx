@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal, Dropdown } from "semantic-ui-react";
 import Axios from "axios";
 function ModalCambioEstado(props) {
-	const [open, setOpen] = React.useState(false);
+	const [abierto, cambiarAbierto] = React.useState(false);
 	const opciones = [
 		{ key: "1", text: "PreInscripte", value: "PreInscripte" },
 		{ key: "3", text: "Abandonade", value: "Abandonade" },
@@ -29,44 +29,38 @@ function ModalCambioEstado(props) {
 				estadoACambiar = 2;
 				break;
 		}
-		props.alumnes.map((alumne) => {
-			return estudiantes.push(alumne.estudiante);
+		props.alumnes.forEach((alumne) => {
+			const alumneListo = {
+				id: alumne.estudiante.id,
+				nombreCompleto: alumne.estudiante.nombreCompleto,
+				estadoId: alumne.estudiante.estadoId
+			};
+			estudiantes.push(alumneListo);
 		});
-		const datos = JSON.stringify({
-			estudiates: estudiantes,
+		const datos = {
+			estudiantes: estudiantes,
 			estado: estadoACambiar
-		});
+		};
 		return datos;
 	};
 	const cambiarEstado = () => {
 		const API_URL = process.env.REACT_APP_API_URL;
-		console.log(prepararDatos());
-		// Axios.post({
-		// 	method: "post",
-		// 	url: `${API_URL}/estudiantes/cambiarEstadoAlumnes/`,
-		// 	headers: { "Content-Type": "application/json" },
-		// 	data: prepararDatos()
-		// }).then((response) => {
-		// 	console.log(response.data);
-		// })
-		var headers = {
-			"Content-Type": "application/json"
-		};
 		Axios.post(
 			`${API_URL}/estudiantes/cambiarEstadoAlumnes/`,
-			prepararDatos(),
-			{ headers: headers }
-		).then((response) => {
-			console.log("reactNativeDemo", "response get details:" + response.data);
+			prepararDatos()
+		).then((repuesta) => {
+			cambiarAbierto(false);
+			props.cambiarEstadoSeleccionable(true);
+			console.log(repuesta.data);
 		});
 	};
 	return (
 		<Modal
 			size="tiny"
-			onClose={() => setOpen(false)}
-			onOpen={() => setOpen(true)}
-			open={open}
-			trigger={<Button>Cambiar Estado</Button>}
+			onClose={() => cambiarAbierto(false)}
+			onOpen={() => cambiarAbierto(true)}
+			open={abierto}
+			trigger={<Button disabled={props.alumnes.length===0?true:false}>Cambiar Estado</Button>}
 		>
 			{console.log(opcionSeleccionada)}
 			{console.log(props.alumnes)}
@@ -83,7 +77,7 @@ function ModalCambioEstado(props) {
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>
-				<Button onClick={() => setOpen(false)}>Cancel</Button>
+				<Button onClick={() => cambiarAbierto(false)}>Cancel</Button>
 				<Button
 					content="Confirmar Cambio"
 					labelPosition="right"

@@ -160,7 +160,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
             </Table.Header>
             <Table.Body>{this.listaAlumnes()}</Table.Body>
           </Table>
-          <ModalCambioEstado alumnes={this.state.alumnesSeleccionados}/>
+          <ModalCambioEstado alumnes={this.state.alumnesSeleccionados} cambiarEstadoSeleccionable={this.cambiarEstadoSeleccionable}/>
         </div>
         {this.listaVacia()}
       </div>
