@@ -49,6 +49,13 @@
   align-items: center;
 }
 
+.editarPeriodo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
 .actionsCrearPeriodo{
   display: flex;
   justify-content: space-between;
@@ -77,3 +84,27 @@
 .isColumn {
   flex-direction: column;
 }
+
+.ui.modal .actions>.ui.primary.button {
+    background-color: white;
+    color: #2ecc40;
+    border: 1px solid #2ecc40;
+}
+
+ .ui.modal .actions>.button {
+    background-color: white;
+    color:#db2828;
+    border: 1px solid #db2828;
+} 
+
+.confirmButton {
+  background-color: white !important;
+  color:#2ecc40 !important;
+  border: 1px solid #2ecc40 !important;
+} 
+
+.cancelButton {
+  background-color: white !important;
+  color:#db2828 !important;
+  border: 1px solid #db2828 !important;
+} 
