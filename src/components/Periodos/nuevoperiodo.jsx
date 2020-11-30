@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
-import { crearPeriodo, obtenerPeriodoPorId } from "../servicios/periodos";
-import CrearPeriodo from "./crearperiodo";
+import { crearPeriodo, obtenerPeriodoPorId } from "../../servicios/periodos";
+import CrearPeriodo from "../Periodos/crearperiodo";
 
 export default function NuevoPeriodo({
   estaAbierto,

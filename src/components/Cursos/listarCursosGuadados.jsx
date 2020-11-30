@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Table } from 'semantic-ui-react';
-import EliminarCurso from "./eliminarCurso";
-import CrearCurso from "./crearcurso";
-import { obtenerCursosPorIdPeriodo } from "../servicios/periodos";
+import EliminarCurso from "../Cursos/eliminarCurso";
+import CrearCurso from "../Cursos/crearcurso";
+import { obtenerCursosPorIdPeriodo } from "../../servicios/periodos";
 
 export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriodo}) {
 

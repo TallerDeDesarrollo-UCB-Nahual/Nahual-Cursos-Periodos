@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { Button } from 'semantic-ui-react'
-import { eliminarCursoDePeriodo } from "../servicios/periodos";
+import { eliminarCursoDePeriodo } from "../../servicios/periodos";
 
 
 function EliminarCurso({ idPeriodo, idCurso }) {

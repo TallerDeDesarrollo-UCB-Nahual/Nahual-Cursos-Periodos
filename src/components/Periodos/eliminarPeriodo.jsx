@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Modal} from 'semantic-ui-react'
-import { eliminarPeriodo } from "../servicios/periodos";
+import { eliminarPeriodo } from "../../servicios/periodos";
 
 
 function Eliminar({ egresadeId }) {

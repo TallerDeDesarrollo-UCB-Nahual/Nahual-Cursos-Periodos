@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
-import styles from "./styles.module.css"
-import {obtenerModulos} from "../servicios/modulos";
-import { Container, Button, Form, ButtonGroup, Header } from 'semantic-ui-react'
-import CrearCurso from "./crearcurso";
-import ListaCursosACrear from "./listaCursosACrear";
+import React, { useEffect, useState } from "react";
+import styles from "../styles.module.css";
+import { obtenerModulos } from "../../servicios/modulos";
+import { Container, Button, Form, ButtonGroup } from "semantic-ui-react";
+import CrearCurso from "../Cursos/crearcurso";
 
 export default function CrearPeriodo({
   cursos,

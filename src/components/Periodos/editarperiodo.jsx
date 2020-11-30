@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from 'react-router-dom';
-import { obtenerModulos } from "../servicios/modulos";
-import { obtenerPeriodoPorId, obtenerCursosPorIdPeriodo, editarPeriodo } from "../servicios/periodos";
+import { obtenerModulos } from "../../servicios/modulos";
+import { obtenerPeriodoPorId, obtenerCursosPorIdPeriodo, editarPeriodo } from "../../servicios/periodos";
 import { Container, Button, Form, ButtonGroup } from "semantic-ui-react";
-import styles from "./styles.module.css";
+import styles from "../styles.module.css";
 
 export default function EditarPeriodo() {
 

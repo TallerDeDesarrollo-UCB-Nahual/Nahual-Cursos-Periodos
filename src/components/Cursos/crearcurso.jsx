@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Form, Container, TextArea } from "semantic-ui-react";
-import { obtenerSedes } from "../servicios/sedes";
+import { obtenerSedes } from "../../servicios/sedes";
 // import styles from "./styles.module.css";
-import { crearCurso } from "../servicios/cursos";
+import { crearCurso } from "../../servicios/cursos";
 
 export default function CrearCurso({estaAbierto, setAbierto, idPeriodo }) {
   const [sedes, setSedes] = useState([]);

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table, Select } from "semantic-ui-react";
-import { obtenerPeriodos } from "../servicios/periodos";
+import { obtenerPeriodos } from "../../servicios/periodos";
 import { useHistory } from "react-router-dom";
-import ListarCursosGuardados from "./listarCursosGuadados";
-import styles from "./styles.module.css";
-import Eliminar from "./eliminarPeriodo";
-import NuevoPeriodo from "./nuevoperiodo";
+import ListarCursosGuardados from "../Cursos/listarCursosGuadados";
+import styles from "../styles.module.css";
+import Eliminar from "../Periodos/eliminarPeriodo";
+import NuevoPeriodo from "../Periodos/nuevoperiodo";
 
 export default function Periodos() {
   const [periodos, setPeriodos] = useState([]);
@@ -14,7 +14,6 @@ export default function Periodos() {
     setEstaAbiertoModalNuevoPerioto,
   ] = useState(false);
   const [filtroEstado, setFiltroEstado] = useState(true);
-  const [cursosAMostrar, setCursosAMostrar] = useState([]);
   const [informacionListaCursos, setInformacionListaCursos] = useState(false);
   const [idPeriodo, setIdPeriodo] = useState(0);
   const history = useHistory();

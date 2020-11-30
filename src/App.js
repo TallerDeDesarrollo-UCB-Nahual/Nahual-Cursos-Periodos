@@ -1,10 +1,10 @@
 import "./App.css";
 
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Periodos from "./components/periodos";
-import NuevoPeriodo from "./components/crearperiodo";
-import EditarPeriodo from "./components/editarperiodo";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Periodos from "./components/Periodos/periodos";
+import NuevoPeriodo from "./components/Periodos/crearperiodo";
+import EditarPeriodo from "./components/Periodos/editarperiodo";
 import ListarNodos from "./components/Nodos/listarNodos";
 import { Container } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
