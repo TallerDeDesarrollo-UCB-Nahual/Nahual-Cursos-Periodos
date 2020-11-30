@@ -49,6 +49,13 @@
   align-items: center;
 }
 
+.editarPeriodo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
 .actionsCrearPeriodo{
   display: flex;
   justify-content: space-between;

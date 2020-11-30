@@ -6,7 +6,6 @@ import CrearCurso from "./crearcurso";
 import ListaCursosACrear from "./listaCursosACrear";
 
 export default function CrearPeriodo({
-  estaEditando,
   cursos,
   setCursos,
   setPeriodo,
@@ -92,26 +91,6 @@ export default function CrearPeriodo({
             onChange={(x, data) => setAnio(parseInt(data.value))}
           />
           <br />
-          <div className={"actionsCrearPeriodo"}>
-            {estaEditando && (
-              <Button.Group>
-                <Button
-                  color="green"
-                  onClick={() => setModalCrearCursoAbierto(true)}
-                >
-                  Nuevo cursos
-                </Button>
-                <Button
-                  color="blue"
-                  onClick={() => {
-                    setMostrarListaCursosAGuardar(true);
-                  }}
-                >
-                  Ver {cursos.length} cursos
-                </Button>
-              </Button.Group>
-            )}
-          </div>
         </Container>
       </div>
     </div>
@@ -135,8 +114,8 @@ export default function CrearPeriodo({
           </div>
         </div>
       ) : (
-        formulariodeperiodos
-      )}
+          formulariodeperiodos
+        )}
     </div>
   );
 }
