@@ -6,26 +6,33 @@ import Periodos from "./components/periodos";
 import NuevoPeriodo from "./components/crearperiodo";
 import EditarPeriodo from "./components/editarperiodo";
 import ListarNodos from "./components/Nodos/listarNodos";
+import { Container } from "semantic-ui-react";
+import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Switch>
-          <Route exact path="/periodos">
-            <Periodos />
-          </Route>
-          <Route exact path="/nodos">
-            <ListarNodos />
-          </Route>
-          <Route exact path="/formulario-registro-periodo">
-            <NuevoPeriodo />
-          </Route>
-          <Route path="/periodos/:id" children={<EditarPeriodo />} />
-          <Route path="/">no estas permitido</Route>
-        </Switch>
-      </div>
-    </Router>
+    <Container>
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/periodos">
+              <Periodos />
+            </Route>
+            <Route exact path="/nodos">
+              <ListarNodos />
+            </Route>
+            <Route exact path="/formulario-registro-periodo">
+              <NuevoPeriodo />
+            </Route>
+            <Route path="/periodos/:id" children={<EditarPeriodo />} />
+            <Route exact path="/alumnes">
+              <ListaDeAlumnesPorCurso />
+            </Route>
+            <Route path="/">no estas permitido</Route>
+          </Switch>
+        </div>
+      </Router>
+    </Container>
   );
 }
 
