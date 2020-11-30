@@ -44,11 +44,10 @@ export default function NuevoPeriodo({
         ></CrearPeriodo>
       </Modal.Content>
       <Modal.Actions>
-        <Button color="red" onClick={() => estaAbierto(false)}>
+        <Button className="cancelButton" onClick={() => estaAbierto(false)}>
           <Icon name="remove" /> No
         </Button>
-        <Button
-          color="green"
+        <Button className="confirmButton"
           onClick={() => {
             crearPeriodo({
               anio: anio,
