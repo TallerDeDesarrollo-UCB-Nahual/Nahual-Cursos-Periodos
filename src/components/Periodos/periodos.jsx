@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table, Select, Icon } from "semantic-ui-react";
+import { Button, Table, Select, Icon, Message } from "semantic-ui-react";
 import { obtenerPeriodos } from "../../servicios/periodos";
 import { useHistory } from "react-router-dom";
 import ListarCursosGuardados from "../Cursos/listarCursosGuadados";
@@ -27,6 +27,67 @@ export default function Periodos() {
   function handleEditButtonClick(id) {
     history.push("/periodos/" + id)
   }
+
+  const listaPeriodos = <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Periodo</Table.HeaderCell>
+          <Table.HeaderCell>Año</Table.HeaderCell>
+          <Table.HeaderCell>Estado</Table.HeaderCell>
+          <Table.HeaderCell>Topico</Table.HeaderCell>
+          <Table.HeaderCell>Cursos</Table.HeaderCell>
+          <Table.HeaderCell className={"displayFlex  centered"}>
+            Acciones
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {periodos.map((p) => {
+          if (p.estado === filtroEstado) {
+            return (
+              <Table.Row key={`periodo-${p.id}`}>
+                <Table.Cell>{p.periodo}</Table.Cell>
+                <Table.Cell>{p.anio}</Table.Cell>
+                <Table.Cell>{p.estado ? "Activo" : "Inactivo"}</Table.Cell>
+                <Table.Cell>{p.topico.nombre}</Table.Cell>
+                <Table.Cell>
+                  <Button
+                    color="blue"
+                    onClick={(x) => {
+                        setInformacionListaCursos(true);
+                          setIdPeriodo(p.id);
+                    }}
+                  >
+                    Cursos
+                    <Icon color='white' name='eye' style={{ margin: '0 0 0 10px' }} />
+                  </Button>
+                </Table.Cell>
+                <Table.Cell>
+                  <div className={"displayFlex centered columnGap"}>
+                    <Button
+                      color="yellow"
+                      onClick={(x) => {
+                        handleEditButtonClick(p.id);
+                      }}
+                    >
+                      Editar <Icon color='white' name='edit' style={{ margin: '0 0 0 10px' }} />
+                    </Button>
+                    <Eliminar egresadeId={p.id}></Eliminar>
+                  </div>
+                </Table.Cell>
+              </Table.Row>
+            );
+          }
+        })}
+      </Table.Body>
+    </Table>
+
+  const mensajeSinPeriodos = <Message
+    icon="warning sign"
+    warning
+    header={"No existen periodos aún."}
+    content={"Crea periodos para Nahual."}
+  />
 
   return (
     <div className={styles.vistaPeriodos}>
@@ -61,59 +122,7 @@ export default function Periodos() {
         periodos={periodos}
         setPeriodos={setPeriodos}
       />
-      <Table>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Periodo</Table.HeaderCell>
-            <Table.HeaderCell>Año</Table.HeaderCell>
-            <Table.HeaderCell>Estado</Table.HeaderCell>
-            <Table.HeaderCell>Topico</Table.HeaderCell>
-            <Table.HeaderCell>Cursos</Table.HeaderCell>
-            <Table.HeaderCell className={"displayFlex  centered"}>
-              Acciones
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {periodos.map((p) => {
-            if (p.estado === filtroEstado) {
-              return (
-                <Table.Row key={`periodo-${p.id}`}>
-                  <Table.Cell>{p.periodo}</Table.Cell>
-                  <Table.Cell>{p.anio}</Table.Cell>
-                  <Table.Cell>{p.estado ? "Activo" : "Inactivo"}</Table.Cell>
-                  <Table.Cell>{p.topico.nombre}</Table.Cell>
-                  <Table.Cell>
-                    <Button
-                      color="blue"
-                      onClick={(x) => {
-                          setInformacionListaCursos(true);
-                            setIdPeriodo(p.id);
-                      }}
-                    >
-                      Cursos
-                      <Icon color='white' name='eye' style={{ margin: '0 0 0 10px' }} />
-                    </Button>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <div className={"displayFlex centered columnGap"}>
-                      <Button
-                        color="yellow"
-                        onClick={(x) => {
-                          handleEditButtonClick(p.id);
-                        }}
-                      >
-                        Editar <Icon color='white' name='edit' style={{ margin: '0 0 0 10px' }} />
-                      </Button>
-                      <Eliminar egresadeId={p.id}></Eliminar>
-                    </div>
-                  </Table.Cell>
-                </Table.Row>
-              );
-            }
-          })}
-        </Table.Body>
-      </Table>
+     { periodos.length > 0 ? listaPeriodos : mensajeSinPeriodos}
     </div>
   );
 }

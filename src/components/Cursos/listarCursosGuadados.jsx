@@ -53,8 +53,8 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
     const mensajeSinCursos = <Message
         icon="warning sign"
         warning
-        header={"No existen cursos aún"}
-        content={"Intenta mas tarde. Gracias"}
+        header={"No existen cursos aún."}
+        content={"Crea cursos para este periodo."}
     />
     return (            
         <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
