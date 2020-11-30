@@ -20,7 +20,7 @@ function Preinscripte({ preinscripte }) {
         />
         <Item.Content verticalAlign='middle'>
             <div style={{ textAlign: "left" }}>
-              <Header as='h1'> {convertirAMayusculas(preinscripte.nombreCompleto)} </Header><br />
+              <Header as='h1'> {convertirAMayusculas(`${preinscripte.nombre} ${preinscripte.apellido}`)} </Header><br />
               <Item.Description>
                 <p> <Icon name='graduation' /> <b>Curso de Interes: </b>{preinscripte.modulo}</p>
                 <p> <Icon name='mail outline' /> <b>Correo: </b>{preinscripte.correo}</p>

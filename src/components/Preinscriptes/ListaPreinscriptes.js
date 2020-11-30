@@ -5,29 +5,15 @@ import iconoPreinscripte from '../../assets/reading-book.png';
 import GenericModal from '../Modal/GenericModal';
 import ElegirCurso from './ElegirCurso';
 import Preinscripte from './Preinscripte';
+import BASE_ROUTE from "../../servicios/rutas";
 
-const opciones = [{
-    key: 1,
-    value: 1,
-    text: '1',
-},
-{
-    key: 2,
-    value: 2,
-    text: '2',
-},
-{
-    key: 3,
-    value: 3,
-    text: '3',
-}];
 
 class ListaPreinscriptes extends Component {
 
     headers = ['Nombre Completo','Zona','Información'];
-    URL_Preinscriptes = 'https://nahual-datos-estudiantes.herokuapp.com/api/estudiantes/DTO?estadoId=1';
-    URL_Periodos = 'https://nahual-datos-estudiantes.herokuapp.com/api/periodos?estado=true';
-    URL_Cursos = 'localhost:8000/api/cursos';
+    URL_Preinscriptes = `${BASE_ROUTE}/estudiantes/DTO?estadoId=1`;
+    URL_Periodos = `${BASE_ROUTE}/periodos?estado=true`;
+    URL_Cursos = `${BASE_ROUTE}/cursos`;
 
     constructor(){
         super();
@@ -59,6 +45,7 @@ class ListaPreinscriptes extends Component {
             this.setState({ periodoSeleccionado: { id: periodosList[0].value }, periodos: periodosList });
             return periodosList[0].text;
         } catch (error) {
+            console.log(error);
             throw error;
         }
        
@@ -69,6 +56,7 @@ class ListaPreinscriptes extends Component {
             var res = await Axios.get(this.URL_Preinscriptes+`&modulo=${modulo}`);
             this.setState({ preInscriptes: res.data.response, estaCargando: false });
         } catch (error) {
+            console.log(error);
             throw error;
         }
     }
@@ -79,6 +67,7 @@ class ListaPreinscriptes extends Component {
             var primerModulo = await this.obtenerPeriodos();
             await this.obtenerPreinscriptes(primerModulo);
         } catch (error) {
+            console.log(error.response.data);
             this.setState({ estaCargando: false, mensaje: "Oops..algo malo pasó" });
         }
         
@@ -155,8 +144,16 @@ class ListaPreinscriptes extends Component {
     async conseguirCursos(PeriodoId){
         let cursos = [];
         try {
-            cursos = await Axios.get(this.URL_Cursos+`?PeriodoId=${PeriodoId}`);
+            const res = await Axios.get(this.URL_Cursos+`?PeriodoId=${PeriodoId}`);
+            cursos = res.data.response.map(curso => {
+                return {
+                    key: curso.id,
+                    value: curso.id,
+                    text: `${curso.nodo.nombre} - ${curso.sede.nombre} - ${curso.profesores} ; ${curso.horario}`
+                }
+            });
         } catch (error) {
+            console.log(error);
             throw error;
         }
         this.setState({ cursos });
@@ -176,9 +173,9 @@ class ListaPreinscriptes extends Component {
                     onClick={(e) => this.seleccionarPreinscripte(preinscripte,e)}
                 />
             </Table.Cell>
-            <Table.Cell>{preinscripte.nombreCompleto}</Table.Cell>
-            <Table.Cell>{preinscripte.zona}</Table.Cell>
-            <Table.Cell>{this.obtenerPreinscripte(preinscripte)}</Table.Cell>
+            <Table.Cell>{ `${preinscripte.nombre}  ${preinscripte.apellido}` }</Table.Cell>
+            <Table.Cell>{ preinscripte.zona }</Table.Cell>
+            <Table.Cell>{ this.obtenerPreinscripte(preinscripte) }</Table.Cell>
         </Table.Row>
     );
         return(
@@ -220,9 +217,11 @@ class ListaPreinscriptes extends Component {
 
             </Table>
             {this.mostrarMensaje()}
-            <GenericModal trigger = { <Button basic color='grey' floated='right'>Inscribir</Button>}>
-                <ElegirCurso opciones={ this.state.cursos }></ElegirCurso>
-            </GenericModal>
+            { this.state.preInscriptes.length > 0 && (
+                <GenericModal trigger = { <Button basic color='grey' onClick={() => this.conseguirCursos(this.state.periodoSeleccionado.id)} floated='right'>Inscribir</Button>}>
+                    <ElegirCurso opciones={ this.state.cursos } preinscrites={ this.state.preinscriptesSeleccionados }></ElegirCurso>
+                </GenericModal>
+            ) }
             </Container>
             )
         }
