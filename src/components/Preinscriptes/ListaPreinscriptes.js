@@ -45,7 +45,6 @@ class ListaPreinscriptes extends Component {
             this.setState({ periodoSeleccionado: { id: periodosList[0].value }, periodos: periodosList });
             return periodosList[0].text;
         } catch (error) {
-            console.log(error);
             throw error;
         }
        
@@ -56,7 +55,6 @@ class ListaPreinscriptes extends Component {
             var res = await Axios.get(this.URL_Preinscriptes+`&modulo=${modulo}`);
             this.setState({ preInscriptes: res.data.response, estaCargando: false });
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }
@@ -67,7 +65,7 @@ class ListaPreinscriptes extends Component {
             var primerModulo = await this.obtenerPeriodos();
             await this.obtenerPreinscriptes(primerModulo);
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error);
             this.setState({ estaCargando: false, mensaje: "Oops..algo malo pasó" });
         }
         
@@ -154,7 +152,7 @@ class ListaPreinscriptes extends Component {
             });
         } catch (error) {
             console.log(error);
-            throw error;
+            this.setState({ estaCargando: false, mensaje: "Oops..algo malo pasó" });
         }
         this.setState({ cursos });
     }
@@ -218,7 +216,7 @@ class ListaPreinscriptes extends Component {
             </Table>
             {this.mostrarMensaje()}
             { this.state.preInscriptes.length > 0 && (
-                <GenericModal trigger = { <Button basic color='grey' onClick={() => this.conseguirCursos(this.state.periodoSeleccionado.id)} floated='right'>Inscribir</Button>}>
+                <GenericModal trigger = { <Button color='green' onClick={() => this.conseguirCursos(this.state.periodoSeleccionado.id)} floated='right'>Inscribir</Button>}>
                     <ElegirCurso opciones={ this.state.cursos } preinscrites={ this.state.preinscriptesSeleccionados }></ElegirCurso>
                 </GenericModal>
             ) }
