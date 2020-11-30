@@ -8,7 +8,7 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
     console.log(cursos)
     const [idCurso, setIdCurso] = useState(0)
     const [informacionCurso, setInformacionCurso] = useState(false)
-    const [curso, setCursoAEditar] = useState({})
+    const [curso, setCursoAEditar] = useState({"nodo":{},"sede":{}})
     const listacursos = 
     <div id="listaCursos" className={"forceFlex isColumn rowGap"}>
         <Table>
@@ -34,16 +34,13 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
                             <Table.Cell>
                                 <div className={'displayFlex centered columnGap'}>
                                 <Button size="small" color="blue" onClick={x => {
-                                                    setCursoAEditar(curso.response)
-                                                    setInformacionCurso(true)
-                                                    setIdCurso(c.id);
-                                                    /* obtenerCurso(c.id).then(curso => {
+                                                    obtenerCurso(c.id).then(curso => {
                                                         return curso.json()
                                                     }).then(curso => {
-                                                        setCursoAEditar(curso.response)
+                                                        setCursoAEditar(curso.respuesta)
                                                         setInformacionCurso(true)
                                                         setIdCurso(c.id);
-                                                    }) */
+                                                    }) 
                                                 }}>Editar</Button>
                                 <EliminarCurso idPeriodo={idPeriodo} idCurso={c.id}></EliminarCurso>
                                 </div>

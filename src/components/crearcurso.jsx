@@ -48,10 +48,6 @@ export default function CrearCurso({ aceptar, estaAbierto, setAbierto }) {
               })}
               onChange={(e, data) => {
                 const selected = data.value;
-                setSedeNodo({
-                  SedeId: selected[1],
-                  NodoId: selected[0],
-                });
               }}
             />
           </div>

@@ -12,8 +12,8 @@ function crearCurso(body) {
 function obtenerCurso(id) {
   return fetch(`${BASE_ROUTE}/cursos/${id}`);
 }
-function editarCurso(id) {
-  return axios.put(`${BASE_ROUTE}/cursos/${id}`);
+function editarCurso(id,body) {
+  return axios.put(`${BASE_ROUTE}/cursos/${id}`,body);
 }
 
 export { obtenerCursos, crearCurso, obtenerCurso,editarCurso };

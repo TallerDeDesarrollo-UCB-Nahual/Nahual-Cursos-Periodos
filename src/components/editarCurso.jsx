@@ -12,18 +12,25 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
     const [nota, setNota] = useState("");
     const [profesor, setProfesor] = useState("")
 
-    function inicializarSedes () {
-        obtenerSedes().then(response => response.json()).then(response => {
-            setSedes(response.response)
-            setSedeNodo({"SedeId": response.response[0].id, "NodoId": response.response[0].NodoId})
-        })
-    }
+  function inicializarSedes() {
+    obtenerSedes()
+      .then((response) => response.json())
+      .then((response) => {
+        setSedes(response.response);
+        setSedeNodo({
+          SedeId: response.response[0].id,
+          NodoId: response.response[0].NodoId,
+        });
+      });
+  }
 
-    function editar() {
-        editarCurso(idCurso).then(curso => {
-            return curso.json()
-        }).then(curso => {
-            console.log("CURSO",curso)
+    function editar(horario,sede,nota,profesor) {
+        editarCurso(idCurso,{"horario":horario,
+            "SedeId": sedeNodo.SedeId,
+            "NodoId": sedeNodo.NodoId,
+            "notas":nota,
+            "profesores":profesor}).then(curso => {
+                console.log("se edito")
         })
 
         setAbierto(!estaAbierto);
@@ -40,6 +47,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                 <Form.Select
                   fluid
                   label="Sede - Nodo"
+                  value = {[curso.SedeId,curso.NodoId]}
                   options={sedes.map((s) => {
                     return {
                       key: `sede-${s.id}`,
@@ -62,6 +70,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                     label="Horario"
                     fluid
                     type="text"
+                    value={curso.horario}
                     className={"form-control"}
                     onChange={(x, data) => setHorario(data)}
                   />
@@ -73,6 +82,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                     label="Notas"
                     fluid
                     type="text"
+                    value={curso.notas}
                     class="form-control"
                     onChange={(x, data) => setNota(data.value)}
                   />
@@ -82,6 +92,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                     label="Profesor"
                     fluid
                     type="text"
+                    value={curso.profesores}
                     class="form-control"
                     onChange={(x, data) => setProfesor(data.value)}
                   />
@@ -93,13 +104,10 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                   <Button
                     color="green"
                     onClick={() => {
-/*                       aceptar({
-                        horario: horario,
-                        ...sedeNodo,
-                        notas: nota,
-                        profesores: profesor,
-                      }); */
-                      editar();
+                      editar(horario,
+                            sedeNodo,
+                            nota,
+                            profesor);
                     }}
                   >
                     Editar Curso
