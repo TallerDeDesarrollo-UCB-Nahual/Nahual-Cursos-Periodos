@@ -77,7 +77,7 @@ const CuerpoModal = ({ alumne, cerrarModal, filtrarAlumne }) => {
               Des-inscribir
             </Dropdown.Item>
             <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(6)}>
-              Abandono{" "}
+              Abandono
             </Dropdown.Item>
             <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(4)}>
               Egreso
