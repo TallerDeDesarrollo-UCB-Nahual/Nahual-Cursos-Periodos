@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Modal, Header, Advertisement, Button } from 'semantic-ui-react';
+import { Modal, Header, Advertisement, Button, Table } from 'semantic-ui-react';
 import EliminarCurso from "./eliminarCurso";
 import EditarCurso from "./editarCurso";
 import { obtenerCurso } from "../servicios/cursos";
@@ -10,16 +10,31 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
     const [informacionCurso, setInformacionCurso] = useState(false)
     const [curso, setCursoAEditar] = useState({})
     const listacursos = 
-    <div className={"forceFlex isColumn rowGap"}>
-        {cursos.map(c => {
-            return (
-            <Advertisement>
-                {c.horarioInicio} - {c.horarioFin} - {" "}
-                <Button color="blue" size="tiny">Nodo: {c.nodo.nombre}</Button>{" "}
-                <Button color="teal" size="tiny">Sede: {c.sede.nombre}</Button>{" "}
-                <Button color="yellow" size="tiny">Profesores: {c.profesores}</Button>
-                <Button color="violet" size="tiny">Notas: {c.notas}</Button>
-                <Button color="green" size="tiny" onClick={x => {
+    <div id="listaCursos" className={"forceFlex isColumn rowGap"}>
+        <Table>
+            <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell>Horario</Table.HeaderCell>
+                    <Table.HeaderCell>Nodo</Table.HeaderCell>
+                    <Table.HeaderCell>Sede</Table.HeaderCell>
+                    <Table.HeaderCell>Profesores</Table.HeaderCell>
+                    <Table.HeaderCell>Notas</Table.HeaderCell>
+                    <Table.HeaderCell className={"displayFlex  centered"}>Acciones</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body>  
+                {cursos.map(c => {
+                    return (                                            
+                        <Table.Row key={`curso-${c.id}`}>
+                            <Table.Cell>{c.horario}</Table.Cell>
+                            <Table.Cell>{c.nodo.nombre}</Table.Cell>
+                            <Table.Cell>{c.sede.nombre}</Table.Cell>
+                            <Table.Cell>{c.profesores}</Table.Cell>
+                            <Table.Cell>{c.notas}</Table.Cell>
+                            <Table.Cell>
+                                <div className={'displayFlex centered columnGap'}>
+                                <Button size="small" color="blue" onClick={x => {
+                                                    setCursoAEditar(curso.response)
                                                     setInformacionCurso(true)
                                                     setIdCurso(c.id);
                                                     /* obtenerCurso(c.id).then(curso => {
@@ -30,16 +45,21 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
                                                         setIdCurso(c.id);
                                                     }) */
                                                 }}>Editar</Button>
-                <EliminarCurso idPeriodo={idPeriodo} idCurso={c.id}></EliminarCurso>
-            </Advertisement>)
-        })}
+                                <EliminarCurso idPeriodo={idPeriodo} idCurso={c.id}></EliminarCurso>
+                                </div>
+                            </Table.Cell>
+                        </Table.Row>
+                    )
+                })}
+            </Table.Body>
+        </Table>
     </div>;
-    return (   
+    return (       
         <div>
-        <EditarCurso curso={curso} estaAbierto={informacionCurso} setAbierto={setInformacionCurso} idCurso={idCurso}/>
-        <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
+        <EditarCurso curso={curso} estaAbierto={informacionCurso} setAbierto={setInformacionCurso} idCurso={idCurso}/>     
+        <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
             <Header>Cursos</Header>
-            <Modal.Content>
+            <Modal.Content scrolling={true} >
                 {cursos.length > 0 ? listacursos : <h2>No hay cursos</h2>}
             </Modal.Content>
         </Modal>
