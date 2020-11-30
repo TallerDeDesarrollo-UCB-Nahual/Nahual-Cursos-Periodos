@@ -7,10 +7,10 @@ import { editarCurso } from "../servicios/cursos";
 export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
 
     const [sedes, setSedes] = useState([]);
-    const [horario, setHorario] = useState("00:00");
-    const [sedeNodo, setSedeNodo] = useState(null)
-    const [nota, setNota] = useState("");
-    const [profesor, setProfesor] = useState("")
+    const [horario, setHorario] = useState("");
+    const [sedeNodo, setSedeNodo] = useState([])
+    const [notas, setNota] = useState("");
+    const [profesores, setProfesor] = useState("")
 
   function inicializarSedes() {
     obtenerSedes()
@@ -24,20 +24,30 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
       });
   }
 
-    function editar(horario,sede,nota,profesor) {
+  function inicializarCurso(){
+        setHorario(curso.horario);
+        setSedeNodo([curso.SedeId,curso.NodoId]);
+        setNota(curso.notas);
+        setProfesor(curso.profesores);
+  }
+
+    function editar(horario,nota,profesor) {
         editarCurso(idCurso,{"horario":horario,
             "SedeId": sedeNodo.SedeId,
             "NodoId": sedeNodo.NodoId,
             "notas":nota,
             "profesores":profesor}).then(curso => {
                 console.log("se edito")
+            //return curso.json()
         })
-
         setAbierto(!estaAbierto);
     }
+
     useEffect(()=>{
         inicializarSedes();
+        inicializarCurso();
     }, [])
+
     return (
         <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
           <Modal.Header>Editar Curso</Modal.Header>
@@ -70,9 +80,9 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                     label="Horario"
                     fluid
                     type="text"
-                    value={curso.horario}
+                    value={horario}
                     className={"form-control"}
-                    onChange={(x, data) => setHorario(data)}
+                    onChange={(x, data) => setHorario(data.value)}
                   />
                 </div>
               </div>
@@ -82,8 +92,8 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                     label="Notas"
                     fluid
                     type="text"
-                    value={curso.notas}
-                    class="form-control"
+                    value={notas}
+                    className={"form-control"}
                     onChange={(x, data) => setNota(data.value)}
                   />
                 </div>
@@ -92,22 +102,23 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                     label="Profesor"
                     fluid
                     type="text"
-                    value={curso.profesores}
-                    class="form-control"
+                    value={profesores}
+                    className={"form-control"}
                     onChange={(x, data) => setProfesor(data.value)}
                   />
                 </div>
               </div>
               <br />
-              <Modal.Actions>
+            </div>
+          </Modal.Content>
+          <Modal.Actions>
                 <div className={"displayFlex spacedBetween"}>
                   <Button
                     color="green"
                     onClick={() => {
                       editar(horario,
-                            sedeNodo,
-                            nota,
-                            profesor);
+                            notas,
+                            profesores);
                     }}
                   >
                     Editar Curso
@@ -122,8 +133,6 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                   </Button>
                 </div>
               </Modal.Actions>
-            </div>
-          </Modal.Content>
         </Modal>
       );
 }

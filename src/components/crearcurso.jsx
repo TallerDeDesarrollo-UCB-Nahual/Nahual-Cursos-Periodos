@@ -59,7 +59,7 @@ export default function CrearCurso({ aceptar, estaAbierto, setAbierto }) {
                 fluid
                 type="text"
                 className={"form-control"}
-                onChange={(x, data) => setHorario(data)}
+                onChange={(x, data) => setHorario(data.value)}
               />
             </div>
           </div>
