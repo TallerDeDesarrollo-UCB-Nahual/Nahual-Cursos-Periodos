@@ -25,7 +25,7 @@ function Alumne(props) {
         />
       </Table.Cell>
       <Table.Cell>
-        {PrimeraLetraEnMayuscula(props.item.nombreCompleto)}
+        {PrimeraLetraEnMayuscula(props.item.nombre+" "+props.item.apellido)}
       </Table.Cell>
     </Table.Row>
   );
