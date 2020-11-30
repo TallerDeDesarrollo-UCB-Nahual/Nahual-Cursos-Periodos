@@ -4,7 +4,7 @@ import { obtenerSedes } from "../servicios/sedes";
 // import styles from "./styles.module.css";
 import { crearCurso } from "../servicios/cursos";
 
-export default function CrearCurso({estaAbierto, setAbierto, periodoId }) {
+export default function CrearCurso({estaAbierto, setAbierto, idPeriodo }) {
   const [sedes, setSedes] = useState([]);
   const [horario, setHorario] = useState("");
   const [sedeNodo, setSedeNodo] = useState(null);
