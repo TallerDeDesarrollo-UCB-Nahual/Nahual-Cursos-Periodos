@@ -40,7 +40,7 @@ export default function NuevoPeriodo({
       </Modal.Content>
       <Modal.Actions>
         <Button className="cancelButton" onClick={() => estaAbierto(false)}>
-          <Icon name="remove" /> No
+        Cancelar <Icon name="remove" style={{ margin: '0 0 0 10px' }}/>
         </Button>
         <Button className="confirmButton"
           onClick={() => {
@@ -68,7 +68,7 @@ export default function NuevoPeriodo({
               });
           }}
         >
-          <Icon name="checkmark" /> Si
+          Crear <Icon name="checkmark" style={{ margin: '0 0 0 10px' }}/>
         </Button>
       </Modal.Actions>
     </Modal>

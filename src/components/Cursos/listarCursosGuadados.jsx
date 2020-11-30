@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Table, Icon, Grid } from 'semantic-ui-react';
+import { Modal, Button, Table, Icon, Grid, Message } from 'semantic-ui-react';
 import EliminarCurso from "../Cursos/eliminarCurso";
 import CrearCurso from "../Cursos/crearcurso";
 import { obtenerCursosPorIdPeriodo } from "../../servicios/periodos";
@@ -49,6 +49,13 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
             </Table.Body>
         </Table>
     </div>;
+    
+    const mensajeSinCursos = <Message
+        icon="warning sign"
+        warning
+        header={"No existen cursos aún"}
+        content={"Intenta mas tarde. Gracias"}
+    />
     return (            
         <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
             <Modal.Header>
@@ -69,7 +76,7 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
                 </Grid>
             </Modal.Header>
             <Modal.Content scrolling={true} >
-                {cursos.length > 0 ? listacursos : <h2>No hay cursos</h2>}
+                {cursos.length > 0 ? listacursos : mensajeSinCursos}
             </Modal.Content>
         </Modal>)
 }
