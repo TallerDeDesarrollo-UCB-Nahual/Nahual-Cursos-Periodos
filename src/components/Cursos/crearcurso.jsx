@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Form, Container, TextArea } from "semantic-ui-react";
+import { Button, Modal, Form, TextArea } from "semantic-ui-react";
 import { obtenerSedes } from "../../servicios/sedes";
 // import styles from "./styles.module.css";
 import { crearCurso } from "../../servicios/cursos";

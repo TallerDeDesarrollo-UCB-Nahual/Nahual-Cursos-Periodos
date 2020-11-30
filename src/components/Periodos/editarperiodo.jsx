@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from 'react-router-dom';
 import { obtenerModulos } from "../../servicios/modulos";
-import { obtenerPeriodoPorId, obtenerCursosPorIdPeriodo, editarPeriodo } from "../../servicios/periodos";
+import { obtenerPeriodoPorId, editarPeriodo } from "../../servicios/periodos";
 import { Container, Button, Form, ButtonGroup } from "semantic-ui-react";
-import styles from "../styles.module.css";
 
 export default function EditarPeriodo() {
 
@@ -16,7 +15,7 @@ export default function EditarPeriodo() {
   const history = useHistory();
 
   useEffect(() => {
-    obtenerPeriodo(id)
+    obtenerPeriodo()
       .then((response) => {
         return response.data;
       })
@@ -35,7 +34,7 @@ export default function EditarPeriodo() {
       });
   }, []);
 
-  function obtenerPeriodo(id) {
+  function obtenerPeriodo() {
     return obtenerPeriodoPorId(id);
   }
 

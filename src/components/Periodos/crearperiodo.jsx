@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "../styles.module.css";
 import { obtenerModulos } from "../../servicios/modulos";
-import { Container, Button, Form, ButtonGroup } from "semantic-ui-react";
-import CrearCurso from "../Cursos/crearcurso";
+import { Form } from "semantic-ui-react";
 
 export default function CrearPeriodo({
   cursos,
@@ -34,20 +33,6 @@ export default function CrearPeriodo({
   }, []);
   const formulariodeperiodos = (
     <div>
-      {/* <CrearCurso
-        aceptar={(element) => {
-          setCursos([...cursos, element]);
-        }}
-        estaAbierto={crearCursoEstaAbierto}
-        setAbierto={setModalCrearCursoAbierto}
-      />
-
-      <ListaCursosACrear
-        cursos={cursos}
-        estaAbierto={mostrarListaCursosAGuardar}
-        setAbierto={setMostrarListaCursosAGuardar}
-      /> */}
-
       <div>
         <Form>
           <Form.Input

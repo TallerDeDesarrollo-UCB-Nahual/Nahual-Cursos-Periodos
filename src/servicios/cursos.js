@@ -1,4 +1,3 @@
-import React from "react";
 import BASE_ROUTE from "./rutas";
 import axios from "axios";
 

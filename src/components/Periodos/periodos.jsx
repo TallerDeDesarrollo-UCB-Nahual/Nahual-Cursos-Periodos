@@ -72,7 +72,7 @@ export default function Periodos() {
         </Table.Header>
         <Table.Body>
           {periodos.map((p) => {
-            if (p.estado == filtroEstado) {
+            if (p.estado === filtroEstado) {
               return (
                 <Table.Row key={`periodo-${p.id}`}>
                   <Table.Cell>{p.periodo}</Table.Cell>
