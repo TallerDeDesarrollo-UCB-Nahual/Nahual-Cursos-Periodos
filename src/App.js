@@ -1,13 +1,10 @@
 import "./App.css";
 
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Periodos from "./components/periodos";
 import NuevoPeriodo from "./components/crearperiodo";
 import EditarPeriodo from "./components/editarperiodo";
-import Formulario_inscrites from './components/inscripcion/Formulario_inscripcion';
-import Navbar from './components/inscripcion/navbar/navbar.js';
-import Listar_Modulos from './components/inscripcion/listar_modulos';
 import ListaPreinscriptes from './components/Preinscriptes/ListaPreinscriptes';
 import 'semantic-ui-less/semantic.less'
 
@@ -23,17 +20,7 @@ function App() {
             <NuevoPeriodo />
           </Route>
           <Route path="/periodos/:id" children={<EditarPeriodo />} />
-            <Route path="/" exact component={Listar_Modulos} />
-            <Route exact path="/formulario" render={ (props) =>(
-                <React.Fragment>   
-                <Formulario_inscrites {...props} />
-                </React.Fragment>
-              )}/>
-            <Route exact path="/lista-preinscriptes" render={ (props) =>(
-                <React.Fragment>
-                  <ListaPreinscriptes/>
-                </React.Fragment>
-            )}/>
+            <Route exact path="/lista-preinscriptes" component={ListaPreinscriptes}/>
         </Switch>
       </div>
     </Router>

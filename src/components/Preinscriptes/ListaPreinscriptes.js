@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
-import {Button, Container, Dimmer, Dropdown, Header, Icon, Loader, Message, Select, Table} from "semantic-ui-react";
+import {Button, Container, Dimmer, Dropdown, Header, Icon, Loader, Message, Table} from "semantic-ui-react";
 import iconoPreinscripte from '../../assets/reading-book.png';
 import GenericModal from '../Modal/GenericModal';
 import ElegirCurso from './ElegirCurso';
@@ -115,7 +115,7 @@ class ListaPreinscriptes extends Component {
 
     cambiarEstadoCheckBoxes(estado){
         var checkboxes = Array.from(document.getElementsByName("checkBox"));
-        checkboxes = checkboxes.map((checkbox) => checkbox.checked=estado);
+        checkboxes.map((checkbox) => checkbox.checked=estado);
     }
 
     cambiarPeriodo(periodoId){
@@ -194,7 +194,7 @@ class ListaPreinscriptes extends Component {
             />
             </Container>
             <Table singleLine selectable striped unstackable>
-                <Table.Header style={{backgroundColor:'#282c34'}}>
+                <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell textAlign="center">
                         <input
