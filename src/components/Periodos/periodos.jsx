@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table, Select } from "semantic-ui-react";
+import { Button, Table, Select, Icon } from "semantic-ui-react";
 import { obtenerPeriodos } from "../../servicios/periodos";
 import { useHistory } from "react-router-dom";
 import ListarCursosGuardados from "../Cursos/listarCursosGuadados";
@@ -45,7 +45,10 @@ export default function Periodos() {
           />
         </div>
         <h1>Periodos</h1>
-        <Button onClick={() => setEstaAbiertoModalNuevoPerioto(true)}>Crear Periodo</Button>
+        <Button color='green' onClick={() => setEstaAbiertoModalNuevoPerioto(true)}>
+          Periodo
+              <Icon color='white' name='add circle' style={{ margin: '0 0 0 10px' }} />
+        </Button>
       </div>
       <ListarCursosGuardados
         estaAbierto={informacionListaCursos}
@@ -96,7 +99,7 @@ export default function Periodos() {
                           handleEditButtonClick(p.id);
                         }}
                       >
-                        Editar periodo
+                        Editar <Icon color='white' name='edit' style={{ margin: '0 0 0 10px' }} />
                       </Button>
                       <Eliminar egresadeId={p.id}></Eliminar>
                     </div>

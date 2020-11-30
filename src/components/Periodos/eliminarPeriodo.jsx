@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal} from 'semantic-ui-react'
+import { Button, Modal, Icon} from 'semantic-ui-react'
 import { eliminarPeriodo } from "../../servicios/periodos";
 
 
@@ -26,8 +26,8 @@ function Eliminar({ egresadeId }) {
     return (
         <>
             <Button color="red" onClick={onOpen}>
-                <i className="user delete icon"></i>
-                <label className="icon-delete">Eliminar</label>
+                Eliminar
+                <Icon color='white' name='delete' style={{ margin: '0 0 0 10px' }} />
             </Button>
             <Modal size="m" open={abierto} >
                 <Modal.Header>Atencion!</Modal.Header>
