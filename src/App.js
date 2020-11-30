@@ -1,13 +1,15 @@
 import "./App.css";
 
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Periodos from "./components/periodos";
 import NuevoPeriodo from "./components/crearperiodo";
 import EditarPeriodo from "./components/editarperiodo";
 import ListarNodos from "./components/Nodos/listarNodos";
 import { Container } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
+import ListaPreinscriptes from './components/Preinscriptes/ListaPreinscriptes';
+import 'semantic-ui-less/semantic.less'
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
               <NuevoPeriodo />
             </Route>
             <Route path="/periodos/:id" children={<EditarPeriodo />} />
+            <Route exact path="/lista-preinscriptes" component={ListaPreinscriptes}/>
             <Route exact path="/alumnes">
               <ListaDeAlumnesPorCurso />
             </Route>

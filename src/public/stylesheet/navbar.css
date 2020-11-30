@@ -1,0 +1,36 @@
+.menu {
+  background-color: #87D734;
+  height: 60;
+}
+
+.menu2 {
+  background-color: white;
+  height: 40
+}
+
+.logo {
+  margin: 10px;
+  height: 60px;
+}
+
+.nav-titulo {
+  color: white;
+  margin: 10px;
+  position: absolute;
+  top: 20px;
+  font-size: 34px;
+  font-weight: bolder;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+  text-align: center !important;
+}
+
+.linea2 {
+  width: 100%;
+  border-bottom: 1px solid #BDBDBD !important;
+  color: #808080;
+}
+
+.authNav {
+  float: right;
+}
