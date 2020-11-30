@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Image, Modal, Grid, Segment, Loader, Dimmer, Icon, Input } from 'semantic-ui-react';
 import axios from 'axios';
+import BASE_ROUTE from "../../servicios/rutas";
 
 class CrearSede extends Component {
   constructor(props) {
@@ -30,9 +31,8 @@ class CrearSede extends Component {
       alert("Los datos no pueden viajar vacios!");
     } else {
       console.log(this.state);
-      const API_URL = `http://localhost:8000/api`;
       var sede = { nombre: this.state.nombreSede, NodoId: this.state.nodoId }
-      axios.post(`${API_URL}/sedes`, sede)
+      axios.post(`${BASE_ROUTE}/sedes`, sede)
         .then(function (respuesta) {
           this.setState({ open: false });
           window.location.reload(false);

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Button, Image, Modal, Grid, Segment, Loader, Dimmer, Icon, Input } from 'semantic-ui-react';
 import axios from 'axios';
 import styles from "../styles.module.css";
+import BASE_ROUTE from "../../servicios/rutas";
 
 export class EditarSede extends Component {
     constructor(props) {
@@ -31,9 +32,8 @@ export class EditarSede extends Component {
             alert("Los datos no pueden viajar vacios!");
         } else {
             console.log(this.state);
-            const API_URL = `http://localhost:8000/api/nodos`;
             var sede = { nombre: this.state.nombreSede, NodoId: this.state.nodoId }
-            axios.put(`${API_URL}/sedes/${this.state.id}`, sede)
+            axios.put(`${BASE_ROUTE}/nodos/sedes/${this.state.id}`, sede)
                 .then(function (respuesta) {
                     this.setState({ open: false });
                     window.location.reload(false);

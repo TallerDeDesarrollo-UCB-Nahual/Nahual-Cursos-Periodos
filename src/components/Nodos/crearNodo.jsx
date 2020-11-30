@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Modal, Grid, Icon, Input, Form } from 'semantic-ui-react';
 import axios from 'axios';
+import BASE_ROUTE from "../../servicios/rutas";
 
 class CrearNodo extends Component {
   constructor() {
@@ -15,10 +16,8 @@ class CrearNodo extends Component {
     if (this.state.nombreNodo === "") {
       alert("Los datos no pueden viajar vacios!");
     } else {
-      console.log(this.state);
-      const API_URL = `http://localhost:8000/api`;
       var nodo = { nombre: this.state.nombreNodo }
-      axios.post(`${API_URL}/nodos`, nodo)
+      axios.post(`${BASE_ROUTE}/nodos`, nodo)
         .then(function (respuesta) {
           this.setState({ open: false });
           window.location.reload(false);
