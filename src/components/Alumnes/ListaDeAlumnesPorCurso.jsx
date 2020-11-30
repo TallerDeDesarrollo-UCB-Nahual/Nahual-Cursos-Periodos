@@ -29,7 +29,7 @@ class ListaDeAlumnesPorCurso extends Component {
       mostrarBotonDeCarga: true
     });
     const API_URL = process.env.REACT_APP_API_URL;
-    Axios.get(`${API_URL}/cursos/${this.state.curso}/inscritos`)
+    Axios.get(`${API_URL}/cursos/${this.state.curso}/inscriptes`)
       .then((respuesta) => {
         this.setState({
           mostrarBotonDeCarga: false,
