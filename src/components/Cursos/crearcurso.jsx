@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Form, TextArea } from "semantic-ui-react";
+import { Button, Modal, Form, TextArea, Icon } from "semantic-ui-react";
 import { obtenerSedes } from "../../servicios/sedes";
 // import styles from "./styles.module.css";
 import { crearCurso } from "../../servicios/cursos";
@@ -33,7 +33,7 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo }) {
     inicializarSedes();
   }, []);
   return (
-    <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
+    <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
       <Modal.Header>Nuevo curso</Modal.Header>
       <Modal.Content>
         <Form>
@@ -80,30 +80,31 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo }) {
         </Form>
       </Modal.Content>
       <Modal.Actions>
-          <Button
-            color="green"
-            onClick={() => {
-              crearCurso({                
-                ...sedeNodo,
-                horario: horario,
-                profesores: profesor,
-                notas: nota,
-                PeriodoId: idPeriodo
-              });
-              resetValores();
-            }}
-          >
-            Crear curso
-          </Button>
-          <Button
-            theme="danger"
-            onClick={() => {
-              resetValores();
-              setAbierto(!estaAbierto);
-            }}
-          >
-            Cancelar
-          </Button>
+        <Button
+          className="cancelButton"
+          onClick={() => {
+            resetValores();
+            setAbierto(!estaAbierto);
+          }}
+        >
+          Cancelar <Icon name="remove" style={{ margin: '0 0 0 10px' }}/>
+        </Button>
+        <Button
+          className="confirmButton"
+          color="green"
+          onClick={() => {
+            crearCurso({                
+              ...sedeNodo,
+              horario: horario,
+              profesores: profesor,
+              notas: nota,
+              PeriodoId: idPeriodo
+            });
+            resetValores();
+          }}
+        >
+          Crear <Icon name="checkmark" style={{ margin: '0 0 0 10px' }}/>
+        </Button>
       </Modal.Actions>
     </Modal>
   );

@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { Button } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import { eliminarCursoDePeriodo } from "../../servicios/periodos";
 
 
@@ -12,7 +12,9 @@ function EliminarCurso({ idPeriodo, idCurso }) {
 
     return (
         <>
-            <Button  negative color="red" size="small" onClick={() => eliminarCursoDeAPI(idPeriodo, idCurso)}>Eliminar</Button>
+            <Button  negative color="red" size="small" onClick={() => eliminarCursoDeAPI(idPeriodo, idCurso)}>
+                Eliminar <Icon color='white' name='delete' style={{ margin: '0 0 0 10px' }} />
+            </Button>
         </>
     );
 }

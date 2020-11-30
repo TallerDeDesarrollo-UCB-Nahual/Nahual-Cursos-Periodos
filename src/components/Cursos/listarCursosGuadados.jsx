@@ -39,7 +39,7 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
                             <Table.Cell>{c.notas}</Table.Cell>
                             <Table.Cell>
                                 <div className={'displayFlex centered columnGap'}>
-                                <Button size="small" color="blue" >Editar</Button>
+                                <Button size="small" color="blue" >Editar <Icon color='white' name='edit' style={{ margin: '0 0 0 10px' }} /></Button>
                                 <EliminarCurso idPeriodo={idPeriodo} idCurso={c.id}></EliminarCurso>
                                 </div>
                             </Table.Cell>
