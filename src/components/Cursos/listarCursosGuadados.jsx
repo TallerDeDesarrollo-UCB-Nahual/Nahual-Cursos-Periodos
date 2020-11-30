@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Table } from 'semantic-ui-react';
+import { Modal, Button, Table, Icon, Grid } from 'semantic-ui-react';
 import EliminarCurso from "../Cursos/eliminarCurso";
 import CrearCurso from "../Cursos/crearcurso";
 import { obtenerCursosPorIdPeriodo } from "../../servicios/periodos";
@@ -51,15 +51,23 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
     </div>;
     return (            
         <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
-            <Modal.Header>Cursos</Modal.Header>
-            <Modal.Content>
-                <CrearCurso
-                    estaAbierto={nuevoCursoModalAbierto}
-                    setAbierto={setNuevoCursoModalAbierto}
-                    idPeriodo={idPeriodo}
-                />
-                <Button onClick={() => setNuevoCursoModalAbierto(true)}>Nuevo Curso</Button>
-            </Modal.Content>
+            <Modal.Header>
+                <Grid columns='equal'>
+                  <Grid.Column>
+                    Cursos
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Button floated='right' color='green' onClick={() => setNuevoCursoModalAbierto(true)}>Nuevo Curso
+                        <Icon color='white' name='add circle' style={{ margin: '0 0 0 10px' }} />
+                    </Button>
+                    <CrearCurso
+                        estaAbierto={nuevoCursoModalAbierto}
+                        setAbierto={setNuevoCursoModalAbierto}
+                        idPeriodo={idPeriodo}
+                    />
+                  </Grid.Column>
+                </Grid>
+            </Modal.Header>
             <Modal.Content scrolling={true} >
                 {cursos.length > 0 ? listacursos : <h2>No hay cursos</h2>}
             </Modal.Content>

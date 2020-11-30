@@ -68,6 +68,7 @@ export default function Periodos() {
             <Table.HeaderCell>Año</Table.HeaderCell>
             <Table.HeaderCell>Estado</Table.HeaderCell>
             <Table.HeaderCell>Topico</Table.HeaderCell>
+            <Table.HeaderCell>Cursos</Table.HeaderCell>
             <Table.HeaderCell className={"displayFlex  centered"}>
               Acciones
             </Table.HeaderCell>
@@ -83,16 +84,19 @@ export default function Periodos() {
                   <Table.Cell>{p.estado ? "Activo" : "Inactivo"}</Table.Cell>
                   <Table.Cell>{p.topico.nombre}</Table.Cell>
                   <Table.Cell>
+                    <Button
+                      color="blue"
+                      onClick={(x) => {
+                          setInformacionListaCursos(true);
+                            setIdPeriodo(p.id);
+                      }}
+                    >
+                      Cursos
+                      <Icon color='white' name='eye' style={{ margin: '0 0 0 10px' }} />
+                    </Button>
+                  </Table.Cell>
+                  <Table.Cell>
                     <div className={"displayFlex centered columnGap"}>
-                      <Button
-                        color="green"
-                        onClick={(x) => {
-                            setInformacionListaCursos(true);
-                              setIdPeriodo(p.id);
-                        }}
-                      >
-                        Ver cursos
-                      </Button>
                       <Button
                         color="yellow"
                         onClick={(x) => {
