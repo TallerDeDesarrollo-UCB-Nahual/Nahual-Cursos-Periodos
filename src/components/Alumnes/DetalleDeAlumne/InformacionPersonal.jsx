@@ -4,8 +4,8 @@ import moment from 'moment';
 import 'moment/locale/es';
 import avatarGenerico from '../../../assets/avatar-generico.png'
 
-function convertirAMayusculas(str) {
-  return str.replace(/\b\w/g, l => l.toUpperCase())
+function convertirAMayusculas(palabras) {
+  return palabras.replace(/\b\w/g, l => l.toUpperCase())
 }
 
 function InformacionPersonal({ alumne }) {
@@ -20,7 +20,7 @@ function InformacionPersonal({ alumne }) {
         />
         <Item.Content verticalAlign='middle'>
             <div style={{ textAlign: "left" }}>
-              <Header as='h1'> {convertirAMayusculas(alumne.nombreCompleto)} </Header><br />
+              <Header as='h1'> {convertirAMayusculas(alumne.nombre+alumne.apellido)} </Header><br />
               <Item.Description>
                 <p> <Icon name='mail outline' /> <b>Correo: </b>{alumne.correo}</p>
                 <p> <Icon name='call' /> <b>Teléfono: </b>{alumne.celular}</p>

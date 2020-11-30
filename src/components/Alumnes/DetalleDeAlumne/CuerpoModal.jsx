@@ -25,7 +25,7 @@ const CuerpoModal = ({ alumne, cerrarModal, filtrarAlumne }) => {
       )
     );
   };
-  const cambiarEstadoDeInscrpte = (id) => {
+  const cambiarEstadoDeInscripte = (id) => {
     let datos = {
       estudiantes: [alumne],
       estado: id
@@ -73,13 +73,13 @@ const CuerpoModal = ({ alumne, cerrarModal, filtrarAlumne }) => {
           className="icon"
         >
           <Dropdown.Menu>
-            <Dropdown.Item onClick={() => cambiarEstadoDeInscrpte(1)}>
+            <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(1)}>
               Des-inscribir
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => cambiarEstadoDeInscrpte(6)}>
+            <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(6)}>
               Abandono{" "}
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => cambiarEstadoDeInscrpte(4)}>
+            <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(4)}>
               Egreso
             </Dropdown.Item>
           </Dropdown.Menu>
