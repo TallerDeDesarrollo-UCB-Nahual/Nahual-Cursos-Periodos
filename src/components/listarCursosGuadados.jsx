@@ -20,13 +20,15 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
                 <Button color="yellow" size="tiny">Profesores: {c.profesores}</Button>
                 <Button color="violet" size="tiny">Notas: {c.notas}</Button>
                 <Button color="green" size="tiny" onClick={x => {
-                                                    obtenerCurso(c.id).then(curso => {
+                                                    setInformacionCurso(true)
+                                                    setIdCurso(c.id);
+                                                    /* obtenerCurso(c.id).then(curso => {
                                                         return curso.json()
                                                     }).then(curso => {
                                                         setCursoAEditar(curso.response)
                                                         setInformacionCurso(true)
                                                         setIdCurso(c.id);
-                                                    })
+                                                    }) */
                                                 }}>Editar</Button>
                 <EliminarCurso idPeriodo={idPeriodo} idCurso={c.id}></EliminarCurso>
             </Advertisement>)
