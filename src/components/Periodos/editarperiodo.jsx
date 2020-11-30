@@ -91,7 +91,10 @@ export default function EditarPeriodo() {
           <br />
           <div className={"actionsCrearPeriodo"}>
             <ButtonGroup>
-              <Button color="green" onClick={() => {
+              <Button floated='right' className="cancelButton" onClick={() => {
+                history.push("/periodos");
+              }}>Cancelar</Button>
+              <Button floated='right'className="confirmButton" onClick={() => {
                 editarPeriodo(id, {
                   anio: anio,
                   periodo: periodo,
@@ -101,9 +104,6 @@ export default function EditarPeriodo() {
                 history.push("/periodos");
                 window.location.reload();
               }}>Guardar</Button>
-              <Button color="red" onClick={() => {
-                history.push("/periodos");
-              }}>Cancelar</Button>
             </ButtonGroup>
           </div>
         </Container>
