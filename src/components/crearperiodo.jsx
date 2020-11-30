@@ -35,7 +35,7 @@ export default function CrearPeriodo({
   }, []);
   const formulariodeperiodos = (
     <div>
-      <CrearCurso
+      {/* <CrearCurso
         aceptar={(element) => {
           setCursos([...cursos, element]);
         }}
@@ -47,17 +47,16 @@ export default function CrearPeriodo({
         cursos={cursos}
         estaAbierto={mostrarListaCursosAGuardar}
         setAbierto={setMostrarListaCursosAGuardar}
-      />
+      /> */}
 
       <div>
-        <Container>
+        <Form>
           <Form.Input
             label="Periodo"
             fluid
             type="text"
             onChange={(e, data) => setPeriodo(data.value)}
           />
-          <br />
           <Form.Select
             id="inputState"
             label="Topico"
@@ -71,7 +70,6 @@ export default function CrearPeriodo({
             })}
             onChange={(e, data) => setTopico(data.value)}
           />
-          <br />
           <Form.Select
             label="Estado"
             fluid
@@ -82,7 +80,6 @@ export default function CrearPeriodo({
             className={"form-control"}
             onChange={(e, data) => setEstadoPeriodo(data.value)}
           />
-          <br />
           <Form.Input
             label="Año"
             type="number"
@@ -90,8 +87,7 @@ export default function CrearPeriodo({
             className={"form-control"}
             onChange={(x, data) => setAnio(parseInt(data.value))}
           />
-          <br />
-        </Container>
+        </Form>
       </div>
     </div>
   );

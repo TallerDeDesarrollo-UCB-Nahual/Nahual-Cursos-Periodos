@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Form } from "semantic-ui-react";
+import { Button, Modal, Form, Container, TextArea } from "semantic-ui-react";
 import { obtenerSedes } from "../servicios/sedes";
+// import styles from "./styles.module.css";
+import { crearCurso } from "../servicios/cursos";
 
-export default function CrearCurso({ aceptar, estaAbierto, setAbierto }) {
+export default function CrearCurso({estaAbierto, setAbierto, periodoId }) {
   const [sedes, setSedes] = useState([]);
   const [horario, setHorario] = useState("");
   const [sedeNodo, setSedeNodo] = useState(null);
@@ -34,89 +36,75 @@ export default function CrearCurso({ aceptar, estaAbierto, setAbierto }) {
     <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
       <Modal.Header>Nuevo curso</Modal.Header>
       <Modal.Content>
-        <div>
-          <div class="form-group">
-            <Form.Select
+        <Form>
+          <Form.Select
+            fluid
+            label="Sede - Nodo"
+            options={sedes.map((s) => {
+              return {
+                key: `sede-${s.id}`,
+                value: [s.nodo.id, s.id],
+                text: s.nombre + " - " + s.nodo.nombre,
+              };
+            })}
+            onChange={(e, data) => {
+              const selected = data.value;
+              setSedeNodo({
+                SedeId: selected[1],
+                NodoId: selected[0],
+              });
+            }}
+          />
+            <Form.Input
+              label="Horario"
               fluid
-              label="Sede - Nodo"
-              options={sedes.map((s) => {
-                return {
-                  key: `sede-${s.id}`,
-                  value: [s.nodo.id, s.id],
-                  text: s.nombre + " - " + s.nodo.nombre,
-                };
-              })}
-              onChange={(e, data) => {
-                const selected = data.value;
-                setSedeNodo({
-                  SedeId: selected[1],
-                  NodoId: selected[0],
-                });
-              }}
+              type="text"
+              className={"form-control"}
+              onChange={(x, data) => setHorario(data.value)}
             />
-          </div>
-          <div class="fullHeight forceFlex columnGap">
-            <div className={"dosentradasformulario"}>
-              <label>Inicio</label>
-              <Form.Input
-                label="Horario"
-                fluid
-                type="text"
-                className={"form-control"}
-                onChange={(x, data) => setHorario(data)}
-              />
-            </div>
-          </div>
-          <div class="forceFlex columnGap">
-            <div className={"dosentradasformulario"}>
-              <Form.Input
-                label="Notas"
-                fluid
-                type="text"
-                class="form-control"
-                onChange={(x, data) => setNota(data.value)}
-              />
-            </div>
-            <div className={"dosentradasformulario"}>
-              <Form.Input
-                label="Profesor"
-                fluid
-                type="text"
-                class="form-control"
-                onChange={(x, data) => setProfesor(data.value)}
-              />
-            </div>
-          </div>
-          <br />
-          <Modal.Actions>
-            <div className={"displayFlex spacedBetween"}>
-              <Button
-                color="green"
-                onClick={() => {
-                  aceptar({
-                    horario: horario,
-                    ...sedeNodo,
-                    notas: nota,
-                    profesores: profesor,
-                  });
-                  resetValores();
-                }}
-              >
-                Crear curso
-              </Button>
-              <Button
-                theme="danger"
-                onClick={() => {
-                  resetValores();
-                  setAbierto(!estaAbierto);
-                }}
-              >
-                Cancelar
-              </Button>
-            </div>
-          </Modal.Actions>
-        </div>
+            <Form.Input
+              label="Profesor"
+              fluid
+              type="text"
+              class="form-control"
+              onChange={(x, data) => setProfesor(data.value)}
+            />
+            <Form.Input
+              label="Notas"
+              fluid
+              type="text"
+              class="form-control"
+              control={TextArea}
+              onChange={(x, data) => setNota(data.value)}
+            />
+        </Form>
       </Modal.Content>
+      <Modal.Actions>
+          <Button
+            color="green"
+            onClick={() => {
+              crearCurso({                
+                ...sedeNodo,
+                horario: horario,
+                profesores: profesor,
+                notas: nota,
+                PeriodoId: idPeriodo
+              });
+              resetValores();
+            }}
+          >
+            Crear curso
+          </Button>
+          <Button
+            theme="danger"
+            onClick={() => {
+              resetValores();
+              setAbierto(!estaAbierto);
+            }}
+          >
+            Cancelar
+          </Button>
+      </Modal.Actions>
     </Modal>
   );
 }

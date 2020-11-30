@@ -1,9 +1,12 @@
-import React from "react";
-import { Modal, Header, Button, Table } from 'semantic-ui-react';
+import React, { useState } from "react";
+import { Modal, Button, Table } from 'semantic-ui-react';
 import EliminarCurso from "./eliminarCurso";
+import CrearCurso from "./crearcurso";
 
 export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, idPeriodo}) {
-    console.log(cursos)
+
+    const [nuevoCursoModalAbierto, setNuevoCursoModalAbierto] = useState(false);
+
     const listacursos = 
     <div id="listaCursos" className={"forceFlex isColumn rowGap"}>
         <Table>
@@ -41,6 +44,14 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
     return (            
         <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
             <Modal.Header>Cursos</Modal.Header>
+            <Modal.Content>
+                <CrearCurso
+                    estaAbierto={nuevoCursoModalAbierto}
+                    setAbierto={setNuevoCursoModalAbierto}
+                    idPeriodo={idPeriodo}
+                />
+                <Button onClick={() => setNuevoCursoModalAbierto(true)}>Nuevo Curso</Button>
+            </Modal.Content>
             <Modal.Content scrolling={true} >
                 {cursos.length > 0 ? listacursos : <h2>No hay cursos</h2>}
             </Modal.Content>
