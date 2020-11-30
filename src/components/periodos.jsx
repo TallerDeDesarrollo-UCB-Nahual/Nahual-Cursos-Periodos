@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button, Table, Select, Modal } from "semantic-ui-react";
 import {
   obtenerPeriodos,
-  obtenerCursosPorIdPeriodo,
+  obtenerCursosPorIdPeriodo
 } from "../servicios/periodos";
+import { useHistory } from "react-router-dom";
 import ListarCursosGuardados from "./listarCursosGuadados";
 import styles from "./styles.module.css";
 import Eliminar from "./eliminarPeriodo";
@@ -19,12 +20,17 @@ export default function Periodos() {
   const [cursosAMostrar, setCursosAMostrar] = useState([]);
   const [informacionListaCursos, setInformacionListaCursos] = useState(false);
   const [idPeriodo, setIdPeriodo] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     obtenerPeriodos()
       .then((response) => response.json())
       .then((response) => setPeriodos(response.response));
   }, []);
+
+  function handleEditButtonClick(id) {
+    history.push("/periodos/" + id)
+  }
 
   return (
     <div className={styles.vistaPeriodos}>
@@ -43,19 +49,19 @@ export default function Periodos() {
           />
         </div>
         <h1>Periodos</h1>
-        <NuevoPeriodo
-          abierto={estaAbiertoModalNuevoPerido}
-          estaAbierto={setEstaAbiertoModalNuevoPerioto}
-          estaEditando={false}
-          periodos={periodos}
-          setPeriodos={setPeriodos}
-        />
+        <Button onClick={() => setEstaAbiertoModalNuevoPerioto(true)}>Crear Periodo</Button>
       </div>
       <ListarCursosGuardados
         cursos={cursosAMostrar}
         estaAbierto={informacionListaCursos}
         setAbierto={setInformacionListaCursos}
         idPeriodo={idPeriodo}
+      />
+      <NuevoPeriodo
+        abierto={estaAbiertoModalNuevoPerido}
+        estaAbierto={setEstaAbiertoModalNuevoPerioto}
+        periodos={periodos}
+        setPeriodos={setPeriodos}
       />
       <Table>
         <Table.Header>
@@ -95,6 +101,14 @@ export default function Periodos() {
                         }}
                       >
                         Ver cursos
+                      </Button>
+                      <Button
+                        color="yellow"
+                        onClick={(x) => {
+                          handleEditButtonClick(p.id);
+                        }}
+                      >
+                        Editar periodo
                       </Button>
                       <Eliminar egresadeId={p.id}></Eliminar>
                     </div>

@@ -4,7 +4,6 @@ import { crearPeriodo, obtenerPeriodoPorId } from "../servicios/periodos";
 import CrearPeriodo from "./crearperiodo";
 
 export default function NuevoPeriodo({
-  estaEditando,
   estaAbierto,
   abierto,
   periodos,
@@ -19,28 +18,22 @@ export default function NuevoPeriodo({
     <Modal
       closeIcon
       open={abierto}
-      trigger={<Button>Nuevo Periodo</Button>}
       onClose={() => estaAbierto(false)}
       onOpen={() => estaAbierto(true)}
     >
-      {estaEditando ? (
-        <Header icon="pencil" content="Editar periodo" />
-      ) : (
-        <Header icon="plus" content="Nuevo periodo" />
-      )}
+      <Header icon="plus" content="Nuevo periodo" />
       <Modal.Content>
         <CrearPeriodo
-          estaEditando={estaEditando}
           cursos={[]}
-          setCursos={(x) => {}}
+          setCursos={(x) => { }}
           setPeriodo={setPeriodo}
           setEstadoPeriodo={setEstadoPeriodo}
-          setModalCrearCursoAbierto={(x) => {}}
+          setModalCrearCursoAbierto={(x) => { }}
           crearCursoEstaAbierto={false}
           mostrarListaCursosAGuardar={false}
           setTopico={setTopico}
           setAnio={setAnio}
-          setEnviandSolicitud={(x) => {}}
+          setEnviandSolicitud={(x) => { }}
           enviandSolicitud={false}
           anio={anio}
           periodo={periodo}
