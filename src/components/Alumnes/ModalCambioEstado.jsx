@@ -32,7 +32,6 @@ function ModalCambioEstado(props) {
 		props.alumnes.forEach((alumne) => {
 			const alumneListo = {
 				id: alumne.estudiante.id,
-				nombreCompleto: alumne.estudiante.nombreCompleto,
 				estadoId: alumne.estudiante.estadoId
 			};
 			estudiantes.push(alumneListo);
