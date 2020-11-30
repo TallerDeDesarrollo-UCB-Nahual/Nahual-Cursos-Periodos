@@ -1,7 +1,6 @@
 import React from "react";
 import NahualLogo from "../../assets/logo-proyecto-nahual.webp";
-
-import { Menu, Image, Dropdown } from "semantic-ui-react";
+import { Menu, Image } from "semantic-ui-react";
 
 function Encabezado() {
   return (
@@ -17,11 +16,11 @@ function Encabezado() {
             href="/nodos"
           />
           <Menu.Item
-            name="Periodos"
+            name="Períodos"
             href="/periodos"
           />
           <Menu.Item
-            name="Inscripcion"
+            name="Inscripción"
             href="/lista-Preinscriptes"
           />
           <Menu.Item
