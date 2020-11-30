@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table, Select, Modal } from "semantic-ui-react";
-import {
-  obtenerPeriodos,
-  obtenerCursosPorIdPeriodo
-} from "../servicios/periodos";
+import { Button, Table, Select } from "semantic-ui-react";
+import { obtenerPeriodos } from "../servicios/periodos";
 import { useHistory } from "react-router-dom";
 import ListarCursosGuardados from "./listarCursosGuadados";
 import styles from "./styles.module.css";
@@ -52,7 +49,6 @@ export default function Periodos() {
         <Button onClick={() => setEstaAbiertoModalNuevoPerioto(true)}>Crear Periodo</Button>
       </div>
       <ListarCursosGuardados
-        cursos={cursosAMostrar}
         estaAbierto={informacionListaCursos}
         setAbierto={setInformacionListaCursos}
         idPeriodo={idPeriodo}
@@ -89,15 +85,8 @@ export default function Periodos() {
                       <Button
                         color="green"
                         onClick={(x) => {
-                          obtenerCursosPorIdPeriodo(p.id)
-                            .then((cursoperiodo) => {
-                              return cursoperiodo.json();
-                            })
-                            .then((cursoperiodo) => {
-                              setCursosAMostrar(cursoperiodo.response);
-                              setInformacionListaCursos(true);
+                            setInformacionListaCursos(true);
                               setIdPeriodo(p.id);
-                            });
                         }}
                       >
                         Ver cursos

@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Table } from 'semantic-ui-react';
 import EliminarCurso from "./eliminarCurso";
 import CrearCurso from "./crearcurso";
+import { obtenerCursosPorIdPeriodo } from "../servicios/periodos";
 
-export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, idPeriodo}) {
+export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriodo}) {
 
     const [nuevoCursoModalAbierto, setNuevoCursoModalAbierto] = useState(false);
+    const [cursos, setCursos] = useState([]);
+
+    useEffect(() => {
+        obtenerCursosPorIdPeriodo(idPeriodo)
+          .then((response) => response.json())
+          .then((response) => setCursos(response.response));
+    });
 
     const listacursos = 
     <div id="listaCursos" className={"forceFlex isColumn rowGap"}>
