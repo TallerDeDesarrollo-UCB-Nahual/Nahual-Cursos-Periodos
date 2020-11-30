@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Table, Icon, Grid, Message } from 'semantic-ui-react';
+import { Modal, Button, Table, Icon, Grid, Message, Image } from 'semantic-ui-react';
 import EliminarCurso from "../Cursos/eliminarCurso";
 import CrearCurso from "../Cursos/crearcurso";
 import { obtenerCursosPorIdPeriodo } from "../../servicios/periodos";
+import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
 
 export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriodo}) {
 
@@ -60,6 +61,9 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
         <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
             <Modal.Header>
                 <Grid columns='equal'>
+                  <Grid.Column>
+                    <Image src={LogoNahual} size='small' />
+                  </Grid.Column>
                   <Grid.Column>
                     Cursos
                   </Grid.Column>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import { Button, Icon, Modal, Grid, Image } from "semantic-ui-react";
 import { crearPeriodo, obtenerPeriodoPorId } from "../../servicios/periodos";
 import CrearPeriodo from "../Periodos/crearperiodo";
+import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
 
 export default function NuevoPeriodo({
   estaAbierto,
@@ -21,7 +22,16 @@ export default function NuevoPeriodo({
       onClose={() => estaAbierto(false)}
       onOpen={() => estaAbierto(true)}
     >
-      <Header icon="plus" content="Nuevo periodo" />
+      <Modal.Header>
+        <Grid columns='equal'>
+          <Grid.Column>
+            <Image src={LogoNahual} size='small' />
+          </Grid.Column>
+          <Grid.Column>
+            Nuevo Periodo
+          </Grid.Column>
+        </Grid>
+      </Modal.Header>
       <Modal.Content>
         <CrearPeriodo
           setPeriodo={setPeriodo}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Form, TextArea, Icon } from "semantic-ui-react";
+import { Button, Modal, Form, TextArea, Icon,Grid, Image } from "semantic-ui-react";
 import { obtenerSedes } from "../../servicios/sedes";
-// import styles from "./styles.module.css";
 import { crearCurso } from "../../servicios/cursos";
+import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
 
 export default function CrearCurso({estaAbierto, setAbierto, idPeriodo }) {
   const [sedes, setSedes] = useState([]);
@@ -34,7 +34,16 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo }) {
   }, []);
   return (
     <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
-      <Modal.Header>Nuevo curso</Modal.Header>
+      <Modal.Header>
+        <Grid columns='equal'>
+          <Grid.Column>
+            <Image src={LogoNahual} size='small' />
+          </Grid.Column>
+          <Grid.Column>
+            Nuevo Curso
+          </Grid.Column>
+        </Grid>
+      </Modal.Header>
       <Modal.Content>
         <Form>
           <Form.Select
