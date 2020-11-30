@@ -75,6 +75,8 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
                         estaAbierto={nuevoCursoModalAbierto}
                         setAbierto={setNuevoCursoModalAbierto}
                         idPeriodo={idPeriodo}
+                        cursos={cursos}
+                        setCursos={setCursos}
                     />
                   </Grid.Column>
                 </Grid>

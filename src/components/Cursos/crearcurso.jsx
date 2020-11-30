@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Form, TextArea, Icon,Grid, Image } from "semantic-ui-react";
 import { obtenerSedes } from "../../servicios/sedes";
-import { crearCurso } from "../../servicios/cursos";
+import { crearCurso, obtenerCursoPorId } from "../../servicios/cursos";
 import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
 
-export default function CrearCurso({estaAbierto, setAbierto, idPeriodo }) {
+export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, setCursos }) {
   const [sedes, setSedes] = useState([]);
   const [horario, setHorario] = useState("");
   const [sedeNodo, setSedeNodo] = useState(null);
@@ -108,7 +108,22 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo }) {
               profesores: profesor,
               notas: nota,
               PeriodoId: idPeriodo
-            });
+            })
+              .then((x) => {
+                return x.data;
+              })
+              .then((x) => {
+                return x.result;
+              })
+              .then((x) => {
+                return obtenerCursoPorId(x.id);
+              })
+              .then((x) => {
+                return x.data.respuesta;
+              })
+              .then((x) => {
+                setCursos([...cursos, x]);
+              });
             resetValores();
           }}
         >

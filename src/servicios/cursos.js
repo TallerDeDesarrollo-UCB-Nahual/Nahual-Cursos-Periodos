@@ -6,8 +6,11 @@ function obtenerCursos() {
 }
 
 function crearCurso(body) {
-  console.log(body);
   return axios.post(`${BASE_ROUTE}/cursos`, body);
 }
 
-export { obtenerCursos, crearCurso };
+function obtenerCursoPorId(id) {
+  return axios.get(`${BASE_ROUTE}/cursos/${id}`);
+}
+
+export { obtenerCursos, crearCurso, obtenerCursoPorId };
