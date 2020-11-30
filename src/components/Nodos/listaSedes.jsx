@@ -23,7 +23,6 @@ export default function ListaSedes({ nodoId, nodoNombre }) {
     const listaDeSedes = <div>
         {sedes.map(sede => {
             return (
-
                 <div>
                     <Table.Cell >
                         <Label className={styles.sede}>• {sede.nombre}</Label>
@@ -39,7 +38,7 @@ export default function ListaSedes({ nodoId, nodoNombre }) {
     </div>;
     return (
         <div>
-            {sedes.length > 0 ? listaDeSedes : <h2>El nodo no tiene sedes</h2>}
+            {sedes.length > 0 ? listaDeSedes : <h4>El nodo no tiene sedes</h4>}
         </div>
     )
 }

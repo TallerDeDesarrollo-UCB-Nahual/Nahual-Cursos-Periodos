@@ -13,7 +13,6 @@ export class EditarSede extends Component {
             nodoNombre: props.nodoNombre,
             id: this.props.id
         };
-        console.log(props);
     }
 
     abrirModal(estado) {
@@ -46,19 +45,11 @@ export class EditarSede extends Component {
     }
 
     componentDidMount() {
-        // obtenerSede().then(response => response.json()).then(response => {
-        //     var datos = response.response;
-        //     this.setState({ open: false, nodos: datos })
-        // });
     }
 
     render() {
         return (
             <>
-                {/* <Button onClick={this.abrirModal}>
-                    <Icon color='olive' name='edit' />
-                </Button> */}
-
                 <Modal
                     open={this.state.open}
                     onClose={() => this.abrirModal(false)}
@@ -67,7 +58,7 @@ export class EditarSede extends Component {
                     closeIcon
                     trigger={
                         <Button color='green' className={styles.botonBasurero}>
-                            <Icon color='olive' name='edit' />
+                            <Icon className={styles.editar} name='edit outline' />
                         </Button>
                     }
                 >
@@ -95,7 +86,6 @@ export class EditarSede extends Component {
                                                 value={this.state.nodoNombre}
                                                 validators={['required']}
                                                 errorMessages={['Este campo es requerido']}
-                                                disabled
                                             />
                                         </Grid.Column>
                                     </Grid>
@@ -122,20 +112,11 @@ export class EditarSede extends Component {
                             </Segment>
                     }
                     <Modal.Actions>
-                        <Button color="green" onClick={() => this.enConfirmacion()}>
-                            Editar
-          </Button>
-                        <Button color="red" onClick={() => this.abrirModal(false)}>
-                            Cerrar
-        </Button>
+                        <Button className="cancelButton" onClick={() => this.abrirModal(false)}>Cerrar</Button>
+                        <Button className="confirmButton" onClick={() => this.enConfirmacion()}>Editar</Button>
                     </Modal.Actions>
                 </Modal>
-
             </>
-
-
-
-
         )
     }
 }

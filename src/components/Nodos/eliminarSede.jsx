@@ -24,7 +24,7 @@ function EliminarSede({ id }) {
                 open={abierto}
                 content='Se eliminará permanentemente'
                 cancelButton='Cancelar'
-                confirmButton="Confirmar"
+                confirmButton='Confirmar'
                 onCancel={onClose}
                 onConfirm={() => eliminar(id)}
             />

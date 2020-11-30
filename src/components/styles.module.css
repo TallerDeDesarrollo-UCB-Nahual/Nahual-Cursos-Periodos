@@ -37,3 +37,24 @@
 .basurero{
     display: contents !important;
 }
+
+.editar{
+    display: contents !important;
+    color: #2ecc40;
+}
+
+.ui.modal .actions>.ui.primary.button {
+    background-color: white;
+    color: #2ecc40;
+    border: 1px solid #2ecc40;
+}
+
+ .ui.modal .actions>.button {
+    background-color: white;
+    color:#db2828;
+    border: 1px solid #db2828;
+} 
+
+.crearNodoButton {
+    text-align-last: end;
+} 
