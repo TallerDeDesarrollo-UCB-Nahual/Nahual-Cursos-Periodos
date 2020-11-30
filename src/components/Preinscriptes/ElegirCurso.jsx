@@ -1,8 +1,7 @@
 import Axios from "axios";
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import BASE_ROUTE from "../../servicios/rutas";
-import { Icon, Item, Header, ItemGroup, ItemContent, Dropdown, Container, Form, Grid, Button, Message } from "semantic-ui-react";
+import { Icon, Header, Form, Grid, Message } from "semantic-ui-react";
 
 const URL_INSCRITE = `${BASE_ROUTE}/inscriptos`;
 
