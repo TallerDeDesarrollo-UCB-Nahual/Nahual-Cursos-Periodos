@@ -4,17 +4,11 @@ import { obtenerModulos } from "../../servicios/modulos";
 import { Form } from "semantic-ui-react";
 
 export default function CrearPeriodo({
-  cursos,
-  setCursos,
   setPeriodo,
   setEstadoPeriodo,
-  setModalCrearCursoAbierto,
-  crearCursoEstaAbierto,
-  mostrarListaCursosAGuardar,
-  setMostrarListaCursosAGuardar,
   setTopico,
   setAnio,
-  enviandSolicitud,
+  enviarSolicitud,
   modulos,
   setModulos,
 }) {
@@ -27,7 +21,7 @@ export default function CrearPeriodo({
       });
   }
   useEffect(() => {
-    if (enviandSolicitud === false) {
+    if (enviarSolicitud === false) {
       inicializar();
     }
   }, []);
@@ -77,7 +71,7 @@ export default function CrearPeriodo({
   );
   return (
     <div>
-      {enviandSolicitud ? (
+      {enviarSolicitud ? (
         <div className={styles.loading}>
           <div className={styles.elementsloading}>
             <div className={styles.loadingdots}>

@@ -24,17 +24,12 @@ export default function NuevoPeriodo({
       <Header icon="plus" content="Nuevo periodo" />
       <Modal.Content>
         <CrearPeriodo
-          cursos={[]}
-          setCursos={(x) => { }}
           setPeriodo={setPeriodo}
           setEstadoPeriodo={setEstadoPeriodo}
-          setModalCrearCursoAbierto={(x) => { }}
-          crearCursoEstaAbierto={false}
-          mostrarListaCursosAGuardar={false}
           setTopico={setTopico}
           setAnio={setAnio}
-          setEnviandSolicitud={(x) => { }}
-          enviandSolicitud={false}
+          setEnviarSolicitud={(x) => { }}
+          enviarSolicitud={false}
           anio={anio}
           periodo={periodo}
           topico={topico}

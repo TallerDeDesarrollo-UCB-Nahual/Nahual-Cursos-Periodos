@@ -13,7 +13,7 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
         obtenerCursosPorIdPeriodo(idPeriodo)
           .then((response) => response.json())
           .then((response) => setCursos(response.response));
-    });
+    },[idPeriodo]);
 
     const listacursos = 
     <div id="listaCursos" className={"forceFlex isColumn rowGap"}>
