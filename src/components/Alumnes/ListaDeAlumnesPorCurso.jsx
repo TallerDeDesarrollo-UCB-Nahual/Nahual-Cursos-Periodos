@@ -1,8 +1,8 @@
 import Axios from "axios";
 import React, { Component } from "react";
+import OpcionesDeCurso from './OpcionesDeCurso'
 import {
   Dimmer,
-  Form,
   Header,
   Loader,
   Message,
@@ -20,16 +20,16 @@ class ListaDeAlumnesPorCurso extends Component {
     };
   }
 
-  componentDidMount() {
-    this.obtenerAlumnes();
+  async componentDidMount() {
+    this.obtenerAlumnes(1);
   }
 
-  obtenerAlumnes() {
+  obtenerAlumnes(idCurso) {
     this.setState({
       mostrarBotonDeCarga: true
     });
     const API_URL = process.env.REACT_APP_API_URL;
-    Axios.get(`${API_URL}/cursos/${this.state.curso}/inscriptes`)
+    Axios.get(`${API_URL}/cursos/${idCurso}/inscriptes`)
       .then((respuesta) => {
         this.setState({
           mostrarBotonDeCarga: false,
@@ -44,9 +44,16 @@ class ListaDeAlumnesPorCurso extends Component {
       });
   }
 
-  cuandoCambiaElCurso() {
-    this.obtenerAlumnes();
+  enviarDatosAlEstado(data) {
+    this.setState({
+      curso:data
+    });
   }
+  
+  cuandoCambiaElCurso = (data) => {
+    this.enviarDatosAlEstado(data);
+    this.obtenerAlumnes(data);
+  };
 
   iconoDeCarga() {
     return (
@@ -84,22 +91,10 @@ class ListaDeAlumnesPorCurso extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={() => this.cuandoCambiaElCurso()}>
-          <Form.Group>
-            <Form.Input
-              placeholder="Curso"
-              name="curso"
-              onChange={(e, { value }) => {
-                this.setState({ curso: value });
-              }}
-              value={this.state.curso}
-            />
-            <Form.Button content="Cambiar" />
-          </Form.Group>
-        </Form>
         {this.iconoDeCarga()}
-        <Header as="h2" textAlign="center" content="Lista Alumnes" />
-        <div style={{ overflowX: "auto" }}>
+        <Header style={{ marginTop: 30}} as="h2" textAlign="center" content="Lista Alumnes"/>
+        <OpcionesDeCurso cuandoCambiaElCurso={this.cuandoCambiaElCurso}/> 
+        <div style={{ overflowX: "auto" }, { marginTop: 15}}>
           <Table singleLine selectable striped unstackable>
             <Table.Header>
               <Table.Row>
