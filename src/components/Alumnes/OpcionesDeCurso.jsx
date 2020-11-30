@@ -23,7 +23,7 @@ class OpcionesDeCurso extends Component{
         this.agregarOpcionesDeFiltrado(respuesta.data.response);
         this.props.cuandoCambiaElCurso(respuesta.data.response[0].id);
         this.setState({
-          textoDropdown:respuesta.data.response[0].nodo.nombre +" - "+respuesta.data.response[0].sede.nombre + " - " + respuesta.data.response[0].profesores + " - " + respuesta.data.response[0].horario
+          textoMenu:respuesta.data.response[0].nodo.nombre +" - "+respuesta.data.response[0].sede.nombre + " - " + respuesta.data.response[0].profesores + " - " + respuesta.data.response[0].horario
         });
       })
       .catch(() => {
@@ -47,7 +47,7 @@ class OpcionesDeCurso extends Component{
   manejarEvento(opcionSeleccionada){
     this.setState({
        valor: opcionSeleccionada.key,
-       textoDropdown: opcionSeleccionada.text
+       textoMenu: opcionSeleccionada.text
       });
     this.props.cuandoCambiaElCurso(opcionSeleccionada.key);
   }  
@@ -76,7 +76,7 @@ class OpcionesDeCurso extends Component{
         <Dropdown
           inline
           compact
-          text={this.state.textoDropdown} 
+          text={this.state.textoMenu} 
           pointing='left' 
           className='link item'
           placeholder= 'Seleccionar curso'
