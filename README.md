@@ -24,6 +24,10 @@ Este proyecto se inició con [Create React App] (https://github.com/facebook/cre
 
 En el directorio del proyecto, puede ejecutar:
 
+##### `npm install`
+
+Instalar las dependencias del proyecto.
+
 ##### `npm start`
 
 Ejecuta la aplicación en modo de desarrollo. \
