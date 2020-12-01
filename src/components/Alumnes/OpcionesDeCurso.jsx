@@ -23,7 +23,8 @@ class OpcionesDeCurso extends Component{
         this.agregarOpcionesDeFiltrado(respuesta.data.response);
         this.props.cuandoCambiaElCurso(respuesta.data.response[0].id);
         this.setState({
-          textoMenu:respuesta.data.response[0].nodo.nombre +" - "+respuesta.data.response[0].sede.nombre + " - " + respuesta.data.response[0].profesores + " - " + respuesta.data.response[0].horario
+          //textoMenu:respuesta.data.response[0].nodo.nombre +" - "+respuesta.data.response[0].sede.nombre + " - " + respuesta.data.response[0].profesores + " - " + respuesta.data.response[0].horario
+          textoMenu:respuesta.data.response[0].nodo.nombre +" - " + respuesta.data.response[0].profesores + " - " + respuesta.data.response[0].horario
         });
       })
       .catch(() => {
@@ -36,14 +37,15 @@ class OpcionesDeCurso extends Component{
     respuesta.forEach(opcionDeCurso => {
       opcionDeCurso = {
         key: opcionDeCurso.id,
-        text: opcionDeCurso.nodo.nombre +" - "+opcionDeCurso.sede.nombre + " - " + opcionDeCurso.profesores + " - " + opcionDeCurso.horario,
+        //text: opcionDeCurso.nodo.nombre + " - "+opcionDeCurso.sede.nombre + " - " + opcionDeCurso.profesores + " - " + opcionDeCurso.horario,
+        text: opcionDeCurso.nodo.nombre  + " - " + opcionDeCurso.profesores + " - " + opcionDeCurso.horario,
         value: opcionDeCurso.id,
       }
       opcionesDeCurso.push(opcionDeCurso);
     });
     this.setState({opcionesDeCurso:opcionesDeCurso})
   }
-
+  
   manejarEvento(opcionSeleccionada){
     this.setState({
        valor: opcionSeleccionada.key,

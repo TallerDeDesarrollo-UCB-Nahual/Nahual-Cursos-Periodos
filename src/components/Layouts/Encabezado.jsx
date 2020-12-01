@@ -5,7 +5,7 @@ import { Menu, Image } from "semantic-ui-react";
 function Encabezado() {
   return (
     <div style={{ paddingBottom: "100px" }}>
-      <Menu fixed="top" secondary style={{ borderBottom: "3px solid #81ce32" }}>
+      <Menu  fixed="top" secondary style={{ borderBottom: "3px solid #81ce32", backgroundColor:"white" }}>
         <Menu.Item>
           <Image rounded size={"small"} src={NahualLogo} href="/" />
         </Menu.Item>
