@@ -8,7 +8,7 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
     console.log(cursos)
     const [idCurso, setIdCurso] = useState(0)
     const [informacionCurso, setInformacionCurso] = useState(false)
-    const [cursoI, setCursoAEditar] = useState({})
+    const [curso, setCursoAEditar] = useState({})
     const listacursos = 
     <div id="listaCursos" className={"forceFlex isColumn rowGap"}>
         <Table>
@@ -37,13 +37,10 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
                                                     obtenerCurso(c.id).then(curso => {
                                                         return curso.json()
                                                     }).then(curso => {
+                                                        console.log("curso",curso);
                                                         setCursoAEditar(curso.respuesta)
                                                         setInformacionCurso(true)
                                                         setIdCurso(c.id);
-                                                        console.log("ya opues",cursoI)
-                                                        return (
-                                                            <EditarCurso curso={cursoI} estaAbierto={informacionCurso} setAbierto={setInformacionCurso} idCurso={idCurso}/>     
-                                                        )
                                                     }) 
                                                 }}>Editar</Button>
                                 <EliminarCurso idPeriodo={idPeriodo} idCurso={c.id}></EliminarCurso>
@@ -57,6 +54,7 @@ export default function ListarCursosGuardados({cursos, estaAbierto, setAbierto, 
     </div>;
     return (       
         <div>
+        <EditarCurso curso={curso} estaAbierto={informacionCurso} setAbierto={setInformacionCurso} idCurso={idCurso}/>     
         <Modal open={estaAbierto} onClose={() => setAbierto(!estaAbierto) }>
             <Header>Cursos</Header>
             <Modal.Content scrolling={true} >

@@ -46,6 +46,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
     useEffect(()=>{
         inicializarSedes();
         inicializarCurso();
+        console.log("--------------------------",curso)
     }, [])
 
     return (
