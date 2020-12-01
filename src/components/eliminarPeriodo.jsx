@@ -33,8 +33,8 @@ function Eliminar({ egresadeId }) {
                 <Modal.Header>Atencion!</Modal.Header>
                 <Modal.Content>Estas seguro que deseas elimnar este periodo?</Modal.Content>
                 <Modal.Actions>
-                    <Button onClick = {() => eliminarPeriodoDeBD(egresadeId)}>Confirmar</Button>
-                    <Button onClick = {onClose}>Cancelar</Button>
+                    <Button className="confirmButton" onClick = {() => eliminarPeriodoDeBD(egresadeId)}>Confirmar</Button>
+                    <Button className="cancelButton" onClick = {onClose}>Cancelar</Button>
                 </Modal.Actions>
             </Modal>
         </>
