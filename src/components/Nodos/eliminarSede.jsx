@@ -12,7 +12,9 @@ function EliminarSede({ id }) {
 
     const eliminar = (id) => {
         eliminarSede(id);
-        window.location.replace("/nodos");
+        setTimeout(() => {
+            window.location.replace("/nodos");
+        }, 1000);
     }
     
     return (

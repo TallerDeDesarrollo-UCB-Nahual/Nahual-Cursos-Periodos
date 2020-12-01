@@ -60,7 +60,12 @@ const CuerpoModal = ({ alumne, cerrarModal, filtrarAlumne }) => {
         </Grid>
       </Modal.Content>
       <Modal.Actions>
-        <Button basic color="grey" onClick={cerrarModal}>
+        <Button
+          className="cancelButton"
+          basic
+          color="red"
+          onClick={cerrarModal}
+        >
           Cerrar
         </Button>
 
@@ -70,7 +75,7 @@ const CuerpoModal = ({ alumne, cerrarModal, filtrarAlumne }) => {
           floating
           labeled
           button
-          className="icon"
+          className="icon confirmButton"
         >
           <Dropdown.Menu>
             <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(1)}>

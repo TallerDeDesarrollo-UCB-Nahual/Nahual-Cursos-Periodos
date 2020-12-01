@@ -1,5 +1,4 @@
 import "./App.css";
-
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Periodos from "./components/Periodos/periodos";
@@ -9,11 +8,13 @@ import ListarNodos from "./components/Nodos/listarNodos";
 import { Container } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
 import ListaPreinscriptes from './components/Preinscriptes/ListaPreinscriptes';
+import Encabezado from "./components/Layouts/Encabezado";
 import 'semantic-ui-less/semantic.less'
 
 function App() {
   return (
     <Container>
+      <Encabezado/>
       <Router>
         <div>
           <Switch>
@@ -31,7 +32,9 @@ function App() {
             <Route exact path="/alumnes">
               <ListaDeAlumnesPorCurso />
             </Route>
-            <Route path="/">no estas permitido</Route>
+            <Route path="/">
+              <ListarNodos/>
+            </Route>
           </Switch>
         </div>
       </Router>
