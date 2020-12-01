@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Header, Icon, Modal } from "semantic-ui-react";
-import { crearPeriodo, obtenerPeriodoPorId } from "../servicios/periodos";
-import CrearPeriodo from "./crearperiodo";
+import { Button, Icon, Modal, Grid, Image } from "semantic-ui-react";
+import { crearPeriodo, obtenerPeriodoPorId } from "../../servicios/periodos";
+import CrearPeriodo from "../Periodos/crearperiodo";
+import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
 
 export default function NuevoPeriodo({
   estaAbierto,
@@ -21,20 +22,24 @@ export default function NuevoPeriodo({
       onClose={() => estaAbierto(false)}
       onOpen={() => estaAbierto(true)}
     >
-      <Header icon="plus" content="Nuevo periodo" />
+      <Modal.Header>
+        <Grid columns='equal'>
+          <Grid.Column>
+            <Image src={LogoNahual} size='small' />
+          </Grid.Column>
+          <Grid.Column>
+            Nuevo Periodo
+          </Grid.Column>
+        </Grid>
+      </Modal.Header>
       <Modal.Content>
         <CrearPeriodo
-          cursos={[]}
-          setCursos={(x) => { }}
           setPeriodo={setPeriodo}
           setEstadoPeriodo={setEstadoPeriodo}
-          setModalCrearCursoAbierto={(x) => { }}
-          crearCursoEstaAbierto={false}
-          mostrarListaCursosAGuardar={false}
           setTopico={setTopico}
           setAnio={setAnio}
-          setEnviandSolicitud={(x) => { }}
-          enviandSolicitud={false}
+          setEnviarSolicitud={(x) => { }}
+          enviarSolicitud={false}
           anio={anio}
           periodo={periodo}
           topico={topico}
@@ -45,7 +50,7 @@ export default function NuevoPeriodo({
       </Modal.Content>
       <Modal.Actions>
         <Button className="cancelButton" onClick={() => estaAbierto(false)}>
-          <Icon name="remove" /> No
+        Cancelar <Icon name="remove" style={{ margin: '0 0 0 10px' }}/>
         </Button>
         <Button className="confirmButton"
           onClick={() => {
@@ -73,7 +78,7 @@ export default function NuevoPeriodo({
               });
           }}
         >
-          <Icon name="checkmark" /> Si
+          Crear <Icon name="checkmark" style={{ margin: '0 0 0 10px' }}/>
         </Button>
       </Modal.Actions>
     </Modal>
