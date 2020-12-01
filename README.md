@@ -1,3 +1,11 @@
+# Nahual-Cursos-Periodos
+
+Indice
+- Versiones
+- Documentación básica dada por react
+- Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
+- Links de aplicaciones deployadas
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
