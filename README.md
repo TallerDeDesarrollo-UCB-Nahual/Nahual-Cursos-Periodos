@@ -90,8 +90,15 @@ Esta sección se ha trasladado aquí: [https://facebook.github.io/create-react-a
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ### Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
 
+- https://app.diagrams.net/#G1PwuIgNhDV0nHuwikm_jZ04tK0tsTPlUS
+- https://docs.google.com/presentation/d/198xv0X_JREhjtBnGXSR9XO3WurTEVbMSO6ti_PzKBVQ/edit#
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ### Links de aplicaciones deployadas
+
+- Serivicio de datos a usar: https://nahual-datos-estudiantes.herokuapp.com/api 
+
+- Aplicación Cursos-Periodos: https://nahual-portal-cursos.herokuapp.com/
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
