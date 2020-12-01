@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from 'react-router-dom';
-import { obtenerModulos } from "../servicios/modulos";
-import { obtenerPeriodoPorId, obtenerCursosPorIdPeriodo, editarPeriodo } from "../servicios/periodos";
+import { obtenerModulos } from "../../servicios/modulos";
+import { obtenerPeriodoPorId, editarPeriodo } from "../../servicios/periodos";
 import { Container, Button, Form, ButtonGroup } from "semantic-ui-react";
-import styles from "./styles.module.css";
 
 export default function EditarPeriodo() {
 
@@ -16,7 +15,7 @@ export default function EditarPeriodo() {
   const history = useHistory();
 
   useEffect(() => {
-    obtenerPeriodo(id)
+    obtenerPeriodo()
       .then((response) => {
         return response.data;
       })
@@ -35,7 +34,7 @@ export default function EditarPeriodo() {
       });
   }, []);
 
-  function obtenerPeriodo(id) {
+  function obtenerPeriodo() {
     return obtenerPeriodoPorId(id);
   }
 
@@ -92,7 +91,10 @@ export default function EditarPeriodo() {
           <br />
           <div className={"actionsCrearPeriodo"}>
             <ButtonGroup>
-              <Button color="green" onClick={() => {
+              <Button floated='right' className="cancelButton" onClick={() => {
+                history.push("/periodos");
+              }}>Cancelar</Button>
+              <Button floated='right'className="confirmButton" onClick={() => {
                 editarPeriodo(id, {
                   anio: anio,
                   periodo: periodo,
@@ -102,9 +104,6 @@ export default function EditarPeriodo() {
                 history.push("/periodos");
                 window.location.reload();
               }}>Guardar</Button>
-              <Button color="red" onClick={() => {
-                history.push("/periodos");
-              }}>Cancelar</Button>
             </ButtonGroup>
           </div>
         </Container>

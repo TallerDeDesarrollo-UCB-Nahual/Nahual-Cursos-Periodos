@@ -25,6 +25,7 @@
   padding: 0.5em;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .selectBar {
@@ -42,11 +43,6 @@
 
 .jTime {
   width: 100% !important;
-}
-
-.opcionesPeriodo {
-  display: flex;
-  align-items: center;
 }
 
 .editarPeriodo {

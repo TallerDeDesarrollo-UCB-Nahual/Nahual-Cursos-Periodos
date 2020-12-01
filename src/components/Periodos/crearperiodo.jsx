@@ -1,22 +1,14 @@
-import React, {useEffect, useState} from "react";
-import styles from "./styles.module.css"
-import {obtenerModulos} from "../servicios/modulos";
-import { Container, Button, Form, ButtonGroup, Header } from 'semantic-ui-react'
-import CrearCurso from "./crearcurso";
-import ListaCursosACrear from "./listaCursosACrear";
+import React, { useEffect } from "react";
+import styles from "../styles.module.css";
+import { obtenerModulos } from "../../servicios/modulos";
+import { Form } from "semantic-ui-react";
 
 export default function CrearPeriodo({
-  cursos,
-  setCursos,
   setPeriodo,
   setEstadoPeriodo,
-  setModalCrearCursoAbierto,
-  crearCursoEstaAbierto,
-  mostrarListaCursosAGuardar,
-  setMostrarListaCursosAGuardar,
   setTopico,
   setAnio,
-  enviandSolicitud,
+  enviarSolicitud,
   modulos,
   setModulos,
 }) {
@@ -29,35 +21,20 @@ export default function CrearPeriodo({
       });
   }
   useEffect(() => {
-    if (enviandSolicitud === false) {
+    if (enviarSolicitud === false) {
       inicializar();
     }
   }, []);
   const formulariodeperiodos = (
     <div>
-      <CrearCurso
-        aceptar={(element) => {
-          setCursos([...cursos, element]);
-        }}
-        estaAbierto={crearCursoEstaAbierto}
-        setAbierto={setModalCrearCursoAbierto}
-      />
-
-      <ListaCursosACrear
-        cursos={cursos}
-        estaAbierto={mostrarListaCursosAGuardar}
-        setAbierto={setMostrarListaCursosAGuardar}
-      />
-
       <div>
-        <Container>
+        <Form>
           <Form.Input
             label="Periodo"
             fluid
             type="text"
             onChange={(e, data) => setPeriodo(data.value)}
           />
-          <br />
           <Form.Select
             id="inputState"
             label="Topico"
@@ -71,7 +48,6 @@ export default function CrearPeriodo({
             })}
             onChange={(e, data) => setTopico(data.value)}
           />
-          <br />
           <Form.Select
             label="Estado"
             fluid
@@ -82,7 +58,6 @@ export default function CrearPeriodo({
             className={"form-control"}
             onChange={(e, data) => setEstadoPeriodo(data.value)}
           />
-          <br />
           <Form.Input
             label="Año"
             type="number"
@@ -90,14 +65,13 @@ export default function CrearPeriodo({
             className={"form-control"}
             onChange={(x, data) => setAnio(parseInt(data.value))}
           />
-          <br />
-        </Container>
+        </Form>
       </div>
     </div>
   );
   return (
     <div>
-      {enviandSolicitud ? (
+      {enviarSolicitud ? (
         <div className={styles.loading}>
           <div className={styles.elementsloading}>
             <div className={styles.loadingdots}>
