@@ -19,7 +19,9 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.1",
     "semantic-ui-react-form-validator": "^1.0.2",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "@craco/craco": "^5.8.0",
+    "@semantic-ui-react/craco-less": "^1.2.1"
   },
   "scripts": {
     "start": "craco start",
@@ -46,8 +48,6 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^5.8.0",
-    "@semantic-ui-react/craco-less": "^1.2.1",
     "semantic-ui-less": "^2.4.1"
   }
 }
