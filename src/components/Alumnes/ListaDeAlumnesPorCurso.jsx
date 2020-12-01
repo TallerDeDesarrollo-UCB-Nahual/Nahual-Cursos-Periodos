@@ -75,17 +75,19 @@ class ListaDeAlumnesPorCurso extends Component {
     return this.mapeoListaAlumnes(this.state.alumnes);
   }
 
-  filtrarAlumneDeLaLista=(id)=> {
-    let alumnesFiltrado = this.state.alumnes.filter((alumne) => alumne.estudiante.id !== id);
+  filtrarAlumneDeLaLista = (id) => {
+    let alumnesFiltrado = this.state.alumnes.filter(
+      (alumne) => alumne.estudiante.id !== id
+    );
     this.setState({
       alumnes: alumnesFiltrado,
       alumnesSeleccionados:[]
     });
-  }
+  };
 
   mapeoListaAlumnes(listaAlumnes) {
     return listaAlumnes.map((alumne,contador) => {
-      return <Alumne item={alumne.estudiante} key={alumne.estudiante.id} seleccionarAlumne={this.seleccionarAlumne} numeracion={contador+1}/>;
+      return <Alumne item={alumne.estudiante} filtrarAlumne={(id) => this.filtrarAlumneDeLaLista(id)} key={alumne.estudiante.id} seleccionarAlumne={this.seleccionarAlumne} numeracion={contador+1}/>;
     });
   }
 
@@ -163,6 +165,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
                   />
                 </Table.HeaderCell>
                 <Table.HeaderCell>NOMBRE Y APELLIDO</Table.HeaderCell>
+                <Table.HeaderCell textAlign="center"></Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>{this.listaAlumnes()}</Table.Body>
