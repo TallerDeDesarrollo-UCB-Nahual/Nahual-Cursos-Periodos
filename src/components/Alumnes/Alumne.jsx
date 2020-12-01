@@ -2,8 +2,8 @@ import React from "react";
 import { Table } from "semantic-ui-react";
 
 function Alumne(props) {
-  function PrimeraLetraEnMayuscula(str) {
-    return str.replace(/\b\w/g, l => l.toUpperCase());
+  function PrimeraLetraEnMayuscula(nombreCompleto) {
+    return nombreCompleto.replace(/\b\w/g, l => l.toUpperCase());
   }
   
   function seleccionarUnAlumne(alumne){

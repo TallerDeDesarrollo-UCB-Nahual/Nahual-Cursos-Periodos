@@ -6,7 +6,7 @@ import {
   Header,
   Loader,
   Message,
-  Table,
+  Table
 } from "semantic-ui-react";
 import Alumne from "./Alumne";
 import ModalCambioEstado from "./ModalCambioEstado.jsx";
@@ -137,7 +137,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
     this.state.alumnesSeleccionados.map(() => {
         return this.setState({
           alumnesSeleccionados: this.state.alumnesSeleccionados.filter(
-            (a) => a.estudiante.id !== alumne.estudiante.id
+            (alumneNahual) => alumneNahual.estudiante.id !== alumne.estudiante.id
           )
         });
       })

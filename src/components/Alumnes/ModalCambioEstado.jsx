@@ -73,14 +73,14 @@ function ModalCambioEstado(props) {
 					<Dropdown
 						onChange={handleChange}
 						options={opciones}
-						placeholder="Elija una opcion"
+						placeholder="Elija una opción"
 						selection
 						value={opcionSeleccionada}
 					/>
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>
-				<Button onClick={() => cambiarAbierto(false)}>Cancel</Button>
+				<Button onClick={() => cambiarAbierto(false)}>Cancelar</Button>
 				<Button
 					content="Confirmar Cambio"
 					labelPosition="right"
