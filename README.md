@@ -6,6 +6,13 @@ Indice
 - Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
 - Links de aplicaciones deployadas
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Versiones
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Documentación básica dada por react
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -76,3 +83,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Links de aplicaciones deployadas
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
