@@ -14,6 +14,7 @@ Indice
 - React: 16.13.1
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## Documentación básica dada por react
 
 ### Introducción a la aplicación Create React
@@ -92,12 +93,14 @@ Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/d
 Esta sección se ha trasladado aquí: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/ create-react-app / docs / troubleshooting # npm-run-build-fail-to-minify)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ### Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
 
 - https://app.diagrams.net/#G1PwuIgNhDV0nHuwikm_jZ04tK0tsTPlUS
 - https://docs.google.com/presentation/d/198xv0X_JREhjtBnGXSR9XO3WurTEVbMSO6ti_PzKBVQ/edit#
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ### Links de aplicaciones deployadas
 
 - Serivicio de datos a usar: https://nahual-datos-estudiantes.herokuapp.com/api 
