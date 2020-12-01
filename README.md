@@ -16,15 +16,15 @@ Indice
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Documentación básica dada por react
 
-## Introducción a la aplicación Create React
+### Introducción a la aplicación Create React
 
 Este proyecto se inició con [Create React App] (https://github.com/facebook/create-react-app).
 
-### Scripts disponibles
+#### Scripts disponibles
 
 En el directorio del proyecto, puede ejecutar:
 
-#### `npm start`
+##### `npm start`
 
 Ejecuta la aplicación en modo de desarrollo. \
 Abra [http: // localhost: 3000] (http: // localhost: 3000) para verlo en el navegador.
@@ -32,12 +32,12 @@ Abra [http: // localhost: 3000] (http: // localhost: 3000) para verlo en el nave
 La página se volverá a cargar si realiza modificaciones. \
 También verá cualquier error de pelusa en la consola.
 
-#### `npm test`
+##### `npm test`
 
 Inicia el corredor de pruebas en el modo de reloj interactivo. \
 Consulte la sección sobre [ejecutar pruebas] (https://facebook.github.io/create-react-app/docs/running-tests) para obtener más información.
 
-#### `npm build`
+##### `npm build`
 
 Crea la aplicación para producción en la carpeta `build`. \
 Agrupa correctamente React en el modo de producción y optimiza la compilación para obtener el mejor rendimiento.
@@ -47,7 +47,7 @@ La compilación se minimiza y los nombres de archivo incluyen los hash. \
 
 Consulte la sección sobre [implementación] (https://facebook.github.io/create-react-app/docs/deployment) para obtener más información.
 
-#### `npm eject`
+##### `npm eject`
 
 ** Nota: esta es una operación unidireccional. Una vez que "expulsas", ¡no puedes regresar! **
 
@@ -57,41 +57,41 @@ En su lugar, copiará todos los archivos de configuración y las dependencias tr
 
 No es necesario que utilice nunca "eject". El conjunto de funciones seleccionadas es adecuado para implementaciones pequeñas y medianas, y no debe sentirse obligado a utilizar esta función. Sin embargo, entendemos que esta herramienta no sería útil si no pudiera personalizarla cuando esté listo para usarla.
 
-### Aprende más
+#### Aprende más
 
 Puede obtener más información en la [documentación de la aplicación Create React] (https://facebook.github.io/create-react-app/docs/getting-started).
 
 Para aprender React, consulte la [documentación de React] (https://reactjs.org/).
 
-#### División de código
+##### División de código
 
 Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code- terrible)
 
-### Analizando el tamaño del paquete
+#### Analizando el tamaño del paquete
 
 Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/ docs / analizando-el-tamaño-del-paquete)
 
-#### Creación de una aplicación web progresiva
+##### Creación de una aplicación web progresiva
 
 Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react- app / docs / making-a-progresiva-web-app)
 
-#### Configuración avanzada
+##### Configuración avanzada
 
 Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced- configuración)
 
-#### Implementación
+##### Implementación
 
 Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-#### `yarn build` no se minimiza
+##### `yarn build` no se minimiza
 
 Esta sección se ha trasladado aquí: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/ create-react-app / docs / troubleshooting # npm-run-build-fail-to-minify)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-## Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
+### Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-## Links de aplicaciones deployadas
+### Links de aplicaciones deployadas
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
