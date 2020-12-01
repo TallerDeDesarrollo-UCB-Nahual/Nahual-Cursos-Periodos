@@ -10,6 +10,9 @@ Indice
 
 ## Versiones
 
+- NodeJS: 12.18.3
+- React: 16.13.1
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Documentación básica dada por react
 
@@ -21,7 +24,7 @@ Este proyecto se inició con [Create React App] (https://github.com/facebook/cre
 
 En el directorio del proyecto, puede ejecutar:
 
-#### `yarn start`
+#### `npm start`
 
 Ejecuta la aplicación en modo de desarrollo. \
 Abra [http: // localhost: 3000] (http: // localhost: 3000) para verlo en el navegador.
@@ -29,12 +32,12 @@ Abra [http: // localhost: 3000] (http: // localhost: 3000) para verlo en el nave
 La página se volverá a cargar si realiza modificaciones. \
 También verá cualquier error de pelusa en la consola.
 
-#### `yarn test`
+#### `npm test`
 
 Inicia el corredor de pruebas en el modo de reloj interactivo. \
 Consulte la sección sobre [ejecutar pruebas] (https://facebook.github.io/create-react-app/docs/running-tests) para obtener más información.
 
-#### `yarn build`
+#### `npm build`
 
 Crea la aplicación para producción en la carpeta `build`. \
 Agrupa correctamente React en el modo de producción y optimiza la compilación para obtener el mejor rendimiento.
@@ -44,7 +47,7 @@ La compilación se minimiza y los nombres de archivo incluyen los hash. \
 
 Consulte la sección sobre [implementación] (https://facebook.github.io/create-react-app/docs/deployment) para obtener más información.
 
-#### `yarn eject`
+#### `npm eject`
 
 ** Nota: esta es una operación unidireccional. Una vez que "expulsas", ¡no puedes regresar! **
 
