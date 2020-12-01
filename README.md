@@ -13,9 +13,9 @@ Indice
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 # Documentación básica dada por react
 
-# Getting Started with Create React App
+# Introducción a la aplicación Create React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto se inició con [Create React App] (https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
