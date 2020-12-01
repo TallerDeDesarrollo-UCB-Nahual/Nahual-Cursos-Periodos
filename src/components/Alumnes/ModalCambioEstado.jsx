@@ -80,8 +80,9 @@ function ModalCambioEstado(props) {
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>
-				<Button onClick={() => cambiarAbierto(false)}>Cancelar</Button>
+				<Button className="cancelButton" onClick={() => cambiarAbierto(false)}>Cancelar</Button>
 				<Button
+					className="confirmButton"
 					content="Confirmar Cambio"
 					labelPosition="right"
 					icon="checkmark"
