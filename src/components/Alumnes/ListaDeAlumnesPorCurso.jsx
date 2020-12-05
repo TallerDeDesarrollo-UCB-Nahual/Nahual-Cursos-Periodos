@@ -119,7 +119,7 @@ seleccionarTodosLosAlumes(){
   }
 }
 
-cambiarEstadoSeleccionable(cambioCurso){
+cambiarEstadoSeleccionable=(cambioCurso)=>{
   let checkboxes = Array.from(document.getElementsByName("checkbox"));
     checkboxes.map((checkbox) => {
       return cambioCurso
@@ -173,7 +173,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
             <Table.Body>{this.listaAlumnes()}</Table.Body>
           </Table>
           {this.listaVacia()}
-          <ModalCambioEstado alumnes={this.state.alumnesSeleccionados}/>
+          <ModalCambioEstado alumnes={this.state.alumnesSeleccionados} cambiarEstadoSeleccionable={this.cambiarEstadoSeleccionable} filtrarAlumneDeLaLista={this.filtrarAlumneDeLaLista} />
         </div>
       </div>
     );
