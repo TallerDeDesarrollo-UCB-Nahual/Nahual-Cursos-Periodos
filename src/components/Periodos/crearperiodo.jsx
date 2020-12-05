@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "../styles.module.css";
 import { obtenerModulos } from "../../servicios/modulos";
-import { Form } from "semantic-ui-react";
+import { Form, TextArea } from "semantic-ui-react";
 
 export default function CrearPeriodo({
   setPeriodo,
@@ -11,6 +11,7 @@ export default function CrearPeriodo({
   enviarSolicitud,
   modulos,
   setModulos,
+  setMensajeDeCierre,
 }) {
   function inicializar() {
     obtenerModulos()
@@ -64,6 +65,14 @@ export default function CrearPeriodo({
             fluid
             className={"form-control"}
             onChange={(x, data) => setAnio(parseInt(data.value))}
+          />
+          <Form.Input
+            label="Mensaje"
+            fluid
+            type="text"
+            class="form-control"
+            control={TextArea}
+            onChange={(x, data) => setMensajeDeCierre(data.value)}
           />
         </Form>
       </div>
