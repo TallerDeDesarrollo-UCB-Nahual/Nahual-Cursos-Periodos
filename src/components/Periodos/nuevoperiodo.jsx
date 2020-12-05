@@ -16,6 +16,7 @@ export default function NuevoPeriodo({
   const [periodo, setPeriodo] = useState(null);
   const [topico, setTopico] = useState(null);
   const [estadoPeriodo, setEstadoPeriodo] = useState(true);
+  const [mensajeDeCierre, setMensajeDeCierre] = useState(null);
   return (
     <Modal
       closeIcon
@@ -45,6 +46,7 @@ export default function NuevoPeriodo({
           estadoPeriodo={estadoPeriodo}
           modulos={modulos}
           setModulos={setModulos}
+          setMensajeDeCierre={setMensajeDeCierre}
         ></CrearPeriodo>
       </Modal.Content>
       <Modal.Actions>
@@ -59,6 +61,7 @@ export default function NuevoPeriodo({
               periodo: periodo,
               estado: estadoPeriodo,
               TopicoId: parseInt(topico),
+              mensajeDeCierre: mensajeDeCierre,
             })
               .then((x) => {
                 return x.data;
