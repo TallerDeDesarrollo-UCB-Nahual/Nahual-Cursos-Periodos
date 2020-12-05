@@ -12,6 +12,7 @@ import {
 } from "semantic-ui-react";
 import Alumne from "./Alumne";
 import ModalCambioEstado from "./ModalCambioEstado.jsx";
+import BotonExportar from "./BotonExportar";
 
 class ListaDeAlumnesPorCurso extends Component {
   constructor(props) {
@@ -94,15 +95,21 @@ class ListaDeAlumnesPorCurso extends Component {
   }
 
   listaVacia() {
-    return (
-      this.state.alumnes.length === 0 && (
-        <Message
-          icon="warning sign"
-          warning
-          header={"Lo sentimos, por el momento no tenemos alumnes disponibles."}
-          content={"Intenta mas tarde. Gracias"}
-        />
-      )
+    return this.state.alumnes.length === 0 ? (
+      <Message
+        icon="warning sign"
+        warning
+        header={"Lo sentimos, por el momento no tenemos alumnes disponibles."}
+        content={"Intenta mas tarde. Gracias"}
+      />
+    ) : (
+      <BotonExportar
+        seleccionados={this.state.alumnesSeleccionados}
+        deseleccionarAlumnes={() => {
+          this.cambiarEstadoSeleccionable(true);
+          this.setState({ alumnesSeleccionados: [] });
+        }}
+      />
     );
   }
 
