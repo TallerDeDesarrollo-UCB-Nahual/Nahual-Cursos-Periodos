@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { obtenerModulos } from "../../servicios/modulos";
 import { obtenerPeriodoPorId, editarPeriodo } from "../../servicios/periodos";
 import { Container, Button, Form, ButtonGroup } from "semantic-ui-react";
+import  servicionotificacion  from "../../servicios/notificaciones";
 
 export default function EditarPeriodo() {
 
@@ -103,6 +104,10 @@ export default function EditarPeriodo() {
                 });
                 history.push("/periodos");
                 window.location.reload();
+                servicionotificacion.mostrarMensajeExito(
+                  "Periodo editado con exito",
+                  'Se edito el periodo correctamente'
+                );
               }}>Guardar</Button>
             </ButtonGroup>
           </div>
