@@ -41,7 +41,7 @@ export default function EditarPeriodo() {
 
   const handleSubmitClick = () => { 
     servicionotificacion.mostrarMensajeExito(
-      `Periodo ${periodo} con ${id} fue editado con exito`,
+      `Periodo ${periodo} con ID ${id} fue editado con exito`,
       `Se edito el ${periodo} correctamente `
     );
   }
