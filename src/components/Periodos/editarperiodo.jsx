@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { obtenerModulos } from "../../servicios/modulos";
 import { obtenerPeriodoPorId, editarPeriodo } from "../../servicios/periodos";
 import { Container, Button, Form, ButtonGroup } from "semantic-ui-react";
+import  servicionotificacion  from "../../servicios/notificaciones";
 
 export default function EditarPeriodo() {
 
@@ -36,6 +37,12 @@ export default function EditarPeriodo() {
 
   function obtenerPeriodo() {
     return obtenerPeriodoPorId(id);
+  }
+
+  function mostrarNotificacion() { 
+    servicionotificacion.mostrarMensajeExito(
+      `Periodo ${periodo} fue editado con exito`,''
+    );
   }
 
   return (
@@ -100,9 +107,10 @@ export default function EditarPeriodo() {
                   periodo: periodo,
                   estado: estadoPeriodo,
                   TopicoId: parseInt(topico)
-                });
+                })
+                mostrarNotificacion();
                 history.push("/periodos");
-                window.location.reload();
+                setTimeout(function () { window.location.reload();}, 5000); 
               }}>Guardar</Button>
             </ButtonGroup>
           </div>
