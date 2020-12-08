@@ -39,7 +39,7 @@ export default function EditarPeriodo() {
     return obtenerPeriodoPorId(id);
   }
 
-  const handleSubmitClick = () => { 
+  const manejadorDeEdicion = () => { 
     servicionotificacion.mostrarMensajeExito(
       `Periodo ${periodo} con ID ${id} fue editado con exito`,
       `Se edito el ${periodo} correctamente `
@@ -109,9 +109,9 @@ export default function EditarPeriodo() {
                   estado: estadoPeriodo,
                   TopicoId: parseInt(topico)
                 })
-                handleSubmitClick();
+                manejadorDeEdicion();
                 history.push("/periodos");
-                window.location.reload();
+                setTimeout(function () { window.location.reload();}, 2000); 
               }}>Guardar</Button>
             </ButtonGroup>
           </div>
