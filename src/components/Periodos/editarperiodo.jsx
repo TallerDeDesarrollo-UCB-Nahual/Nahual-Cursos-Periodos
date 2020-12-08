@@ -39,10 +39,9 @@ export default function EditarPeriodo() {
     return obtenerPeriodoPorId(id);
   }
 
-  const manejadorDeEdicion = () => { 
+  function mostrarNotificacion() { 
     servicionotificacion.mostrarMensajeExito(
-      `Periodo ${periodo} con ID ${id} fue editado con exito`,
-      `Se edito el ${periodo} correctamente `
+      `Periodo ${periodo} fue editado con exito`,''
     );
   }
 
@@ -109,9 +108,9 @@ export default function EditarPeriodo() {
                   estado: estadoPeriodo,
                   TopicoId: parseInt(topico)
                 })
-                manejadorDeEdicion();
+                mostrarNotificacion();
                 history.push("/periodos");
-                setTimeout(function () { window.location.reload();}, 2000); 
+                setTimeout(function () { window.location.reload();}, 5000); 
               }}>Guardar</Button>
             </ButtonGroup>
           </div>
