@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Axios from "axios";
 import { Dimmer, Loader } from "semantic-ui-react";
 import NoAutorizado from "./NoAutorizado";
-import Encabezado from "../Layouts/Encabezado";
 import ListarNodos from "../Nodos/listarNodos";
 
 const ValidarAutorizacion = () => {
@@ -14,6 +13,7 @@ const ValidarAutorizacion = () => {
   });
   useEffect(() => {
     verificarAutorizacion();
+    // eslint-disable-next-line 
   }, []);
   const verificarAutorizacion = () => {
     const SERVICIO_DE_VERIFICACION_API_SERVICIO_DE_DATOS =

@@ -9,7 +9,7 @@ const ProtegerRuta = ({ component: Component, ...args }) => {
   const { isAuthenticated: estaAutenticado, user: usuario } = useAuth0();
   const [estado, cambiarEstado] = useState({
     validado: false,
-    intentosLogin: 0,
+    intentosIniciarSesion: 0,
   });
 
   const ValidarTieneAcceso = () => {
@@ -20,7 +20,7 @@ const ProtegerRuta = ({ component: Component, ...args }) => {
       email: usuario.email,
       aplicacion: "Cursos-Periodos",
     });
-    if (estado.intentosLogin <= INTENTOS_MAXIMOS_LOGIN) {
+    if (estado.intentosIniciarSesion <= INTENTOS_MAXIMOS_LOGIN) {
       Axios.post(
         `${SERVICIO_DE_VERIFICACION_API_SERVICIO_DE_DATOS}verificarAcceso`,
         datos,
@@ -37,7 +37,7 @@ const ProtegerRuta = ({ component: Component, ...args }) => {
         })
         .catch((error) => {
           cambiarEstado({
-            intentosLogin: estado.intentosLogin + 1,
+            intentosIniciarSesion: estado.intentosIniciarSesion + 1,
           });
           alert("Hay un error con la base de datos, status: " + error.status);
         });

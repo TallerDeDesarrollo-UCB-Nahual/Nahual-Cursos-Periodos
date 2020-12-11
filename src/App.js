@@ -17,48 +17,75 @@ import ProtegerRuta from "./components/Autenticacion/ProtegerRuta";
 
 function App() {
   return (
-    <div>
-      <div id="mensaje-exito" className={styles.notificationMessage}>
-        <Message icon color="green">
-          <Icon name="check" />
-          <Message.Content>
-            <Message.Header>
-              <p id="mensaje-exito-title"></p>
-            </Message.Header>
-            <p id="mensaje-exito-description"></p>
-          </Message.Content>
-        </Message>
-      </div>
-      <div id="mensaje-error" className={styles.notificationMessage}>
-        <Message icon color="red">
-          <Icon name="times circle outline" />
-          <Message.Content>
-            <Message.Header>
-              <p id="mensaje-error-title"></p>
-            </Message.Header>
-            <p id="mensaje-error-description"></p>
-          </Message.Content>
-        </Message>
-      </div>
-      <Container style={{paddingBottom:"200px"}}>
-        <Encabezado />
-        <div className="app">
-          <div className="app__sidebar" />
-          <main className="app__content">
-            <Switch>
-              <ProtegerRuta path="/periodos" component={Periodos}></ProtegerRuta>
-              <ProtegerRuta exact path="/nodos" component={ListarNodos} />
-              <ProtegerRuta exact path="/formulario-registro-periodo" component={NuevoPeriodo} />
-              <ProtegerRuta exact path="/periodos/:id" children={<EditarPeriodo />} />
-              <ProtegerRuta exact path="/lista-preinscriptes" component={ListaPreinscriptes}/>
-              <ProtegerRuta exact path="/alumnes" component={ListaDeAlumnesPorCurso} />
-              <Route path="/" component={ValidarInicioSesion} />
-            </Switch>
-          </main>
+    <Router>
+      <div>
+        <div id="mensaje-exito" className={styles.notificationMessage}>
+          <Message icon color="green">
+            <Icon name="check" />
+            <Message.Content>
+              <Message.Header>
+                <p id="mensaje-exito-title"></p>
+              </Message.Header>
+              <p id="mensaje-exito-description"></p>
+            </Message.Content>
+          </Message>
         </div>
-      </Container>
-      <PieDePagina/>
-    </div>
+        <div id="mensaje-error" className={styles.notificationMessage}>
+          <Message icon color="red">
+            <Icon name="times circle outline" />
+            <Message.Content>
+              <Message.Header>
+                <p id="mensaje-error-title"></p>
+              </Message.Header>
+              <p id="mensaje-error-description"></p>
+            </Message.Content>
+          </Message>
+        </div>
+        <Container>
+          <Encabezado />
+          <div className="app">
+            <div className="app__sidebar" />
+            <main className="app__content">
+              <Switch>
+                <ProtegerRuta
+                  exact
+                  path="/periodos"
+                  component={Periodos}
+                ></ProtegerRuta>
+                <ProtegerRuta exact path="/nodos" component={ListarNodos} />
+                <ProtegerRuta
+                  exact
+                  path="/formulario-registro-periodo"
+                  component={NuevoPeriodo}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/periodos/:id"
+                  children={<EditarPeriodo />}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/lista-preinscriptes"
+                  component={ListaPreinscriptes}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/alumnes"
+                  component={ListaDeAlumnesPorCurso}
+                />
+                <ProtegerRuta
+                  exact
+                  path="*"
+                  component={ValidarInicioSesion}
+                />
+                <Route exact path="/" component={ValidarInicioSesion} />
+              </Switch>
+            </main>
+          </div>
+        </Container>
+        <PieDePagina/>
+      </div>
+    </Router>
   );
 }
 

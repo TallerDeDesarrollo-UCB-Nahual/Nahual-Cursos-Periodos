@@ -33,7 +33,7 @@ function Encabezado() {
                   style={{ color: "black" }}
                   to="/nodos"
                 >
-                  Nodos & Periodos
+                  Nodos & Sedes
                 </NavLink>
               </Menu.Item>
               <Menu.Item>
