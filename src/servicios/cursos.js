@@ -18,4 +18,4 @@ function obtenerCursoPorId(id) {
   return axios.get(`${BASE_ROUTE}/cursos/${id}`);
 }
 
-export { obtenerCursos, crearCurso, obtenerCursoPorId, editarCurso };
+export { obtenerCursos, crearCurso, obtenerCursoPorId, editarCurso, obtenerCurso };

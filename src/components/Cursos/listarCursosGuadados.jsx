@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, componentDidUpdate } from "react";
 import { Modal, Button, Table, Icon, Grid, Message, Image } from 'semantic-ui-react';
 import EliminarCurso from "../Cursos/eliminarCurso";
 import CrearCurso from "../Cursos/crearcurso";
+import EditarCurso from "../Cursos/editarCurso";
 import { obtenerCursosPorIdPeriodo } from "../../servicios/periodos";
 import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
 
@@ -9,12 +10,19 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
 
     const [nuevoCursoModalAbierto, setNuevoCursoModalAbierto] = useState(false);
     const [cursos, setCursos] = useState([]);
+    const [idCurso, setIdCurso] = useState(0)
+    const [informacionCurso, setInformacionCurso] = useState(false)
+    const [curso, setCursoAEditar] = useState({})
 
     useEffect(() => {
         obtenerCursosPorIdPeriodo(idPeriodo)
           .then((response) => response.json())
           .then((response) => setCursos(response.response));
     },[idPeriodo]);
+
+    //componentDidUpdate(()=>{
+    //    console.log("updateeeeee");
+    //})
 
     const listacursos = 
     <div id="listaCursos" className={"forceFlex isColumn rowGap"}>
@@ -40,7 +48,12 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
                             <Table.Cell>{c.notas}</Table.Cell>
                             <Table.Cell>
                                 <div className={'displayFlex centered columnGap'}>
-                                <Button size="small" color="blue" >Editar <Icon color='white' name='edit' style={{ margin: '0 0 0 10px' }} /></Button>
+                            <Button size="small" color="blue" onClick={x => {
+                                                        setInformacionCurso(true)
+                                                        setIdCurso(c.id);
+
+                                                }}>Editar <Icon color='white' name='edit' style={{ margin: '0 0 0 10px' }} /></Button>
+                                <EditarCurso estaAbierto={informacionCurso} setAbierto={setInformacionCurso} idCurso={idCurso}/>     
                                 <EliminarCurso idPeriodo={idPeriodo} idCurso={c.id}></EliminarCurso>
                                 </div>
                             </Table.Cell>
