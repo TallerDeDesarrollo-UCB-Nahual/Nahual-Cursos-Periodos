@@ -3,7 +3,7 @@ import NahualLogo from "../../assets/logo-proyecto-nahual.webp";
 import { Menu, Image, Dropdown } from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-function Encabezado() {
+function CerrarSesion() {
   const {
     user: usuario,
     isAuthenticated: estaAutenticado,
@@ -22,14 +22,6 @@ function Encabezado() {
         <>
           {estaAutenticado && (
             <>
-              <Menu.Item position="right" href="/nodos">
-                Nodos & Sedes
-              </Menu.Item>
-              <Menu.Item href="/periodos">Períodos</Menu.Item>
-              <Menu.Item href="/lista-Preinscriptes">Inscripción</Menu.Item>
-              <Menu.Item style={{ marginRight: "50px" }} href="/alumnes">
-                Alumnes
-              </Menu.Item>
               <Menu.Item position="right">
                 <Dropdown
                   trigger={
@@ -56,4 +48,4 @@ function Encabezado() {
     </div>
   );
 }
-export default Encabezado;
+export default CerrarSesion;
