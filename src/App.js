@@ -12,6 +12,9 @@ import Encabezado from "./components/Layouts/Encabezado";
 // import "semantic-ui-less/semantic.less";
 import styles from "./styles.module.css";
 import PieDePagina from "./components/Layouts/PieDePagina"
+import ValidarInicioSesion from "../src/components/Autenticacion/ValidarInicioSesion";
+import ProtegerRuta from "./components/Autenticacion/ProtegerRuta";
+
 function App() {
   return (
     <div>
@@ -42,27 +45,25 @@ function App() {
         <Router>
           <div>
             <Switch>
-              <Route exact path="/periodos">
-                <Periodos />
-              </Route>
-              <Route exact path="/nodos">
-                <ListarNodos />
-              </Route>
-              <Route exact path="/formulario-registro-periodo">
-                <NuevoPeriodo />
-              </Route>
-              <Route path="/periodos/:id" children={<EditarPeriodo />} />
-              <Route
+              <ProtegerRuta exact path="/periodos" component={Periodos} />
+              <ProtegerRuta exact path="/nodos" component={ListarNodos} />
+              <ProtegerRuta
+                exact
+                path="/formulario-registro-periodo"
+                component={NuevoPeriodo}
+              />
+              <ProtegerRuta path="/periodos/:id" children={<EditarPeriodo />} />
+              <ProtegerRuta
                 exact
                 path="/lista-preinscriptes"
                 component={ListaPreinscriptes}
               />
-              <Route exact path="/alumnes">
-                <ListaDeAlumnesPorCurso />
-              </Route>
-              <Route path="/">
-                <ListarNodos />
-              </Route>
+              <ProtegerRuta
+                exact
+                path="/alumnes"
+                component={ListaDeAlumnesPorCurso}
+              />
+              <Route path="/" component={ValidarInicioSesion} />
             </Switch>
           </div>
         </Router>
