@@ -33,17 +33,21 @@ class OpcionesDeCurso extends Component{
 
   agregarOpcionesDeFiltrado(respuesta) {
     const opcionesDeCurso = [];
+    const sedePorDefecto = {nombre: "Sin sede"}
     respuesta.forEach(opcionDeCurso => {
+      if (opcionDeCurso.sede == null){
+        opcionDeCurso.sede = sedePorDefecto;
+      }
       opcionDeCurso = {
         key: opcionDeCurso.id,
-        text: opcionDeCurso.nodo.nombre +" - "+opcionDeCurso.sede.nombre + " - " + opcionDeCurso.profesores + " - " + opcionDeCurso.horario,
+        text: opcionDeCurso.nodo.nombre + " - "+ opcionDeCurso.sede.nombre + " - " + opcionDeCurso.profesores + " - " + opcionDeCurso.horario,
         value: opcionDeCurso.id,
       }
       opcionesDeCurso.push(opcionDeCurso);
     });
     this.setState({opcionesDeCurso:opcionesDeCurso})
   }
-
+  
   manejarEvento(opcionSeleccionada){
     this.setState({
        valor: opcionSeleccionada.key,

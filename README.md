@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# Nahual-Cursos-Periodos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Indice
+- Versiones
+- Documentación básica dada por react
+- Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
+- Links de aplicaciones deployadas
 
-## Available Scripts
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-In the project directory, you can run:
+## Versiones
 
-### `yarn start`
+- NodeJS: 12.18.3
+- React: 16.13.1
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Documentación básica dada por react
 
-### `yarn test`
+### Introducción a la aplicación Create React
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Este proyecto se inició con [Create React App] (https://github.com/facebook/create-react-app).
 
-### `yarn build`
+#### Scripts disponibles
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+En el directorio del proyecto, puede ejecutar:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+##### `npm install`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Instalar las dependencias del proyecto.
 
-### `yarn eject`
+##### `npm start`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Ejecuta la aplicación en modo de desarrollo. \
+Abra [http: // localhost: 3000] (http: // localhost: 3000) para verlo en el navegador.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+La página se volverá a cargar si realiza modificaciones. \
+También verá cualquier error de pelusa en la consola.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### `npm test`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Inicia el corredor de pruebas en el modo de reloj interactivo. \
+Consulte la sección sobre [ejecutar pruebas] (https://facebook.github.io/create-react-app/docs/running-tests) para obtener más información.
 
-## Learn More
+##### `npm build`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Crea la aplicación para producción en la carpeta `build`. \
+Agrupa correctamente React en el modo de producción y optimiza la compilación para obtener el mejor rendimiento.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+La compilación se minimiza y los nombres de archivo incluyen los hash. \
+¡Tu aplicación está lista para implementarse!
 
-### Code Splitting
+Consulte la sección sobre [implementación] (https://facebook.github.io/create-react-app/docs/deployment) para obtener más información.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+##### `npm eject`
 
-### Analyzing the Bundle Size
+** Nota: esta es una operación unidireccional. Una vez que "expulsas", ¡no puedes regresar! **
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Si no está satisfecho con la herramienta de compilación y las opciones de configuración, puede "expulsar" en cualquier momento. Este comando eliminará la dependencia de compilación única de su proyecto.
 
-### Making a Progressive Web App
+En su lugar, copiará todos los archivos de configuración y las dependencias transitivas (paquete web, Babel, ESLint, etc.) directamente en su proyecto para que tenga control total sobre ellos. Todos los comandos excepto `eject` seguirán funcionando, pero apuntarán a los scripts copiados para que pueda modificarlos. En este punto estás solo.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+No es necesario que utilice nunca "eject". El conjunto de funciones seleccionadas es adecuado para implementaciones pequeñas y medianas, y no debe sentirse obligado a utilizar esta función. Sin embargo, entendemos que esta herramienta no sería útil si no pudiera personalizarla cuando esté listo para usarla.
 
-### Advanced Configuration
+#### Aprende más
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Puede obtener más información en la [documentación de la aplicación Create React] (https://facebook.github.io/create-react-app/docs/getting-started).
 
-### Deployment
+Para aprender React, consulte la [documentación de React] (https://reactjs.org/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+##### División de código
 
-### `yarn build` fails to minify
+Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code- terrible)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Analizando el tamaño del paquete
+
+Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/ docs / analizando-el-tamaño-del-paquete)
+
+##### Creación de una aplicación web progresiva
+
+Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react- app / docs / making-a-progresiva-web-app)
+
+##### Configuración avanzada
+
+Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced- configuración)
+
+##### Implementación
+
+Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+##### `yarn build` no se minimiza
+
+Esta sección se ha trasladado aquí: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/ create-react-app / docs / troubleshooting # npm-run-build-fail-to-minify)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
+
+- https://app.diagrams.net/#G1PwuIgNhDV0nHuwikm_jZ04tK0tsTPlUS
+- https://docs.google.com/presentation/d/198xv0X_JREhjtBnGXSR9XO3WurTEVbMSO6ti_PzKBVQ/edit#
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Links de aplicaciones deployadas
+
+- Serivicio de datos a usar: https://nahual-datos-estudiantes.herokuapp.com/api 
+
+- Aplicación Cursos-Periodos: https://nahual-portal-cursos.herokuapp.com/
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+

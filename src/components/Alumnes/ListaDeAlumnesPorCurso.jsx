@@ -3,13 +3,16 @@ import React, { Component } from "react";
 import OpcionesDeCurso from "./OpcionesDeCurso";
 import {
   Dimmer,
+  Form,
   Header,
   Loader,
   Message,
-  Table
+  Table,
+  Button
 } from "semantic-ui-react";
 import Alumne from "./Alumne";
 import ModalCambioEstado from "./ModalCambioEstado.jsx";
+import BotonExportar from "./BotonExportar";
 
 class ListaDeAlumnesPorCurso extends Component {
   constructor(props) {
@@ -32,7 +35,7 @@ class ListaDeAlumnesPorCurso extends Component {
     });
     const API_URL = process.env.REACT_APP_API_URL;
     Axios.get(`${API_URL}/cursos/${idCurso}/inscriptes`)
-      .then((respuesta) => {
+      .then(respuesta => {
         this.setState({
           mostrarBotonDeCarga: false,
           alumnes: respuesta.data.response,
@@ -92,15 +95,21 @@ class ListaDeAlumnesPorCurso extends Component {
   }
 
   listaVacia() {
-    return (
-      this.state.alumnes.length === 0 && (
-        <Message
-          icon="warning sign"
-          warning
-          header={"Lo sentimos, por el momento no tenemos alumnes disponibles."}
-          content={"Intenta mas tarde. Gracias"}
-        />
-      )
+    return this.state.alumnes.length === 0 ? (
+      <Message
+        icon="warning sign"
+        warning
+        header={"Lo sentimos, por el momento no tenemos alumnes disponibles."}
+        content={"Intenta mas tarde. Gracias"}
+      />
+    ) : (
+      <BotonExportar
+        seleccionados={this.state.alumnesSeleccionados}
+        deseleccionarAlumnes={() => {
+          this.cambiarEstadoSeleccionable(true);
+          this.setState({ alumnesSeleccionados: [] });
+        }}
+      />
     );
   }
 
@@ -117,7 +126,7 @@ seleccionarTodosLosAlumes(){
   }
 }
 
-cambiarEstadoSeleccionable(cambioCurso){
+cambiarEstadoSeleccionable=(cambioCurso)=>{
   let checkboxes = Array.from(document.getElementsByName("checkbox"));
     checkboxes.map((checkbox) => {
       return cambioCurso
@@ -139,7 +148,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
     this.state.alumnesSeleccionados.map(() => {
         return this.setState({
           alumnesSeleccionados: this.state.alumnesSeleccionados.filter(
-            (alumneNahual) => alumneNahual.estudiante.id !== alumne.estudiante.id
+            (a) => a.estudiante.id !== alumne.estudiante.id
           )
         });
       })
@@ -150,9 +159,9 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
     return (
       <div>
         {this.iconoDeCarga()}
-        <Header style={{ marginTop: 30}} as="h2" textAlign="center" content="Lista Alumnes"/>
-        <OpcionesDeCurso cuandoCambiaElCurso={this.cuandoCambiaElCurso}/> 
-        <div style={{ overflowX: "auto" }, { marginTop: 15}}>
+        <Header as="h2" textAlign="center" content="Lista Alumnes" />
+        <OpcionesDeCurso cuandoCambiaElCurso={this.cuandoCambiaElCurso} />
+        <div style={{ overflowX: "auto" }}>
           <Table singleLine selectable striped unstackable>
             <Table.Header>
               <Table.Row>
@@ -170,9 +179,9 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
             </Table.Header>
             <Table.Body>{this.listaAlumnes()}</Table.Body>
           </Table>
+          {this.listaVacia()}
           <ModalCambioEstado alumnes={this.state.alumnesSeleccionados} cambiarEstadoSeleccionable={this.cambiarEstadoSeleccionable} filtrarAlumneDeLaLista={this.filtrarAlumneDeLaLista} />
         </div>
-        {this.listaVacia()}
       </div>
     );
   }
