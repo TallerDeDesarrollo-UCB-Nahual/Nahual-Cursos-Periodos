@@ -4,6 +4,7 @@ import Axios from "axios";
 import { Dimmer, Loader } from "semantic-ui-react";
 import NoAutorizado from "./NoAutorizado";
 import Encabezado from "../Layouts/Encabezado";
+import ListarNodos from "../Nodos/listarNodos";
 
 const ValidarAutorizacion = () => {
   const { user: usuario } = useAuth0();
@@ -57,7 +58,7 @@ const ValidarAutorizacion = () => {
   return (
     <div>
       {iconoDeCarga()}
-      {estado.validado ? <Encabezado/> : <NoAutorizado />}
+      {estado.validado ? <ListarNodos /> : <NoAutorizado />}
     </div>
   );
 };

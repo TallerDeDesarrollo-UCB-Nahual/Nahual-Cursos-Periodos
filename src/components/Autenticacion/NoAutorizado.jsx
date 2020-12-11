@@ -10,19 +10,20 @@ import {
   Icon,
   Button,
 } from "semantic-ui-react";
+import imagenSinAcceso from "../../public/imagenes/NoAcceso.png";
 
 const NoAutorizado = () => {
   const { user: usuario, logout: cerrarSesion } = useAuth0();
   return (
     <>
       <CerrarSesion />
-      <Grid centered style={{ marginTop: 120 }}>
+      <Grid centered>
         <Reveal animated="small fade" instant>
           <Reveal.Content visible>
             <Image circular size="small" src={usuario.picture} />
           </Reveal.Content>
           <Reveal.Content hidden>
-            <Image size="tiny" />
+            <Image size="tiny" src={imagenSinAcceso} />
           </Reveal.Content>
         </Reveal>
       </Grid>

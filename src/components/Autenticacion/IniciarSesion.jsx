@@ -1,17 +1,18 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Header, Icon, Segment, Button } from "semantic-ui-react";
+import { Header, Icon, Segment, Button, Image } from "semantic-ui-react";
 import Navbar from "../Layouts/Encabezado";
+import Logo from "../../public/imagenes/educacion-en-linea.png";
 
 const IniciarSesion = () => {
   const { loginWithRedirect: iniciarSesion } = useAuth0();
   return (
     <>
       <Navbar />
-      <Segment vertical textAlign="center" style={{ marginTop: "20vh" }}>
+      <Segment vertical textAlign="center">
         <Header icon textAlign="center" size="huge">
-          <Icon name="hand point down outline" />
-          ¡Bienvenido!
+          <Image src={Logo} style={{ width: "200px", height: "200px" }} />
+          <Header>¡Bienvenido!</Header>
           <Header.Subheader>
             Para continuar debe iniciar sesión.
           </Header.Subheader>

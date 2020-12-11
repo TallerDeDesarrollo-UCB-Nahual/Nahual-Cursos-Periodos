@@ -42,31 +42,20 @@ function App() {
       </div>
       <Container style={{paddingBottom:"200px"}}>
         <Encabezado />
-        <Router>
-          <div>
+        <div className="app">
+          <div className="app__sidebar" />
+          <main className="app__content">
             <Switch>
-              <ProtegerRuta exact path="/periodos" component={Periodos} />
+              <ProtegerRuta path="/periodos" component={Periodos}></ProtegerRuta>
               <ProtegerRuta exact path="/nodos" component={ListarNodos} />
-              <ProtegerRuta
-                exact
-                path="/formulario-registro-periodo"
-                component={NuevoPeriodo}
-              />
-              <ProtegerRuta path="/periodos/:id" children={<EditarPeriodo />} />
-              <ProtegerRuta
-                exact
-                path="/lista-preinscriptes"
-                component={ListaPreinscriptes}
-              />
-              <ProtegerRuta
-                exact
-                path="/alumnes"
-                component={ListaDeAlumnesPorCurso}
-              />
+              <ProtegerRuta exact path="/formulario-registro-periodo" component={NuevoPeriodo} />
+              <ProtegerRuta exact path="/periodos/:id" children={<EditarPeriodo />} />
+              <ProtegerRuta exact path="/lista-preinscriptes" component={ListaPreinscriptes}/>
+              <ProtegerRuta exact path="/alumnes" component={ListaDeAlumnesPorCurso} />
               <Route path="/" component={ValidarInicioSesion} />
             </Switch>
-          </div>
-        </Router>
+          </main>
+        </div>
       </Container>
       <PieDePagina/>
     </div>

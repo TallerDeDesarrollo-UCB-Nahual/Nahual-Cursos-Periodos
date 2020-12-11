@@ -2,6 +2,7 @@ import React from "react";
 import NahualLogo from "../../assets/logo-proyecto-nahual.webp";
 import { Menu, Image, Dropdown } from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { NavLink } from "react-router-dom";
 
 function Encabezado() {
   const {
@@ -17,18 +18,62 @@ function Encabezado() {
         style={{ borderBottom: "3px solid #81ce32", backgroundColor: "white" }}
       >
         <Menu.Item>
-          <Image rounded size={"small"} src={NahualLogo} href="/" />
+          <Image rounded size={"small"} src={NahualLogo} href="/nodos" />
         </Menu.Item>
         <>
           {estaAutenticado && (
             <>
-              <Menu.Item position="right" href="/nodos">
-                Nodos & Sedes
+              <Menu.Item position="right">
+                {" "}
+                <NavLink
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#81ce32",
+                  }}
+                  style={{ color: "black" }}
+                  to="/nodos"
+                >
+                  Nodos & Periodos
+                </NavLink>
               </Menu.Item>
-              <Menu.Item href="/periodos">Períodos</Menu.Item>
-              <Menu.Item href="/lista-Preinscriptes">Inscripción</Menu.Item>
-              <Menu.Item style={{ marginRight: "50px" }} href="/alumnes">
-                Alumnes
+              <Menu.Item>
+                {" "}
+                <NavLink
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#81ce32",
+                  }}
+                  style={{ color: "black" }}
+                  to="/periodos"
+                >
+                  Periodos
+                </NavLink>
+              </Menu.Item>
+              <Menu.Item>
+                {" "}
+                <NavLink
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#81ce32",
+                  }}
+                  style={{ color: "black" }}
+                  to="/lista-Preinscriptes"
+                >
+                  Inscripción
+                </NavLink>
+              </Menu.Item>
+              <Menu.Item style={{ marginRight: "50px" }}>
+                {" "}
+                <NavLink
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#81ce32",
+                  }}
+                  style={{ color: "black" }}
+                  to="/alumnes"
+                >
+                  Alumnes
+                </NavLink>
               </Menu.Item>
               <Menu.Item position="right">
                 <Dropdown
