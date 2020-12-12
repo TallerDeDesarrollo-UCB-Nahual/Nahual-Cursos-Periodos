@@ -67,7 +67,7 @@ function App() {
           </div>
         </Router>
       </Container>
-      <PieDePagina/>
+      <PieDePagina />
     </div>
   );
 }

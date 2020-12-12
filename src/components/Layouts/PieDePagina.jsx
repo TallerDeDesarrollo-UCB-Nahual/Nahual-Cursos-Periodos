@@ -8,15 +8,11 @@ const PieDePagina = (props) => {
     <Segment
       inverted
       vertical
-      style={{ margin: "20em 0em 0em", padding: "3em 0em" }}
+      style={{ margin: "20em 0em 0em", padding: "2em 0em" }}
     >
       <Container textAlign="center">
         <Image centered size="small" src={NahualLogo} />
-        <List horizontal divided link size="small">
-          <List.Item as="a" href="https://www.nahual.com.ar/">
-            Nahual Argentina
-          </List.Item>
-        </List>
+        <a style={{color:"grey"}} href="https://www.nahual.com.ar/">www.nahual.com.ar</a>
       </Container>
     </Segment>
   );
