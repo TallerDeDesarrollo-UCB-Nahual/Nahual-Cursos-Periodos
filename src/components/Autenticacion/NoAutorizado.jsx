@@ -32,7 +32,7 @@ const NoAutorizado = () => {
         textAlign="center"
         as="h2"
         content={usuario.name}
-        subheader="No tienes acceso para ingresar a esta página"
+        subheader="No tienes acceso para ingresar a esta página."
       />
       <Segment placeholder style={{ marginLeft: 100, marginRight: 100 }}>
         <Grid columns={2} stackable textAlign="center">

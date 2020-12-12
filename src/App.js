@@ -51,7 +51,7 @@ function App() {
                   exact
                   path="/periodos"
                   component={Periodos}
-                ></ProtegerRuta>
+                />
                 <ProtegerRuta exact path="/nodos" component={ListarNodos} />
                 <ProtegerRuta
                   exact
