@@ -6,14 +6,15 @@ import GenericModal from '../Modal/GenericModal';
 import ElegirCurso from './ElegirCurso';
 import Preinscripte from './Preinscripte';
 import BASE_ROUTE from "../../servicios/rutas";
+import Exportar from './Exportar';
 
 
 class ListaPreinscriptes extends Component {
 
     headers = ['Nombre Completo','Zona','Información'];
-    URL_Preinscriptes = `${BASE_ROUTE}/estudiantes/DTO?estadoId=1`;
-    URL_Periodos = `${BASE_ROUTE}/periodos?estado=true`;
-    URL_Cursos = `${BASE_ROUTE}/cursos`;
+    URL_Preinscriptes = `${process.env.REACT_APP_API_URL}/estudiantes/DTO?estadoId=1`;
+    URL_Periodos = `${process.env.REACT_APP_API_URL}/periodos?estado=true`;
+    URL_Cursos = `${process.env.REACT_APP_API_URL}/cursos`;
 
     constructor(){
         super();
@@ -199,7 +200,7 @@ class ListaPreinscriptes extends Component {
                     <Table.HeaderCell textAlign="center">
                         <input
                             type="checkbox"
-                            name="checkBoxAll"
+                            name="checkBox"
                             onClick={(e) => this.seleccionarTodosPreinscriptes(e)}
                             style={{ transform: "scale(1.4)" }}
                         />
@@ -214,6 +215,13 @@ class ListaPreinscriptes extends Component {
                 </Table.Body>
 
             </Table>
+           <Exportar 
+           deseleccionarPreinscriptes={()=>{
+                console.log("rntta");
+                this.setState({ preinscriptesSeleccionados: Array(0) });
+                this.cambiarEstadoCheckBoxes(false);
+            }} 
+            seleccionados={this.state.preinscriptesSeleccionados}/>
             {this.mostrarMensaje()}
             { this.state.preInscriptes.length > 0 && (
                 <GenericModal trigger = { <Button color='green' onClick={() => this.conseguirCursos(this.state.periodoSeleccionado.id)} floated='right'>Inscribir</Button>}>

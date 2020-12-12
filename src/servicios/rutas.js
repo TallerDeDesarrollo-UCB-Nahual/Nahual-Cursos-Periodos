@@ -1,3 +1,3 @@
-const BASE_ROUTE = "http://localhost:8000/api";
+const BASE_ROUTE = process.env.REACT_APP_API_URL;
 
 export default BASE_ROUTE;
