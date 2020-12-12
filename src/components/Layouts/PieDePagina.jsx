@@ -3,7 +3,7 @@ import NahualLogo from "../../assets/logo-proyecto-nahual.webp";
 
 import { Container, Image, List, Segment } from "semantic-ui-react";
 
-const PieDePagina = (props) => {
+const PieDePagina = () => {
   return (
     <Segment
       inverted
@@ -17,7 +17,5 @@ const PieDePagina = (props) => {
     </Segment>
   );
 };
-
-PieDePagina.propTypes = {};
 
 export default PieDePagina;
