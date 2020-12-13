@@ -10,7 +10,7 @@ function ElegirCurso(props) {
     const [cursoId, setCursoId] = useState(null);
     const [esSatisfactorio, setEsSatisfactorio] = useState(null);
 
-    const header = "Inscribir en Curso";
+    // const header = "Inscribir en Curso";
 
     const handleForm = async () => {
         const body = props.preinscrites.map(preinscrite => {
@@ -34,10 +34,10 @@ function ElegirCurso(props) {
             <Form.Dropdown selection
             fluid 
             options={ props.opciones } 
-            placeholder='Seleccione curso' 
+            placeholder='Seleccione el curso' 
             onChange={ (e, { value }) => setCursoId(value) }
             />
-            { cursoId && <Form.Button basic icon><Icon name='save'></Icon></Form.Button> }
+            { cursoId && <Form.Button color="green" basic icon><Icon name='save'></Icon>Inscribir</Form.Button> }
         </Form.Group>
     );
 
@@ -46,7 +46,7 @@ function ElegirCurso(props) {
             <Message
             success
             header='Completado'
-            content="Inscripcion satisfactoria"
+            content="Inscripción satisfactoria"
             />
             { esSatisfactorio && window.location.reload() }
         </>
@@ -61,18 +61,16 @@ function ElegirCurso(props) {
     );
 
     return (
-        <Grid container>
-            <Grid.Row columns='1'>
-                <Header as='h2'>
-                    { header }
-                </Header>
-            </Grid.Row>
-            <Grid.Row  centered verticalAlign='middle'>
-                <Form onSubmit={ handleForm } success error>
-                    { esSatisfactorio === null ? formNormal : (esSatisfactorio ? formSatisfactorio : formErroneo) }
-                </Form>
-            </Grid.Row>
-        </Grid>
+        <div style={{marginBottom: "50px",marginTop: "50px"}}>
+            <Grid container>
+                <Grid.Row  centered verticalAlign='middle'>
+                    <Form onSubmit={ handleForm } success error>
+                        { esSatisfactorio === null ? formNormal : (esSatisfactorio ? formSatisfactorio : formErroneo) }
+                    </Form>
+                </Grid.Row>
+            </Grid>
+        </div>
+        
     );
 };
 
