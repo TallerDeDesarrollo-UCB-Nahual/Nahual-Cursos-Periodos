@@ -29,6 +29,7 @@ class ListaPreinscriptes extends Component {
             cursos: [],
             estaCargando: false,
             mensaje: '',
+            deshabilitar:true
         }
     }
 
@@ -74,6 +75,12 @@ class ListaPreinscriptes extends Component {
 
     componentDidMount(){
         this.cargarDatos();
+    }
+
+    componentDidUpdate(prevProps,prevState){
+        if (prevState.preinscriptesSeleccionados !== this.state.preinscriptesSeleccionados) {
+            this.validarPreinscriptes();
+        }
     }
 
     obtenerPreinscripte(preinscripte){
@@ -160,6 +167,14 @@ class ListaPreinscriptes extends Component {
 
     handleChange = (e, { value }) => this.cambiarPeriodo(value);
 
+    validarPreinscriptes(){
+        if(this.state.preinscriptesSeleccionados.length===0){
+            this.setState({deshabilitar:true});
+        }else{
+            this.setState({deshabilitar:false});
+        }
+    }
+
     render(){
         const preinscripteFilas = this.state.preInscriptes.map((preinscripte)=>
         <Table.Row key={preinscripte.id}>
@@ -215,18 +230,24 @@ class ListaPreinscriptes extends Component {
                 </Table.Body>
 
             </Table>
-           <Exportar 
-           deseleccionarPreinscriptes={()=>{
-                console.log("rntta");
-                this.setState({ preinscriptesSeleccionados: Array(0) });
-                this.cambiarEstadoCheckBoxes(false);
-            }} 
-            seleccionados={this.state.preinscriptesSeleccionados}/>
             {this.mostrarMensaje()}
             { this.state.preInscriptes.length > 0 && (
-                <GenericModal trigger = { <Button color='green' onClick={() => this.conseguirCursos(this.state.periodoSeleccionado.id)} floated='right'>Inscribir</Button>}>
+                <>
+                <Exportar 
+                deseleccionarPreinscriptes={()=>{
+                     console.log("rntta");
+                     this.setState({ preinscriptesSeleccionados: Array(0) });
+                     this.cambiarEstadoCheckBoxes(false);
+                 }} 
+                 seleccionados={this.state.preinscriptesSeleccionados}/>
+                <GenericModal
+                 Header ={<Header as='h2'>
+                 { "Inscribir en Curso"}
+                </Header>}
+                 trigger = { <Button disabled={this.state.deshabilitar} color='green' onClick={() => this.conseguirCursos(this.state.periodoSeleccionado.id)} floated='right'>Inscribir</Button>}>
                     <ElegirCurso opciones={ this.state.cursos } preinscrites={ this.state.preinscriptesSeleccionados }></ElegirCurso>
                 </GenericModal>
+                </>
             ) }
             </Container>
             )

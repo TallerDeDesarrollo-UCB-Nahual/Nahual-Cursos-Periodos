@@ -25,8 +25,9 @@ function Preinscripte({ preinscripte }) {
                 <p> <Icon name='graduation' /> <b>Curso de Interes: </b>{preinscripte.modulo}</p>
                 <p> <Icon name='mail outline' /> <b>Correo: </b>{preinscripte.correo}</p>
                 <p> <Icon name='call' /> <b>Teléfono: </b>{preinscripte.celular}</p>
-                <p> <Icon name='calendar outline' /><b>Fecha de nacimiento: </b>{fechaConvertida}</p>             
+                <p> <Icon name='calendar outline' /><b>Fecha de nacimiento: </b>{fechaConvertida}</p>
                 <p> <Icon name='map marker alternate'/><b>Zona de Residencia: </b> {preinscripte.zona}</p>
+                <p> <Icon name='map marker alternate'/><b>Nodo: </b> {preinscripte.nodo}</p>
               </Item.Description>
             </div>
         </Item.Content>

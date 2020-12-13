@@ -30,6 +30,11 @@ const Exportar = (props)=>{
               style: estilos
             },
             {
+              title: "DNI",
+              width: { wpx: 40 },
+              style: estilos
+            },
+            {
               title: "Nombre y Apellido",
               width: { wpx: 200 },
               style: estilos
@@ -51,6 +56,31 @@ const Exportar = (props)=>{
             },
             {
               title: "Fecha de Nacimiento",
+              width: { wpx: 200 },
+              style: estilos
+            },
+            {
+              title: "Nacionalidad",
+              width: { wpx: 200 },
+              style: estilos
+            },
+            {
+              title: "¿Trabaja actualmente?",
+              width: { wpx: 200 },
+              style: estilos
+            },
+            {
+              title: "¿Trabaja en algo de sistemas?",
+              width: { wpx: 200 },
+              style: estilos
+            },
+            {
+              title: "Experiencia en Sistemas",
+              width: { wpx: 200 },
+              style: estilos
+            },
+            {
+              title: "¿Tiene estudios en sistemas?",
               width: { wpx: 200 },
               style: estilos
             }
@@ -85,17 +115,23 @@ const Exportar = (props)=>{
           : "";
         return [
           numeroDeFila + 1,
+          alumne.dni,
           PrimeraLetraEnMayuscula(alumne.nombre + " " + alumne.apellido),
           alumne.correo,
           alumne.celular,
           alumne.nodo,
-          fechaDeNacimiento
+          fechaDeNacimiento,
+          alumne.nacionalidad,
+          alumne.trabajaActualmente,
+          alumne.trabajaSistemas,
+          alumne.experienciaSistemas,
+          alumne.estudiosSistemas
         ];
       };
       
     return (
           <ArchivoExcel
-            filename={`Alumnes Exportados-${fechaDescarga}`}
+            filename={`Lista-Preinscriptes-${fechaDescarga}`}
             element={
                 <Button 
                 color='green' 
@@ -113,7 +149,7 @@ const Exportar = (props)=>{
                 />
             }
           >
-            <HojaExcel dataSet={[conjuntoDeDatos]} name="Alumnes"></HojaExcel>
+            <HojaExcel dataSet={[conjuntoDeDatos]} name="Preinscriptes"></HojaExcel>
           </ArchivoExcel>
     );
 }
