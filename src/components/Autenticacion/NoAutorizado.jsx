@@ -40,7 +40,7 @@ const NoAutorizado = () => {
             <Grid.Column>
               <Header icon>
                 <Icon name="sign out" />
-                Cambiar a una cuenta con acceso
+                Cambiar a una cuenta con acceso.
               </Header>
               <Button onClick={() => cerrarSesion()} color="grey">
                 Cerrar Sesión

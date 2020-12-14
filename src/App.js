@@ -24,7 +24,7 @@ function App() {
             <Icon name="check" />
             <Message.Content>
               <Message.Header>
-                <p id="mensaje-exito-title"></p>
+                <p id="titulo-mensaje-exito"></p>
               </Message.Header>
               <p id="mensaje-exito-description"></p>
             </Message.Content>
@@ -35,7 +35,7 @@ function App() {
             <Icon name="times circle outline" />
             <Message.Content>
               <Message.Header>
-                <p id="mensaje-error-title"></p>
+                <p id="titulo-mensaje-error"></p>
               </Message.Header>
               <p id="mensaje-error-description"></p>
             </Message.Content>
