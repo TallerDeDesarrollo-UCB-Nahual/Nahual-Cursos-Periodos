@@ -33,6 +33,14 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
   useEffect(() => {
     inicializarSedes();
   }, []);
+
+  function mostrarNotificacion(curso) { 
+    servicioNotificacion.mostrarMensajeExito(
+      "Curso creado con éxito",
+      `Se creó el curso ${curso.horario}`
+    );
+  }
+
   return (
     <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
       <Modal.Header>
@@ -124,10 +132,7 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
               })
               .then((x) => {
                 setCursos([...cursos, x]);
-                servicioNotificacion.mostrarMensajeExito(
-                  "Curso creado con éxito",
-                  `Se creó el curso ${x.horario}`
-                );
+                mostrarNotificacion(x);
               });
             resetValores();
           }}
