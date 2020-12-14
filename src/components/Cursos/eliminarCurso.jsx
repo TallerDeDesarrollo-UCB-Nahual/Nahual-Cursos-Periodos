@@ -8,7 +8,7 @@ function EliminarCurso({ idPeriodo, idCurso }) {
 
     const mostrarNotificacion = () => { 
         servicionotificacion.mostrarMensajeExito(
-          `Curso eliminado con exito`,''
+          `Curso eliminado con éxito`,''
         );
     }
 

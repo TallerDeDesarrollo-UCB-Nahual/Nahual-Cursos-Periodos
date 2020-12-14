@@ -41,7 +41,7 @@ export default function EditarPeriodo() {
 
   function mostrarNotificacion() { 
     servicionotificacion.mostrarMensajeExito(
-      `Periodo ${periodo} fue editado con exito`,''
+      `Periodo ${periodo} fue editado con éxito`,''
     );
   }
 

@@ -79,7 +79,7 @@ export default function NuevoPeriodo({
                 setPeriodos([...periodos, x]);
                 estaAbierto(false);
                 servicioNotificacion.mostrarMensajeExito(
-                  "Periodo creado con exito",
+                  "Periodo creado con éxito",
                   `Se creo el periodo ${x.periodo}`
                 );
               });

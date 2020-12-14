@@ -125,8 +125,8 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
               .then((x) => {
                 setCursos([...cursos, x]);
                 servicioNotificacion.mostrarMensajeExito(
-                  "Curso creado con exito",
-                  `Se creo el curso ${x.horario}`
+                  "Curso creado con éxito",
+                  `Se creó el curso ${x.horario}`
                 );
               });
             resetValores();
