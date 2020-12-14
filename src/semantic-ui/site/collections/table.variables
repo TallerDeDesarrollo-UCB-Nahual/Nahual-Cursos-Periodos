@@ -1,7 +1,0 @@
-/*******************************
-    User Variable Overrides
-*******************************/
-
-@headerBackground: #81CE32;
-@background: @white;
-@selectableBackground: rgba(128, 205, 50, 0.19);

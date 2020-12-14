@@ -9,7 +9,7 @@ import { Container, Message, Icon } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
 import ListaPreinscriptes from "./components/Preinscriptes/ListaPreinscriptes";
 import Encabezado from "./components/Layouts/Encabezado";
-import "semantic-ui-less/semantic.less";
+// import "semantic-ui-less/semantic.less";
 import styles from "./styles.module.css";
 
 function App() {
