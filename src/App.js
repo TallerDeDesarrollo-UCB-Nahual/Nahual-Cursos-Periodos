@@ -37,7 +37,7 @@ function App() {
           </Message.Content>
         </Message>
       </div>
-      <Container>
+      <Container style={{paddingBottom:"200px"}}>
         <Encabezado />
         <Router>
           <div>
@@ -67,7 +67,7 @@ function App() {
           </div>
         </Router>
       </Container>
-      <PieDePagina />
+      <PieDePagina/>
     </div>
   );
 }

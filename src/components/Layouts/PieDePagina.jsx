@@ -5,6 +5,7 @@ import { Container, Image, List, Segment } from "semantic-ui-react";
 
 const PieDePagina = () => {
   return (
+    <div style={{ position:"fixed" , width:"100%", bottom:0}}>
     <Segment
       inverted
       vertical
@@ -15,6 +16,7 @@ const PieDePagina = () => {
         <a style={{color:"grey"}} href="https://www.nahual.com.ar/">www.nahual.com.ar</a>
       </Container>
     </Segment>
+    </div>
   );
 };
 
