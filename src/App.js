@@ -11,7 +11,7 @@ import ListaPreinscriptes from "./components/Preinscriptes/ListaPreinscriptes";
 import Encabezado from "./components/Layouts/Encabezado";
 // import "semantic-ui-less/semantic.less";
 import styles from "./styles.module.css";
-
+import PieDePagina from "./components/Layouts/PieDePagina"
 function App() {
   return (
     <div>
@@ -37,7 +37,7 @@ function App() {
           </Message.Content>
         </Message>
       </div>
-      <Container>
+      <Container style={{paddingBottom:"200px"}}>
         <Encabezado />
         <Router>
           <div>
@@ -67,6 +67,7 @@ function App() {
           </div>
         </Router>
       </Container>
+      <PieDePagina/>
     </div>
   );
 }
