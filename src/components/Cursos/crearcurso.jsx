@@ -3,6 +3,7 @@ import { Button, Modal, Form, TextArea, Icon,Grid, Image } from "semantic-ui-rea
 import { obtenerSedes } from "../../servicios/sedes";
 import { crearCurso, obtenerCursoPorId } from "../../servicios/cursos";
 import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
+import servicioNotificacion from "../../servicios/notificaciones";
 
 export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, setCursos }) {
   const [sedes, setSedes] = useState([]);
@@ -32,6 +33,14 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
   useEffect(() => {
     inicializarSedes();
   }, []);
+
+  function mostrarNotificacion(curso) { 
+    servicioNotificacion.mostrarMensajeExito(
+      "Curso creado con éxito",
+      `Se creó el curso ${curso.horario}`
+    );
+  }
+
   return (
     <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
       <Modal.Header>
@@ -123,6 +132,7 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
               })
               .then((x) => {
                 setCursos([...cursos, x]);
+                mostrarNotificacion(x);
               });
             resetValores();
           }}

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from 'react-router-dom';
 import { obtenerModulos } from "../../servicios/modulos";
 import { obtenerPeriodoPorId, editarPeriodo } from "../../servicios/periodos";
-import { Container, Button, Form, ButtonGroup } from "semantic-ui-react";
-import  servicionotificacion  from "../../servicios/notificaciones";
+import { Container, Button, Form, ButtonGroup, TextArea } from "semantic-ui-react";
+import servicionotificacion from "../../servicios/notificaciones";
 
 export default function EditarPeriodo() {
 
@@ -12,6 +12,7 @@ export default function EditarPeriodo() {
   const [estadoPeriodo, setEstadoPeriodo] = useState(false);
   const [anio, setAnio] = useState();
   const [topico, setTopico] = useState(null);
+  const [mensajeDeCierre, setMensajeDeCierre] = useState(null);
   const { id } = useParams();
   const history = useHistory();
 
@@ -25,6 +26,7 @@ export default function EditarPeriodo() {
         setEstadoPeriodo(response.response.estado);
         setTopico(response.response.topico.id);
         setAnio(response.response.anio);
+        setMensajeDeCierre(response.response.mensajeDeCierre);
       });
 
     obtenerModulos()
@@ -39,9 +41,9 @@ export default function EditarPeriodo() {
     return obtenerPeriodoPorId(id);
   }
 
-  function mostrarNotificacion() { 
+  function mostrarNotificacion() {
     servicionotificacion.mostrarMensajeExito(
-      `Periodo ${periodo} fue editado con exito`,''
+      `Periodo ${periodo} fue editado con éxito`, ''
     );
   }
 
@@ -52,68 +54,81 @@ export default function EditarPeriodo() {
           <h1>Editar Periodo</h1>
         </div>
         <Container>
-          <Form.Input
-            label="Periodo"
-            fluid
-            value={periodo}
-            type="text"
-            onChange={(e, data) => setPeriodo(data.value)}
-          />
-          <br />
-          <Form.Select
-            id="inputState"
-            label="Topico"
-            fluid
-            value={topico}
-            options={modulos.map((m) => {
-              return {
-                key: `modulo-${m.id}`,
-                value: m.id,
-                text: m.nombre,
-              };
-            })}
-            onChange={(e, data) => setTopico(data.value)}
-          />
-          <br />
-          <Form.Select
-            label="Estado"
-            fluid
-            options={[
-              { key: "activo1", value: true, text: "Activo" },
-              { key: "inactivo1", value: false, text: "Inactivo" },
-            ]}
-            className={"form-control"}
-            value={estadoPeriodo}
-            onChange={(e, data) => setEstadoPeriodo(data.value)}
-          />
-          <br />
-          <Form.Input
-            label="Año"
-            type="number"
-            fluid
-            className={"form-control"}
-            value={anio}
-            onChange={(x, data) => setAnio(parseInt(data.value))}
-          />
-          <br />
-          <div className={"actionsCrearPeriodo"}>
-            <ButtonGroup>
-              <Button floated='right' className="cancelButton" onClick={() => {
-                history.push("/periodos");
-              }}>Cancelar</Button>
-              <Button floated='right'className="confirmButton" onClick={() => {
-                editarPeriodo(id, {
-                  anio: anio,
-                  periodo: periodo,
-                  estado: estadoPeriodo,
-                  TopicoId: parseInt(topico)
-                })
-                mostrarNotificacion();
-                history.push("/periodos");
-                setTimeout(function () { window.location.reload();}, 5000); 
-              }}>Guardar</Button>
-            </ButtonGroup>
-          </div>
+          <Form>
+            <Form.Input
+              label="Periodo"
+              fluid
+              value={periodo}
+              type="text"
+              onChange={(e, data) => setPeriodo(data.value)}
+            />
+            <br />
+            <Form.Select
+              id="inputState"
+              label="Topico"
+              fluid
+              value={topico}
+              options={modulos.map((m) => {
+                return {
+                  key: `modulo-${m.id}`,
+                  value: m.id,
+                  text: m.nombre,
+                };
+              })}
+              onChange={(e, data) => setTopico(data.value)}
+            />
+            <br />
+            <Form.Select
+              label="Estado"
+              fluid
+              options={[
+                { key: "activo1", value: true, text: "Activo" },
+                { key: "inactivo1", value: false, text: "Inactivo" },
+              ]}
+              className={"form-control"}
+              value={estadoPeriodo}
+              onChange={(e, data) => setEstadoPeriodo(data.value)}
+            />
+            <br />
+            <Form.Input
+              label="Año"
+              type="number"
+              fluid
+              className={"form-control"}
+              value={anio}
+              onChange={(x, data) => setAnio(parseInt(data.value))}
+            />
+            <br />
+            <Form.Input
+              label="Mensaje"
+              fluid
+              type="text"
+              class="form-control"
+              control={TextArea}
+              value={mensajeDeCierre}
+              onChange={(x, data) => setMensajeDeCierre(data.value)}
+            />
+            <br />
+            <div className={"actionsCrearPeriodo"}>
+              <ButtonGroup>
+                <Button floated='right' className="cancelButton" onClick={() => {
+                  history.push("/periodos");
+                }}>Cancelar</Button>
+                <Button floated='right' className="confirmButton" onClick={() => {
+                  editarPeriodo(id, {
+                    anio: anio,
+                    periodo: periodo,
+                    estado: estadoPeriodo,
+                    TopicoId: parseInt(topico),
+                    mensajeDeCierre: mensajeDeCierre
+                  })
+                  mostrarNotificacion();
+                  history.push("/periodos");
+                  setTimeout(function () { window.location.reload(); }, 5000);
+                }}>Guardar</Button>
+              </ButtonGroup>
+            </div>
+          </Form>
         </Container>
       </div>
     </div>
