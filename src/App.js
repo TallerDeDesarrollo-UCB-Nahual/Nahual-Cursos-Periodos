@@ -9,7 +9,7 @@ import { Container, Message, Icon } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
 import ListaPreinscriptes from "./components/Preinscriptes/ListaPreinscriptes";
 import Encabezado from "./components/Layouts/Encabezado";
-// import "semantic-ui-less/semantic.less";
+import "semantic-ui-less/semantic.less";
 import styles from "./styles.module.css";
 import PieDePagina from "./components/Layouts/PieDePagina"
 import ValidarInicioSesion from "../src/components/Autenticacion/ValidarInicioSesion";
@@ -41,7 +41,7 @@ function App() {
             </Message.Content>
           </Message>
         </div>
-        <Container>
+        <Container  style={{paddingBottom:"200px", minHeight: "100vh"}}>
           <Encabezado />
           <div className="app">
             <div className="app__sidebar" />

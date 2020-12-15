@@ -9,7 +9,7 @@ const IniciarSesion = () => {
   return (
     <>
       <Navbar />
-      <Segment vertical textAlign="center">
+      <Segment vertical textAlign="center" style={{marginTop: "-100px"}}>
         <Header icon textAlign="center" size="huge">
           <Image src={Logo} style={{ width: "200px", height: "200px" }} />
           <Header>¡Bienvenido!</Header>
