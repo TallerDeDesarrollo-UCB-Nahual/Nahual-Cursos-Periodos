@@ -47,18 +47,18 @@ function App() {
             <div className="app__sidebar" />
             <main className="app__content">
               <Switch>
-                <ProtegerRuta
+                <Route
                   exact
                   path="/periodos"
                   component={Periodos}
                 />
                 <ProtegerRuta exact path="/nodos" component={ListarNodos} />
-                <ProtegerRuta
+                <Route
                   exact
                   path="/formulario-registro-periodo"
                   component={NuevoPeriodo}
                 />
-                <ProtegerRuta
+                <Route
                   exact
                   path="/periodos/:id"
                   children={<EditarPeriodo />}

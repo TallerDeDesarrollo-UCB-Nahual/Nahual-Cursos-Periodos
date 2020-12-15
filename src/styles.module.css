@@ -1,8 +1,7 @@
 .notificationMessage {
-    z-index: 1000;
+    z-index: 10000;
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    padding-left: 40%;
+    padding-top: 0.5%;
 }
