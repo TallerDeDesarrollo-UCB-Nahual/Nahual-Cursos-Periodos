@@ -9,66 +9,83 @@ import { Container, Message, Icon } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
 import ListaPreinscriptes from "./components/Preinscriptes/ListaPreinscriptes";
 import Encabezado from "./components/Layouts/Encabezado";
-// import "semantic-ui-less/semantic.less";
+import "semantic-ui-less/semantic.less";
 import styles from "./styles.module.css";
 import PieDePagina from "./components/Layouts/PieDePagina"
+import ValidarInicioSesion from "../src/components/Autenticacion/ValidarInicioSesion";
+import ProtegerRuta from "./components/Autenticacion/ProtegerRuta";
+
 function App() {
   return (
-    <div>
-      <div id="mensaje-exito" className={styles.notificationMessage}>
-        <Message icon color="green">
-          <Icon name="check" />
-          <Message.Content>
-            <Message.Header>
-              <p id="mensaje-exito-title"></p>
-            </Message.Header>
-            <p id="mensaje-exito-description"></p>
-          </Message.Content>
-        </Message>
-      </div>
-      <div id="mensaje-error" className={styles.notificationMessage}>
-        <Message icon color="red">
-          <Icon name="times circle outline" />
-          <Message.Content>
-            <Message.Header>
-              <p id="mensaje-error-title"></p>
-            </Message.Header>
-            <p id="mensaje-error-description"></p>
-          </Message.Content>
-        </Message>
-      </div>
-      <Container style={{paddingBottom:"200px"}}>
-        <Encabezado />
-        <Router>
-          <div>
-            <Switch>
-              <Route exact path="/periodos">
-                <Periodos />
-              </Route>
-              <Route exact path="/nodos">
-                <ListarNodos />
-              </Route>
-              <Route exact path="/formulario-registro-periodo">
-                <NuevoPeriodo />
-              </Route>
-              <Route path="/periodos/:id" children={<EditarPeriodo />} />
-              <Route
-                exact
-                path="/lista-preinscriptes"
-                component={ListaPreinscriptes}
-              />
-              <Route exact path="/alumnes">
-                <ListaDeAlumnesPorCurso />
-              </Route>
-              <Route path="/">
-                <ListarNodos />
-              </Route>
-            </Switch>
+    <Router>
+      <div>
+        <div id="mensaje-exito" className={styles.notificationMessage}>
+          <Message icon color="green">
+            <Icon name="check" />
+            <Message.Content>
+              <Message.Header>
+                <p id="titulo-mensaje-exito"></p>
+              </Message.Header>
+              <p id="mensaje-exito-description"></p>
+            </Message.Content>
+          </Message>
+        </div>
+        <div id="mensaje-error" className={styles.notificationMessage}>
+          <Message icon color="red">
+            <Icon name="times circle outline" />
+            <Message.Content>
+              <Message.Header>
+                <p id="titulo-mensaje-error"></p>
+              </Message.Header>
+              <p id="mensaje-error-description"></p>
+            </Message.Content>
+          </Message>
+        </div>
+        <Container  style={{paddingBottom:"200px", minHeight: "100vh"}}>
+          <Encabezado />
+          <div className="app">
+            <div className="app__sidebar" />
+            <main className="app__content">
+              <Switch>
+                <ProtegerRuta
+                  exact
+                  path="/periodos"
+                  component={Periodos}
+                />
+                <ProtegerRuta exact path="/nodos" component={ListarNodos} />
+                <ProtegerRuta
+                  exact
+                  path="/formulario-registro-periodo"
+                  component={NuevoPeriodo}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/periodos/:id"
+                  children={<EditarPeriodo />}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/lista-preinscriptes"
+                  component={ListaPreinscriptes}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/alumnes"
+                  component={ListaDeAlumnesPorCurso}
+                />
+                <ProtegerRuta
+                  exact
+                  path="*"
+                  component={ValidarInicioSesion}
+                />
+                <Route exact path="/" component={ValidarInicioSesion} />
+              </Switch>
+            </main>
           </div>
-        </Router>
-      </Container>
-      <PieDePagina/>
-    </div>
+        </Container>
+        <PieDePagina/>
+      </div>
+    </Router>
   );
 }
 
