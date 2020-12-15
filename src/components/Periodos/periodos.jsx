@@ -35,6 +35,7 @@ export default function Periodos() {
           <Table.HeaderCell>Año</Table.HeaderCell>
           <Table.HeaderCell>Estado</Table.HeaderCell>
           <Table.HeaderCell>Topico</Table.HeaderCell>
+          <Table.HeaderCell>Mensaje de cierre</Table.HeaderCell>
           <Table.HeaderCell>Cursos</Table.HeaderCell>
           <Table.HeaderCell className={"displayFlex  centered"}>
             Acciones
@@ -50,6 +51,7 @@ export default function Periodos() {
                 <Table.Cell>{p.anio}</Table.Cell>
                 <Table.Cell>{p.estado ? "Activo" : "Inactivo"}</Table.Cell>
                 <Table.Cell>{p.topico.nombre}</Table.Cell>
+                <Table.Cell>{p.mensajeDeCierre}</Table.Cell>
                 <Table.Cell>
                   <Button
                     color="blue"
