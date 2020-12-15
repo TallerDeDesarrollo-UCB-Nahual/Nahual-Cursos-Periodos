@@ -5,6 +5,7 @@ import JTimepicker from 'reactjs-timepicker'
 import { editarCurso } from "../../servicios/cursos";
 import { obtenerCurso } from "../../servicios/cursos";
 import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
+import { useHistory } from 'react-router'
 
 export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
 
@@ -16,6 +17,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
     const [notas, setNota] = useState("");
     const [profesores, setProfesor] = useState("")
     const [habilitado, setHabilitado] = useState(false)
+    const history = useHistory()
 
   
     useEffect(()=>{
@@ -53,8 +55,8 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
             "notas":nota,
             "profesores":profesor}).then(curso => {
         })
+        history.go("/periodos");
         setAbierto(!estaAbierto);
-        
     }
 
 
@@ -128,7 +130,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
           >
             Cancelar <Icon name="remove" style={{ margin: '0 0 0 10px' }}/>
           </Button>
-          <Button disabled={!habilitado}
+          <Button disabled={habilitado}
             type="submit"
             className="confirmButton"
             color="green"
