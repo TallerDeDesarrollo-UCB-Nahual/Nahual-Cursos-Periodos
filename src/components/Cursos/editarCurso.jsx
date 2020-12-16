@@ -16,6 +16,9 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
     const [nodo, setNodo] = useState("")
     const [notas, setNota] = useState("");
     const [profesores, setProfesor] = useState("")
+    const [validacionProfesor, setValidacionProfesor] = useState(false)
+    const [validacionNota, setValidacionNota] = useState(false)
+    const [validacionHorario, setValidacionHorario] = useState(false)
     const [habilitado, setHabilitado] = useState(false)
     const history = useHistory()
 
@@ -24,6 +27,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
       obtenerCurso(idCurso)
       .then(curso => { return curso.json()})
       .then(curso => {
+        setHabilitado(false);
         if(curso.respuesta != null){
           setHorario(curso.respuesta.horario);
           setSedeNodo([curso.respuesta.SedeId,curso.respuesta.NodoId]);
@@ -57,6 +61,30 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
         })
         history.go("/periodos");
         setAbierto(!estaAbierto);
+    }
+
+    function validarFormulario(data,tipo){
+      switch(tipo){
+        case "profesor":
+          setProfesor(data)
+          if(data.length != 0)
+            setValidacionProfesor(true)
+        break;
+        case "nota":
+          setNota(data)
+          if(data.length != 0)
+            setValidacionNota(true)
+        break;
+        case "horario":
+          setHorario(data)
+          if(data.length != 0)
+            setValidacionHorario(true)
+        break;
+      }
+      if(validacionProfesor || validacionHorario || validacionNota){
+        setHabilitado(true);
+      }
+
     }
 
 
@@ -100,7 +128,8 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                 type="text"
                 value={horario}
                 className={"form-control"}
-                onChange={(x, data) => setHorario(data.value)}
+                onChange={(x, data) => 
+                  validarFormulario(data.value , "horario")}
               />
               <Form.Input
                 label="Profesor"
@@ -108,7 +137,8 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                 type="text"
                 value={profesores}
                 class="form-control"
-                onChange={(x, data) => setProfesor(data.value)}
+                onChange={(x, data) => 
+                  validarFormulario(data.value , "profesor")}
               />
               <Form.Input
                 label="Notas"
@@ -117,7 +147,8 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                 value={notas}
                 class="form-control"
                 control={TextArea}
-                onChange={(x, data) => setNota(data.value)}
+                onChange={(x, data) => 
+                  validarFormulario(data.value , "nota")}
               />
           </Form>
         </Modal.Content>
@@ -130,7 +161,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
           >
             Cancelar <Icon name="remove" style={{ margin: '0 0 0 10px' }}/>
           </Button>
-          <Button disabled={habilitado}
+          <Button disabled={!habilitado}
             type="submit"
             className="confirmButton"
             color="green"
