@@ -123,7 +123,7 @@ export default function EditarCurso({ curso, estaAbierto, setAbierto, idCurso })
             <Image src={LogoNahual} size='small' />
           </Grid.Column>
           <Grid.Column>
-            Nuevo Curso
+            Editar Curso
             </Grid.Column>
         </Grid>
       </Modal.Header>
