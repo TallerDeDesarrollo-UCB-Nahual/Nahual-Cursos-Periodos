@@ -1,22 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Icon, Modal, Grid, Image } from "semantic-ui-react";
 import { crearPeriodo, obtenerPeriodoPorId } from "../../servicios/periodos";
 import CrearPeriodo from "../Periodos/crearperiodo";
 import LogoNahual from "../../assets/logo-proyecto-nahual.webp";
 import servicioNotificacion from "../../servicios/notificaciones";
+import {  TextArea } from "semantic-ui-react";
+import { Form, Input, Dropdown } from 'semantic-ui-react-form-validator';
+import { obtenerModulos } from "../../servicios/modulos";
+
 
 export default function NuevoPeriodo({
   estaAbierto,
   abierto,
   periodos,
   setPeriodos,
-}) {
+})
+
+{
+  function inicializar() {
+    obtenerModulos()
+      .then((response) => response.json())
+      .then((response) => {
+        setModulos(response.response);
+        setTopico(response.response[0].id);
+      });
+  }
+
   const [modulos, setModulos] = useState([]);
   const [anio, setAnio] = useState(2020);
   const [periodo, setPeriodo] = useState(null);
   const [topico, setTopico] = useState(null);
   const [estadoPeriodo, setEstadoPeriodo] = useState(true);
   const [mensajeDeCierre, setMensajeDeCierre] = useState(null);
+  var enviarSolicitud=false;
+  useEffect(() => {
+    if (enviarSolicitud === false) {
+      inicializar();
+    }
+  }, []);
   return (
     <Modal
       closeIcon
@@ -34,59 +55,16 @@ export default function NuevoPeriodo({
       </Modal.Header>
       <Modal.Content>
         <CrearPeriodo
-          setPeriodo={setPeriodo}
-          setEstadoPeriodo={setEstadoPeriodo}
-          setTopico={setTopico}
-          setAnio={setAnio}
           setEnviarSolicitud={(x) => {}}
           enviarSolicitud={false}
-          anio={anio}
-          periodo={periodo}
-          topico={topico}
-          estadoPeriodo={estadoPeriodo}
-          modulos={modulos}
-          setModulos={setModulos}
-          setMensajeDeCierre={setMensajeDeCierre}
-        ></CrearPeriodo>
+          periodos = {periodos}
+          estaAbierto={estaAbierto}
+          setPeriodos={setPeriodos}
+          
+        ></CrearPeriodo> 
       </Modal.Content>
       <Modal.Actions>
-        <Button className="cancelButton" onClick={() => estaAbierto(false)}>
-          Cancelar <Icon name="remove" style={{ margin: "0 0 0 10px" }} />
-        </Button>
-        <Button
-          className="confirmButton"
-          onClick={() => {
-            crearPeriodo({
-              anio: anio,
-              periodo: periodo,
-              estado: estadoPeriodo,
-              TopicoId: parseInt(topico),
-              mensajeDeCierre: mensajeDeCierre,
-            })
-              .then((x) => {
-                return x.data;
-              })
-              .then((x) => {
-                return x.result;
-              })
-              .then((x) => {
-                return obtenerPeriodoPorId(x.id);
-              })
-              .then((x) => {
-                return x.data.response;
-              })
-              .then((x) => {
-                setPeriodos([...periodos, x]);
-                estaAbierto(false);
-                servicioNotificacion.mostrarMensajeExito(
-                  "Periodo creado con éxito",
-                  `Se creó el periodo ${x.periodo}`
-                );
-              });
-          }}
-        >
-          Crear <Icon name="checkmark" style={{ margin: "0 0 0 10px" }} />
-        </Button>
+      
       </Modal.Actions>
     </Modal>
   );
