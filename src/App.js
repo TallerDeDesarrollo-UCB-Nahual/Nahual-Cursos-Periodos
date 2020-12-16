@@ -73,7 +73,12 @@ function App() {
                   path="/alumnes"
                   component={ListaDeAlumnesPorCurso}
                 />
-                <Route exact path="/" component={Periodos} />
+                <ProtegerRuta
+                  exact
+                  path="*"
+                  component={ValidarInicioSesion}
+                />
+                <Route exact path="/" component={ValidarInicioSesion} />
               </Switch>
             </main>
           </div>
