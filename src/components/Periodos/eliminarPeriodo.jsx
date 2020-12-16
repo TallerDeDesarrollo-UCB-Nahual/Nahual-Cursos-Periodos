@@ -26,7 +26,7 @@ function Eliminar({ egresadeId }) {
 
     const mostrarNotificacion = () => { 
         servicionotificacion.mostrarMensajeExito(
-          `Curso eliminado con éxito`,''
+          `Periodo eliminado con éxito`,''
         );
     }
 
