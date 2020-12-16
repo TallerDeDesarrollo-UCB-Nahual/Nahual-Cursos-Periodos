@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal, Icon} from 'semantic-ui-react'
 import { eliminarPeriodo } from "../../servicios/periodos";
-
+import  servicionotificacion  from "../../servicios/notificaciones";
 
 function Eliminar({ egresadeId }) {
 
@@ -21,6 +21,13 @@ function Eliminar({ egresadeId }) {
                 window.location.reload();
             }
         })
+        mostrarNotificacion();
+    }
+
+    const mostrarNotificacion = () => { 
+        servicionotificacion.mostrarMensajeExito(
+          `Periodo eliminado con éxito`,''
+        );
     }
 
     return (
