@@ -9,7 +9,6 @@ import { Container, Message, Icon } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
 import ListaPreinscriptes from "./components/Preinscriptes/ListaPreinscriptes";
 import Encabezado from "./components/Layouts/Encabezado";
-import "semantic-ui-less/semantic.less";
 import styles from "./styles.module.css";
 import PieDePagina from "./components/Layouts/PieDePagina"
 import ValidarInicioSesion from "../src/components/Autenticacion/ValidarInicioSesion";
