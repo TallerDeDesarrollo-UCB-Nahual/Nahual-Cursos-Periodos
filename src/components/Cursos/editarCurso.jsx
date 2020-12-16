@@ -19,6 +19,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
     const [validacionProfesor, setValidacionProfesor] = useState(false)
     const [validacionNota, setValidacionNota] = useState(false)
     const [validacionHorario, setValidacionHorario] = useState(false)
+    const [validacionNodo, setValidacionNodo] = useState(false)
     const [habilitado, setHabilitado] = useState(false)
     const history = useHistory()
 
@@ -52,40 +53,52 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
       });
   }
 
-    function editar(horario,nota,profesor) {
-        editarCurso(idCurso,{"horario":horario,
-            "SedeId": sedeNodo.SedeId,
-            "NodoId": sedeNodo.NodoId,
-            "notas":nota,
-            "profesores":profesor}).then(curso => {
-        })
-        history.go("/periodos");
-        setAbierto(!estaAbierto);
-    }
+  function resetValores() {
+    setAbierto(!estaAbierto);
+    setHabilitado(false);
+    setValidacionNota(false);
+    setValidacionNodo(false);
+    setValidacionHorario(false);
+    setValidacionProfesor(false);
+  }
 
-    function validarFormulario(data,tipo){
-      switch(tipo){
-        case "profesor":
-          setProfesor(data)
-          if(data.length != 0)
-            setValidacionProfesor(true)
-        break;
-        case "nota":
-          setNota(data)
-          if(data.length != 0)
-            setValidacionNota(true)
-        break;
-        case "horario":
-          setHorario(data)
-          if(data.length != 0)
-            setValidacionHorario(true)
-        break;
-      }
-      if(validacionProfesor || validacionHorario || validacionNota){
-        setHabilitado(true);
-      }
+  function editar(horario,nota,profesor) {
+      editarCurso(idCurso,{"horario":horario,
+          "SedeId": sedeNodo.SedeId,
+          "NodoId": sedeNodo.NodoId,
+          "notas":nota,
+          "profesores":profesor}).then(curso => {
+      })
+      history.go("/periodos");
+      setAbierto(!estaAbierto);
+  }
 
+  function validarFormulario(data,tipo){
+    switch(tipo){
+      case "sede-nodo":
+        setProfesor(data)
+          setValidacionNodo(true)
+      break;
+      case "profesor":
+        setProfesor(data)
+        if(data.length != 0)
+          setValidacionProfesor(true)
+      break;
+      case "nota":
+        setNota(data)
+        if(data.length != 0)
+          setValidacionNota(true)
+      break;
+      case "horario":
+        setHorario(data)
+        if(data.length != 0)
+          setValidacionHorario(true)
+      break;
     }
+    if(validacionProfesor || validacionHorario || validacionNota || validacionNodo){
+      setHabilitado(true);
+    }
+  }
 
 
     return (
@@ -110,16 +123,18 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
                 return {
                   key: `sede-${s.id}`,
                   value: [s.nodo.id, s.id],
-                  //value = {[sede,nodo]},
                   text: s.nombre + " - " + s.nodo.nombre,
                 };
               })}
               onChange={(e, data) => {
                 const selected = data.value;
+                validarFormulario(data.value , "sede-nodo")
                 setSedeNodo({
                   SedeId: selected[1],
                   NodoId: selected[0],
                 });
+                setNodo(selected[0])
+                setSede(selected[1])
               }}
             />
               <Form.Input
@@ -157,6 +172,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
             className="cancelButton"
             onClick={() => {
               setAbierto(!estaAbierto);
+              resetValores();
             }}
           >
             Cancelar <Icon name="remove" style={{ margin: '0 0 0 10px' }}/>
@@ -169,6 +185,7 @@ export default function EditarCurso({curso, estaAbierto,setAbierto, idCurso}) {
               editar(horario,
                 notas,
                 profesores);
+              resetValores();
             }}
           >
             Editar <Icon name="checkmark" style={{ margin: '0 0 0 10px' }}/>

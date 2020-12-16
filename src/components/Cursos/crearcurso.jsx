@@ -11,6 +11,11 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
   const [sedeNodo, setSedeNodo] = useState(null);
   const [nota, setNota] = useState("");
   const [profesor, setProfesor] = useState("");
+  const [validacionProfesor, setValidacionProfesor] = useState(false)
+  const [validacionNota, setValidacionNota] = useState(false)
+  const [validacionNodo, setValidacionNodo] = useState(false)
+  const [validacionHorario, setValidacionHorario] = useState(false)
+  const [habilitado, setHabilitado] = useState(false)
   function inicializarSedes() {
     obtenerSedes()
       .then((response) => response.json())
@@ -29,6 +34,11 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
     setNota("");
     setProfesor("");
     setAbierto(!estaAbierto);
+    setHabilitado(false);
+    setValidacionNota(false);
+    setValidacionNodo(false);
+    setValidacionHorario(false);
+    setValidacionProfesor(false);
   }
   useEffect(() => {
     inicializarSedes();
@@ -39,6 +49,33 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
       "Curso creado con éxito",
       `Se creó el curso ${curso.horario}`
     );
+  }
+
+  function validarFormulario(data,tipo){
+    switch(tipo){
+      case "sede-nodo":
+        setProfesor(data)
+          setValidacionNodo(true)
+      break;
+      case "profesor":
+        setProfesor(data)
+        if(data.length != 0)
+          setValidacionProfesor(true)
+      break;
+      case "nota":
+        setNota(data)
+        if(data.length != 0)
+          setValidacionNota(true)
+      break;
+      case "horario":
+        setHorario(data)
+        if(data.length != 0)
+          setValidacionHorario(true)
+      break;
+    }
+    if(validacionProfesor && validacionHorario && validacionNota && validacionNodo){
+      setHabilitado(true);
+    }
   }
 
   return (
@@ -67,6 +104,7 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
             })}
             onChange={(e, data) => {
               const selected = data.value;
+              validarFormulario(data.value , "sede-nodo")
               setSedeNodo({
                 SedeId: selected[1],
                 NodoId: selected[0],
@@ -78,14 +116,14 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
               fluid
               type="text"
               className={"form-control"}
-              onChange={(x, data) => setHorario(data.value)}
+              onChange={(x, data) => validarFormulario(data.value , "horario")}
             />
             <Form.Input
               label="Profesor"
               fluid
               type="text"
               class="form-control"
-              onChange={(x, data) => setProfesor(data.value)}
+              onChange={(x, data) => validarFormulario(data.value , "profesor")}
             />
             <Form.Input
               label="Notas"
@@ -93,7 +131,7 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
               type="text"
               class="form-control"
               control={TextArea}
-              onChange={(x, data) => setNota(data.value)}
+              onChange={(x, data) => validarFormulario(data.value , "nota")}
             />
         </Form>
       </Modal.Content>
@@ -110,6 +148,7 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
         <Button
           className="confirmButton"
           color="green"
+          disabled={!habilitado}
           onClick={() => {
             crearCurso({                
               ...sedeNodo,

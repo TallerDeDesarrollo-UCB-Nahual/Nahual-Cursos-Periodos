@@ -20,10 +20,6 @@ export default function ListarCursosGuardados({estaAbierto, setAbierto, idPeriod
           .then((response) => setCursos(response.response));
     },[idPeriodo]);
 
-    //componentDidUpdate(()=>{
-    //    console.log("updateeeeee");
-    //})
-
     const listacursos = 
     <div id="listaCursos" className={"forceFlex isColumn rowGap"}>
         <Table>
