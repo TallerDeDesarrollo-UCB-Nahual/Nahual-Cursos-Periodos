@@ -2,6 +2,9 @@
   "name": "nahual-cursos-periodos",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@auth0/auth0-react": "^1.2.0",
     "axios": "^0.21.0",
