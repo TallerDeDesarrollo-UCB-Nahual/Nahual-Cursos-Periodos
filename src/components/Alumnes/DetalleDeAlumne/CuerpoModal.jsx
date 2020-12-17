@@ -81,10 +81,10 @@ const CuerpoModal = ({ alumne, cerrarModal, filtrarAlumne }) => {
             <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(1)}>
               Des-inscribir
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(6)}>
+            <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(5)}>
               Abandono
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(4)}>
+            <Dropdown.Item onClick={() => cambiarEstadoDeInscripte(3)}>
               Egreso
             </Dropdown.Item>
           </Dropdown.Menu>

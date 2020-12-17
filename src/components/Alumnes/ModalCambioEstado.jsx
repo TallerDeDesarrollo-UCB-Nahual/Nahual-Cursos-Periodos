@@ -5,8 +5,8 @@ function ModalCambioEstado(props) {
 	const [abierto, cambiarAbierto] = React.useState(false);
 	const opciones = [
 		{ key: "1", text: "PreInscripte", value: "PreInscripte" },
-		{ key: "3", text: "Abandonade", value: "Abandonade" },
-		{ key: "5", text: "Egresade", value: "Egresade" }
+		{ key: "5", text: "Abandonade", value: "Abandonade" },
+		{ key: "3", text: "Egresade", value: "Egresade" }
 	];
 	const [opcionSeleccionada, setOpcionSeleccionada] = React.useState(
 		opciones[2].value
@@ -20,10 +20,10 @@ function ModalCambioEstado(props) {
 				estadoACambiar = 1;
 				break;
 			case "Abandonade":
-				estadoACambiar = 3;
+				estadoACambiar = 5;
 				break;
 			case "Egresade":
-				estadoACambiar = 5;
+				estadoACambiar = 3;
 				break;
 			default:
 				estadoACambiar = 2;
