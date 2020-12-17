@@ -1,0 +1,7 @@
+.notificationMessage {
+    z-index: 10000;
+    display: none;
+    position: fixed;
+    padding-left: 40%;
+    padding-top: 0.5%;
+}
