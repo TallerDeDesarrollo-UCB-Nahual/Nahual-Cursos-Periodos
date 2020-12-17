@@ -97,9 +97,9 @@ const generarFila = (alumne, numeroDeFila) => {
     PrimeraLetraEnMayuscula(alumne.nombre + " " + alumne.apellido),
     alumne.correo,
     alumne.celular,
-    alumne.sede.nombre,
-    alumne.nodo.nombre,
-    alumne.nivelIngles.nombre,
+    alumne.sede && alumne.sede.nombre,
+    alumne.nodo && alumne.nodo.nombre,
+    alumne.nivelIngles && alumne.nivelIngles.nombre,
     fechaDeNacimiento
   ];
 };
