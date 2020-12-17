@@ -2,9 +2,10 @@
 
 Indice
 - Versiones
-- Documentación básica dada por react
-- Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
 - Links de aplicaciones deployadas
+- Credenciales
+- Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
+- Documentación básica dada por react
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -12,6 +13,50 @@ Indice
 
 - NodeJS: 12.18.3
 - React: 16.13.1
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Links de aplicaciones deployadas
+
+#### Ambiente de Produccion
+
+- Serivicio de datos: https://nahual-datos-estudiantes.herokuapp.com/api 
+
+- Servicio de autenticacion: https://nahual-auth-service.herokuapp.com/api/
+
+- Aplicación Cursos-Periodos: https://nahual-portal-cursos.herokuapp.com/
+
+
+#### Ambiente de Desarrollo
+
+- Serivicio de datos: https://nahual-datos-dev.herokuapp.com/ 
+
+- Servicio de autenticacion: https://nahualautenticacion-desarrollo.herokuapp.com/api/
+
+- Aplicación Cursos-Periodos: https://nahual-portal-cursos-dev.herokuapp.com/
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Credenciales
+
+- Auth0
+correo: nahualproyecto@gmail.com
+contraseña: Nahual123
+
+- Gmail
+correo: nahualproyecto@gmail.com
+contraseña: Nahual123*
+
+- Heroku
+correo: nahualproyecto@gmail.com
+contraseña: Nahual123*
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
+
+- https://app.diagrams.net/#G1PwuIgNhDV0nHuwikm_jZ04tK0tsTPlUS
+- https://docs.google.com/presentation/d/198xv0X_JREhjtBnGXSR9XO3WurTEVbMSO6ti_PzKBVQ/edit#
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -93,19 +138,3 @@ Esta sección se ha movido aquí: [https://facebook.github.io/create-react-app/d
 Esta sección se ha trasladado aquí: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/ create-react-app / docs / troubleshooting # npm-run-build-fail-to-minify)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-### Link a presentación diagrama de componentes del proyecto Nahual-Cursos-Periodos
-
-- https://app.diagrams.net/#G1PwuIgNhDV0nHuwikm_jZ04tK0tsTPlUS
-- https://docs.google.com/presentation/d/198xv0X_JREhjtBnGXSR9XO3WurTEVbMSO6ti_PzKBVQ/edit#
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-### Links de aplicaciones deployadas
-
-- Serivicio de datos a usar: https://nahual-datos-estudiantes.herokuapp.com/api 
-
-- Aplicación Cursos-Periodos: https://nahual-portal-cursos.herokuapp.com/
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
