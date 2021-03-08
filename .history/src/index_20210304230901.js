@@ -7,11 +7,10 @@ import "semantic-ui-css/semantic.min.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-
 ReactDOM.render(
   <Auth0Provider
-    domain={`${process.env.REACT_APP_DOMAIN}`}
-    clientId={`${process.env.REACT_APP_CLIENT_ID}`}
+    domain="dev-0563c-jv.us.auth0.com"
+    clientId="MEMtfqM7PWnV0GZm4fYywKb8IIB3uYvf"
     useRefreshTokens={true}
     cacheLocation="localstorage"
   >
@@ -19,8 +18,7 @@ ReactDOM.render(
       <App />
     </Router>
   </Auth0Provider>,
-  document.getElementById("root"),
-  console.log(process.env.REACT_APP_CLIENT_ID)
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
