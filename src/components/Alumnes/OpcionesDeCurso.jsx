@@ -27,7 +27,7 @@ class OpcionesDeCurso extends Component{
         });
       })
       .catch(() => {
-        alert("Error en la base de datos.");
+        console.log("Error al cargar la base de datos")
       });
   }
 
