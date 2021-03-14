@@ -47,7 +47,7 @@ class ListaDeAlumnesPorCurso extends Component {
         this.setState({
           mostrarBotonDeCarga: false
         });
-        alert("Error en la base de datos.");
+        console.log("Error al cargar la base de datos")
       });
   }
 

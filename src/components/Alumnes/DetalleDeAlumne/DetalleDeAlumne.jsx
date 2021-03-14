@@ -21,7 +21,7 @@ class DetalleDeAlumne extends Component {
         });
       })
       .catch(function (error) {
-      alert("Error en la base de datos.")
+        console.log("Error al cargar la base de datos")
       });
   }
 
