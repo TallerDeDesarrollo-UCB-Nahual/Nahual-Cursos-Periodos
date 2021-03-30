@@ -10,7 +10,7 @@ function convertirAMayusculas(str) {
 
 function Preinscripte({ preinscripte }) {
   moment.locale('es');
-  const fechaConvertida = moment(preinscripte.fechaNacimiento).format('LL');
+  const fechaConvertida = moment(preinscripte.fechaNacimiento).format('DD/MM/yyyy');
   return (
     <Item.Group>
       <Item>
