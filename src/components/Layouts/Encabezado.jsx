@@ -49,6 +49,21 @@ function Encabezado() {
                   Alumnes
                 </NavLink>
               </Menu.Item>
+
+              <Menu.Item style={{ marginRight: "50px" }}>
+                {" "}
+                <NavLink
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#81ce32",
+                  }}
+                  style={{ color: "black" }}
+                  to="/topicos"
+                >
+                  Topicos
+                </NavLink>
+              </Menu.Item>
+
               <Menu.Item position="right">
                 <Dropdown
                   trigger={
