@@ -14,6 +14,7 @@ import styles from "./styles.module.css";
 import PieDePagina from "./components/Layouts/PieDePagina"
 import ValidarInicioSesion from "../src/components/Autenticacion/ValidarInicioSesion";
 import ProtegerRuta from "./components/Autenticacion/ProtegerRuta";
+import Topico from "./components/Topicos/topicos.jsx"
 
 function App() {
   return (
@@ -72,6 +73,11 @@ function App() {
                   exact
                   path="/alumnes"
                   component={ListaDeAlumnesPorCurso}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/topicos"
+                  component={Topico}
                 />
                 <ProtegerRuta
                   exact
