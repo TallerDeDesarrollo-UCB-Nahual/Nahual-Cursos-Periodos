@@ -36,33 +36,7 @@ function Encabezado() {
                   Nodos & Sedes
                 </NavLink>
               </Menu.Item>
-              <Menu.Item>
-                {" "}
-                <NavLink
-                  activeStyle={{
-                    fontWeight: "bold",
-                    color: "#81ce32",
-                  }}
-                  style={{ color: "black" }}
-                  to="/periodos"
-                >
-                  Periodos
-                </NavLink>
-              </Menu.Item>
-              <Menu.Item>
-                {" "}
-                <NavLink
-                  activeStyle={{
-                    fontWeight: "bold",
-                    color: "#81ce32",
-                  }}
-                  style={{ color: "black" }}
-                  to="/lista-Preinscriptes"
-                >
-                  Inscripción
-                </NavLink>
-              </Menu.Item>
-              <Menu.Item>
+              <Menu.Item style={{ marginRight: "50px" }}>
                 {" "}
                 <NavLink
                   activeStyle={{
