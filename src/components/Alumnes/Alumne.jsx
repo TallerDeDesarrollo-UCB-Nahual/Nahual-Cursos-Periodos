@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Table } from "semantic-ui-react";
 import DetalleDeAlumne from "./DetalleDeAlumne/DetalleDeAlumne";
 import { Link } from 'react-router-dom';
 import Eliminar from './eliminaAlumne/Eliminar';
@@ -20,6 +21,8 @@ function Alumne(props) {
   }  
 
   return (
+
+
     <Table.Row>
       <Table.Cell style={{ textAlign: "center" }}>
         <input
