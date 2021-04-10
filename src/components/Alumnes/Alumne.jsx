@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "semantic-ui-react";
+import { Button, Table } from "semantic-ui-react";
 import DetalleDeAlumne from "./DetalleDeAlumne/DetalleDeAlumne";
 
 function Alumne(props) {
@@ -16,6 +16,8 @@ function Alumne(props) {
   }  
 
   return (
+
+
     <Table.Row>
       <Table.Cell style={{ textAlign: "center" }}>
         <input
