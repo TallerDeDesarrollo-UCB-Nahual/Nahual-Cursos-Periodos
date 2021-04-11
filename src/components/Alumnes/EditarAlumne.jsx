@@ -4,6 +4,7 @@ import { Form, Input, Dropdown } from 'semantic-ui-react-form-validator';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { MensajeResultante } from './tipoDeMensaje/MensajeResultante.jsx';
+import axios from 'axios';
 
 export const OpcionesDeNivelDeIngles = [
   {
@@ -25,9 +26,29 @@ export const OpcionesDeNivelDeIngles = [
       valueToSend : 3
   }
 ];
+export const OpcionesDeEstadoLaboral = [
+  {
+    key: 0,
+    text: 'Desempleado',
+    value: 'Desempleado',
+    valueToSend: false
+  },
+  {
+    key: 1,
+    text: 'Empleado',
+    value: 'Empleado',
+    valueToSend: true
+  },
 
-class EditarAlumne extends Component {
-  state = {}
+];
+
+function obtenerValorConvertidoDeEnvio(opciones, valorAConvertir) {
+  return opciones.filter(op => op.key === valorAConvertir)[0].valueToSend;
+}
+export class EditarAlumne extends Component {
+  state = {
+    salir :false
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -44,18 +65,54 @@ class EditarAlumne extends Component {
         isVisibleSuccessMessage: false
       },
     };
-    //this.handleConfirm = this.handleConfirm.bind(this);
-    //this.handleConfirmEdition = this.handleConfirmEdition.bind(this);
+    this.handleConfirm = this.handleConfirm.bind(this);
+    this.handleConfirmEdition = this.handleConfirmEdition.bind(this);
   }
-  handleChange = (e, { value }) => this.setState({ value })
+
+  handleChange = (e, { value }) => this.setState({ value },()=>{})
   handleCancelEdition() {
     this.setState({ abrirModal: true });
   }
-  handleCancel = () => { this.setState({ abrirModal: false }) }
+  handleCancel = () => { this.setState({ abrirModal: false },()=>{}) }
 
   handleConfirm() {
-    this.setState({ abrirModal: false })
+    this.setState({ abrirModal: false },()=>{})
     this.props.history.push("/listaEgresades");
+  }
+  async handleConfirmEdition() {
+    let graduate = await this.guardarEgresade();
+    if (graduate !== undefined) {
+      this.setState({ isVisibleSuccessMessage: true });
+      setTimeout(() => {
+        this.setState({ isVisibleSuccessMessage: false });
+        this.props.history.push("/listaEgresades");
+      }, 700);
+    }
+  }
+async guardarEgresade() {
+    var egresadeAEnviar = {
+      ...this.state.egresade,
+      nodoId: obtenerValorConvertidoDeEnvio(this.state.nodos, this.state.egresade.nodo),
+      sedeId: obtenerValorConvertidoDeEnvio(this.obtenerSede(this.state.egresade.nodo), this.state.egresade.sede)
+    }
+    let graduateData;
+    egresadeAEnviar.nivelInglesId = this.existeNivelIngles(this.state.egresade.nivelIngles)
+    egresadeAEnviar = this.obtenerFechaNacimiento(egresadeAEnviar);
+    //egresadeAEnviar.celular = parseInt(egresadeAEnviar.celular);
+    egresadeAEnviar.esEmpleado = OpcionesDeEstadoLaboral.filter(op => op.value === this.state.egresade.esEmpleado)[0].valueToSend;
+    egresadeAEnviar.fechaNacimiento = egresadeAEnviar.fechaNacimiento === "" ? null :  egresadeAEnviar.fechaNacimiento;
+    delete egresadeAEnviar.nodo;
+    delete egresadeAEnviar.sede;
+    delete egresadeAEnviar.nivelIngles;
+    try {
+      graduateData = await axios.put(`${process.env.REACT_APP_EGRESADES_NAHUAL_API}/estudiantes/${egresadeAEnviar.id}`, egresadeAEnviar)
+    } catch {
+      this.setState({ isVisibleErrorMessage: true });
+      setTimeout(() => {
+        this.setState({ isVisibleErrorMessage: false });
+      }, 2200);
+    }
+    return graduateData;
   }
 
   enCambio = (event) => {
@@ -64,10 +121,10 @@ class EditarAlumne extends Component {
     let estadoDepurado = this.state.alumne;
     delete estadoDepurado[`${nombre}`];
     let nuevoEstado = { ...estadoDepurado, [`${nombre}`]: valor };
-    this.setState({ alumne: nuevoEstado });
+    this.setState({ alumne: nuevoEstado },()=>{});
   }
   obtenerNuevaFecha() {
-    if(this.state.alumne.fechaNacimiento == undefined || this.state.egresade.fechaNacimiento == ""){
+    if(this.state.alumne.fechaNacimiento === undefined || this.state.egresade.fechaNacimiento === ""){
       return null;
     }else {
       const mes = this.state.alumne.fechaNacimiento.substring(5,7);
@@ -89,7 +146,7 @@ class EditarAlumne extends Component {
   }
   onChangeDropdown = (e, { value, name }) => {
     let valor = this.state.alumne[name];
-    this.setState({ selectedType: valor })
+    this.setState({ selectedType: valor },()=>{})
     valor = value;
     this.state.alumne[name] = valor;
   }
@@ -241,8 +298,8 @@ class EditarAlumne extends Component {
                   />
                 </span>
               </Grid.Column>
-    
-            
+
+
           </Grid>
           <Grid centered rows={1} columns={1}>
             <GridRow>

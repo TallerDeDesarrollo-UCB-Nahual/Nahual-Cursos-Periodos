@@ -6,13 +6,14 @@ function Eliminar({ alumneId, curseId}) {
     const [abierto, setAbierto] = React.useState(false);
     const onOpen = () => setAbierto(true);
     const onClose = () => setAbierto(false);
-
+/*
     const eliminarAlumneCurseAPI = (alumneId,curseId) => {
         console.log(alumneId);
         console.log(curseId);
-        const API_URL = `${process.env.REACT_APP_API_URL}/estudiantes`;
+        const API_URL = `${process.env.REACT_APP_API_URL}`;
+
         axios
-            .delete(`${API_URL}/inscriptos/${alumneId}?cursoId=${curseId}`)
+            .delete(`${API_URL}/cursos/${curseId}/inscriptes/${alumneId}`)
             .then(response => {
                 //eliminarVista();
             })
@@ -20,8 +21,22 @@ function Eliminar({ alumneId, curseId}) {
                 console.log(error);
             });
         onClose();
+    }*/
+
+    const eliminarAlumneCurseAPI = (alumneId,curseId) => {
+        const API_URL = `${process.env.REACT_APP_API_URL}/estudiantes/`;
+        console.log(`${API_URL}${alumneId}`);
+            axios
+            .delete(`${API_URL}${alumneId}?curseId=${curseId}`)
+            .then(response => {
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        onClose();
     }
-    
+
     return (
         <>
             <Button onClick={onOpen}>
