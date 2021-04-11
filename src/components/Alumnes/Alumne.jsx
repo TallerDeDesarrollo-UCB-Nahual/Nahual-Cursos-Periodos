@@ -2,7 +2,9 @@ import React from "react";
 import DetalleDeAlumne from "./DetalleDeAlumne/DetalleDeAlumne";
 import EditarAlumne from "./EditarAlumne";
 import { Link } from 'react-router-dom';
+import Eliminar from './eliminaAlumne/Eliminar'
 import { Label, Button, Message, Table, Search, Dropdown } from 'semantic-ui-react'
+
 
 function Alumne(props) {
   function PrimeraLetraEnMayuscula(nombreCompleto) {
@@ -39,6 +41,7 @@ function Alumne(props) {
                       <label className="icon-text">Editar</label>
                     </Button></Link>
                     }
+      <Eliminar  alumneId={props.item.id} curseId={props.cursoId} ></Eliminar>
 			</Table.Cell>
     </Table.Row>
   );

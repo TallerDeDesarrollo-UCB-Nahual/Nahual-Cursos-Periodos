@@ -54,7 +54,7 @@ function App() {
                 />
                 <ProtegerRuta
                   exact
-                  path="/alumnes/:id"
+                  path="/alumne/:id"
                   component={EditarAlumne}
                 />
                 <ProtegerRuta
