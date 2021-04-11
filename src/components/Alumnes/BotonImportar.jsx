@@ -28,7 +28,8 @@ const findSede = (data, sede) => {
 
 const findEstudiante = (listaEstudiantes, correo, numero) => {
   var estudiante = listaEstudiantes.find(el => el.correo === correo && el.celular === numero)
-    if(estudiante !== null) {
+  console.log(estudiante)
+    if(estudiante !== undefined) {
       return estudiante
     }
     else{
@@ -228,7 +229,8 @@ class BotonImportar extends Component {
                     onError={this.handleOnError}
                     addRemoveButton
                     onRemoveFile={this.handleOnRemoveFile}>
-                    <span>Drop CSV file here to upload.</span>
+                    <span>Arrastra el archivo CSV aqui.</span>
+                    <p> El CSV tiene que tener la informacion de celular y correo para importar</p>
                 </CSVReader>
                 </Modal.Description>
               {this.state.mostrarLista && this.state.inscriptes !== [] ?
