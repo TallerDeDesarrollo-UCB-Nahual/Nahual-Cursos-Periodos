@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import EditarAlumne from "./components/Alumnes/EditarAlumne";
 
 import ListarNodos from "./components/Nodos/listarNodos";
 import { Container, Message, Icon } from "semantic-ui-react";
@@ -51,6 +51,11 @@ function App() {
                   exact
                   path="/alumnes"
                   component={ListaDeAlumnesPorCurso}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/alumnes/:id"
+                  component={EditarAlumne}
                 />
                 <ProtegerRuta
                   exact

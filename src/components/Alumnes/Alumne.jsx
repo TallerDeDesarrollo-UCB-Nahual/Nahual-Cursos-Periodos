@@ -1,6 +1,8 @@
 import React from "react";
-import { Table } from "semantic-ui-react";
 import DetalleDeAlumne from "./DetalleDeAlumne/DetalleDeAlumne";
+import EditarAlumne from "./EditarAlumne";
+import { Link } from 'react-router-dom';
+import { Label, Button, Message, Table, Search, Dropdown } from 'semantic-ui-react'
 
 function Alumne(props) {
   function PrimeraLetraEnMayuscula(nombreCompleto) {
@@ -30,6 +32,13 @@ function Alumne(props) {
       </Table.Cell>
       <Table.Cell textAlign='center'>
 				<DetalleDeAlumne id={props.item.id} filtrarAlumne={(id)=> props.filtrarAlumne(id)} ></DetalleDeAlumne>
+			</Table.Cell>
+      <Table.Cell textAlign='center'>
+      {<Link to={`/alumne/${props.item.id}`}><Button className="view-button">
+                      <i className="edit icon"></i>
+                      <label className="icon-text">Editar</label>
+                    </Button></Link>
+                    }
 			</Table.Cell>
     </Table.Row>
   );
