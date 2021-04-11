@@ -40,10 +40,12 @@ class EditarAlumne extends Component {
         nivelIngles: '',
         sedes: [],
         nodos: [],
+        isVisibleErrorMessage: false,
+        isVisibleSuccessMessage: false
       },
     };
-    this.handleConfirm = this.handleConfirm.bind(this);
-    this.handleConfirmEdition = this.handleConfirmEdition.bind(this);
+    //this.handleConfirm = this.handleConfirm.bind(this);
+    //this.handleConfirmEdition = this.handleConfirmEdition.bind(this);
   }
   handleChange = (e, { value }) => this.setState({ value })
   handleCancelEdition() {

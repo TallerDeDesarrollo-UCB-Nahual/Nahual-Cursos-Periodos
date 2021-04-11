@@ -10,7 +10,7 @@ function Eliminar({ alumneId, curseId}) {
     const eliminarAlumneCurseAPI = (alumneId,curseId) => {
         console.log(alumneId);
         console.log(curseId);
-        const API_URL = `${process.env.REACT_APP_EGRESADES_NAHUAL_API}/estudiantes/`;
+        const API_URL = `${process.env.REACT_APP_API_URL}/estudiantes`;
         axios
             .delete(`${API_URL}/inscriptos/${alumneId}?cursoId=${curseId}`)
             .then(response => {
