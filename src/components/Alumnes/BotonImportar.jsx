@@ -27,9 +27,12 @@ const findSede = (data, sede) => {
 
 
 const findEstudiante = (listaEstudiantes, correo, numero) => {
-    if((listaEstudiantes.Mail.find(el => el === correo)) && (listaEstudiantes.numero.find(el => el === numero))) {
-      return 
-
+  var estudiante = listaEstudiantes.find(el => el.correo === correo && el.celular === numero)
+    if(estudiante !== null) {
+      return estudiante
+    }
+    else{
+      return null
     }
 }
 
@@ -116,23 +119,25 @@ class BotonImportar extends Component {
   }
 
   onSubmit = (onRegistrarCorrectamente) => {
-    let lista = this.state.inscriptes
-    fetch(URL_Estudiantes, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': JSON.stringify(lista).length.toString()
-      },
-      body: JSON.stringify(lista)
-    }).then(res => {
-      if (res) {
-        onRegistrarCorrectamente(this.state.contandorInscriptes)
-        this.state.open= false
+    let curso = this.props.cursoActual;
+    let lista = this.state.inscriptes;
+    lista.forEach(inscripte => {
+      var nuevoInscripte = {
+        "estudianteId": inscripte.id,
+        "cursoId": curso
       }
-    })
-      .catch(err => {
-        console.log("error al leer los datos " + err)
+      fetch(`${URL_Inscriptos}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': JSON.stringify(nuevoInscripte).length.toString()
+        },
+        body: JSON.stringify(nuevoInscripte)
       })
+      
+    });
+    this.abrirModal(false)
+   
   }
 
 
@@ -142,34 +147,44 @@ class BotonImportar extends Component {
       var sede = fila.data["SEDE"]
       var correo = fila.data["Mail"]
       var numero = fila.data["Numero de Celular"]
-
-      if ((findNodo(listaNodos, nodo)) && (findSede(listaSedes, sede)) && (findEstudiante(listaEstudiantes, correo, numero))) {
-        var inscripte = {
-          "nombre": fila.data["Nombre"],
-          "apellido": fila.data["Apellido"],
-          "Estado": "Egresade",
-          "fechaNacimiento": this.getDate(fila.data["Fecha de Nacimiento"]),
-          "correo": fila.data["Mail"],
-          "celular": fila.data["Numero de Celular"],
-          "sede": fila.data["SEDE"],
-          "nodo": fila.data["NODO"],
-          "añoGraduacion": fila.data["Anio"],
-          "cuatrimestre": fila.data["Cuatri"],
-          "nivelIngles": fila.data["Ingles"] === "Básico" ? "Basico":fila.data["Ingles"],
-          "nombrePrimerTrabajo": fila.data["Empresa IT primer empleo"],
-          "linkedin": fila.data["Linkedin"],
-          "esEmpleado": fila.data["Consiguio trabajo luego de egresar?"] === "Sí" || fila.data["Consiguio trabajo luego de egresar?"] === "Si" ? true : false,
-          "modulo": fila.data["Tipo de curso del cual egreso"]
+      var estudiante = findEstudiante(listaEstudiantes,correo, numero)
+      if(estudiante !== null) {
+        if ((findNodo(listaNodos, nodo)) && (findSede(listaSedes, sede))) {
+          var inscripte = {
+            "id":estudiante.id,
+            "nombre": estudiante.nombre,
+            "apellido": estudiante.apellido,
+            "estadoId": estudiante.estadoId,
+            "fechaNacimiento": estudiante.fechaNacimiento,
+            "correo": estudiante.correo,
+            "celular": estudiante.celular,
+            "nodoId": estudiante.nodoId,
+            "sedeId": estudiante.sedeId,
+            "añoGraduacion": estudiante.añoGraduacion,
+            "cuatrimestre": estudiante.cuatrimestre,
+            "nivelInglesId": estudiante.nivelInglesId,
+            "nombrePrimerTrabajo": estudiante.nombrePrimerTrabajo,
+            "linkedin": estudiante.linkedin,
+            "esEmpleado": estudiante.esEmpleado,
+            "modulo": estudiante.modulo,
+            "zona": estudiante.zona,
+            "dni": estudiante.dni,
+            "nacionalidad": estudiante.nacionalidad,
+            "trabajaActualmente": estudiante.trabajaActualmente,
+            "trabajaSistemas": estudiante.trabajaActualmente,
+            "experienciaSistemas": estudiante.experienciaSistemas,
+            "estudiosSistemas": estudiante.estudiosSistemas,
+            "correoOpcional": estudiante.correoOpcional,
+            "detalle": estudiante.detalle,
+            "fechaActualTrabajo": estudiante.fechaActualTrabajo,
+            "lugarActualTrabajo": estudiante.lugarActualTrabajo,
+            "fechaPrimerEmpleo": estudiante.fechaPrimerEmpleo
+          }
+          this.state.inscriptes.push(inscripte)
+          this.incrementarContadorInscriptes()
         }
-        this.state.inscriptes.push(inscripte)
-        this.incrementarContadorInscriptes()
-      }
-      else {
-        this.state.inscriptes = []
-        this.setState({ contandorInscriptes: 0 })
-        throw null;
-      }
-      this.mostrarTabla()
+        this.mostrarTabla()
+      }     
     })
   }
 

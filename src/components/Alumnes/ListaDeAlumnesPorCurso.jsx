@@ -178,7 +178,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
             <Table.Body>{this.listaAlumnes()}</Table.Body>
           </Table>
           {this.listaVacia()}
-          <BotonImportar json={this.state.curso}/>
+          <BotonImportar cursoActual={this.state.curso}/>
           <ModalCambioEstado alumnes={this.state.alumnesSeleccionados} cambiarEstadoSeleccionable={this.cambiarEstadoSeleccionable} filtrarAlumneDeLaLista={this.filtrarAlumneDeLaLista} />
         </div>
       </div>
