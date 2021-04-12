@@ -1,8 +1,8 @@
 import React from "react";
 import DetalleDeAlumne from "./DetalleDeAlumne/DetalleDeAlumne";
-import EditarAlumne from "./EditarAlumne";
 import { Link } from 'react-router-dom';
-import Eliminar from './eliminaAlumne/Eliminar'
+import Eliminar from './eliminaAlumne/Eliminar';
+import EditarAlumne from './EditarAlumne';
 import { Label, Button, Message, Table, Search, Dropdown } from 'semantic-ui-react'
 
 
@@ -36,11 +36,8 @@ function Alumne(props) {
 				<DetalleDeAlumne id={props.item.id} filtrarAlumne={(id)=> props.filtrarAlumne(id)} ></DetalleDeAlumne>
 			</Table.Cell>
       <Table.Cell textAlign='center'>
-      {<Link to={`/alumne/${props.item.id}`}><Button className="view-button">
-                      <i className="edit icon"></i>
-                      <label className="icon-text">Editar</label>
-                    </Button></Link>
-                    }
+      <EditarAlumne  id={props.item.id}  nombre={props.item.nombre} apellido={props.item.apellido}
+                    celular={props.item.celular}> </EditarAlumne>
       <Eliminar  alumneId={props.item.id} curseId={props.cursoId} ></Eliminar>
 			</Table.Cell>
     </Table.Row>

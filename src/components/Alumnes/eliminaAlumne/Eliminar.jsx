@@ -29,7 +29,7 @@ function Eliminar({ alumneId, curseId}) {
             axios
             .delete(`${API_URL}${alumneId}?curseId=${curseId}`)
             .then(response => {
-
+                window.location.reload(false);
             })
             .catch(function (error) {
                 console.log(error);
