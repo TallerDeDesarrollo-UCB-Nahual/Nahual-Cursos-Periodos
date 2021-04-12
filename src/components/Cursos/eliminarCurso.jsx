@@ -1,10 +1,10 @@
 import React, { useReducer } from "react";
 import { Button, Icon } from 'semantic-ui-react'
-import { eliminarCursoDePeriodo } from "../../servicios/periodos";
+import { eliminarCurso } from "../../servicios/cursos";
 import  servicionotificacion  from "../../servicios/notificaciones";
 
 
-function EliminarCurso({ idPeriodo, idCurso }) {
+function EliminarCurso({ idCurso }) {
 
     const mostrarNotificacion = () => { 
         servicionotificacion.mostrarMensajeExito(
@@ -12,17 +12,17 @@ function EliminarCurso({ idPeriodo, idCurso }) {
         );
     }
 
-    const eliminarCursoDeAPI = (idPeriodo, idCurso) => {
-        eliminarCursoDePeriodo(idPeriodo, idCurso);
+    const eliminarCursoDeAPI = ( idCurso) => {
+        eliminarCurso( idCurso);
         mostrarNotificacion();
-        window.location.replace("/periodos");
+        window.location.replace("/cursos");
         setTimeout(function () { window.location.reload();}, 5000); 
     }
 
     return (
         <>
-            <Button  negative color="red" size="small" onClick={() => eliminarCursoDeAPI(idPeriodo, idCurso)}>
-                Eliminar <Icon color='white' name='delete' style={{ margin: '0 0 0 10px' }} />
+            <Button  negative color="red" size="small" onClick={() => eliminarCursoDeAPI( idCurso)}>
+                Eliminar <Icon color='white' name='trash' style={{ margin: '0 0 0 10px' }} />
             </Button>
         </>
     );

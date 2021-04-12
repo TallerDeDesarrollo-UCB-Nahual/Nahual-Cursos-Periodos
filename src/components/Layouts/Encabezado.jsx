@@ -57,6 +57,19 @@ function Encabezado() {
                     color: "#81ce32",
                   }}
                   style={{ color: "black" }}
+                  to="/cursos"
+                >
+                  Cursos
+                </NavLink>
+              </Menu.Item>
+              <Menu.Item>
+                {" "}
+                <NavLink
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#81ce32",
+                  }}
+                  style={{ color: "black" }}
                   to="/lista-Preinscriptes"
                 >
                   Inscripción

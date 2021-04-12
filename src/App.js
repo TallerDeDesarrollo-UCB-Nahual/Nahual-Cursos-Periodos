@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Periodos from "./components/Periodos/periodos";
+import Cursos from "./components/Cursos/cursos";
 import NuevoPeriodo from "./components/Periodos/crearperiodo";
 import EditarPeriodo from "./components/Periodos/editarperiodo";
 import ListarNodos from "./components/Nodos/listarNodos";
@@ -52,7 +53,15 @@ function App() {
                   path="/periodos"
                   component={Periodos}
                 />
-                <ProtegerRuta exact path="/nodos" component={ListarNodos} />
+                 <ProtegerRuta
+                  exact
+                  path="/cursos"
+                  component={Cursos}
+                />
+                <ProtegerRuta 
+                  exact 
+                  path="/nodos" 
+                  component={ListarNodos} />
                 <ProtegerRuta
                   exact
                   path="/formulario-registro-periodo"
