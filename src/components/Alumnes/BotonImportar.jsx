@@ -28,7 +28,6 @@ const findSede = (data, sede) => {
 
 const findEstudiante = (listaEstudiantes, correo, numero) => {
   var estudiante = listaEstudiantes.find(el => el.correo === correo && el.celular === numero)
-  console.log(estudiante)
     if(estudiante !== undefined) {
       return estudiante
     }
@@ -61,6 +60,7 @@ class BotonImportar extends Component {
           console.log(error);
         });
   }
+
   obtenerEstudiantes = async () => {
     const API_URL = `${process.env.REACT_APP_API_URL}/estudiantes/`;
     await
@@ -78,6 +78,7 @@ class BotonImportar extends Component {
           console.log(error);
         });
   }
+  
     constructor(props) {
       super(props);
       this.obtenerNodosYSedes()
@@ -94,7 +95,10 @@ class BotonImportar extends Component {
 
   abrirModal(estado) {
     this.setState({
-      open: estado
+      open: estado,
+      mostrarLista: false, 
+      inscriptes: [], 
+      contandorInscriptes: 0 
     })
   }
 
@@ -135,14 +139,15 @@ class BotonImportar extends Component {
         },
         body: JSON.stringify(nuevoInscripte)
       })
-      
+    
     });
     this.abrirModal(false)
-   
+
   }
 
 
   handleOnDrop = (data) => {
+    this.obtenerEstudiantes()
     data.forEach(fila => {
       var nodo = fila.data["NODO"]
       var sede = fila.data["SEDE"]
@@ -155,7 +160,7 @@ class BotonImportar extends Component {
             "id":estudiante.id,
             "nombre": estudiante.nombre,
             "apellido": estudiante.apellido,
-            "estadoId": estudiante.estadoId,
+            "estadoId": 1,
             "fechaNacimiento": estudiante.fechaNacimiento,
             "correo": estudiante.correo,
             "celular": estudiante.celular,
@@ -230,7 +235,7 @@ class BotonImportar extends Component {
                     addRemoveButton
                     onRemoveFile={this.handleOnRemoveFile}>
                     <span>Arrastra el archivo CSV aqui.</span>
-                    <p> El CSV tiene que tener la informacion de celular y correo para importar</p>
+                    <p> El CSV tiene que tener las cabeceras de "Numero de Celular" y "Mail" para importar</p>
                 </CSVReader>
                 </Modal.Description>
               {this.state.mostrarLista && this.state.inscriptes !== [] ?
