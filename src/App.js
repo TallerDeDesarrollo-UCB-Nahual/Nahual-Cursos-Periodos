@@ -8,13 +8,13 @@ import EditarPeriodo from "./components/Periodos/editarperiodo";
 import ListarNodos from "./components/Nodos/listarNodos";
 import { Container, Message, Icon } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
-import ListaPreinscriptes from "./components/Preinscriptes/ListaPreinscriptes";
 import Encabezado from "./components/Layouts/Encabezado";
 import "semantic-ui-less/semantic.less";
 import styles from "./styles.module.css";
 import PieDePagina from "./components/Layouts/PieDePagina"
 import ValidarInicioSesion from "../src/components/Autenticacion/ValidarInicioSesion";
 import ProtegerRuta from "./components/Autenticacion/ProtegerRuta";
+import Topico from "./components/Topicos/topicos.jsx"
 
 function App() {
   return (
@@ -64,23 +64,18 @@ function App() {
                   component={ListarNodos} />
                 <ProtegerRuta
                   exact
-                  path="/formulario-registro-periodo"
-                  component={NuevoPeriodo}
-                />
-                <ProtegerRuta
-                  exact
-                  path="/periodos/:id"
-                  children={<EditarPeriodo />}
-                />
-                <ProtegerRuta
-                  exact
-                  path="/lista-preinscriptes"
-                  component={ListaPreinscriptes}
-                />
-                <ProtegerRuta
-                  exact
                   path="/alumnes"
                   component={ListaDeAlumnesPorCurso}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/alumne/:id"
+                  component={EditarAlumne}
+                />
+                <ProtegerRuta
+                  exact
+                  path="/topicos"
+                  component={Topico}
                 />
                 <ProtegerRuta
                   exact

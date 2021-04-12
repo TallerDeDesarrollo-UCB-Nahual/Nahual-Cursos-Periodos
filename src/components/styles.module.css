@@ -18,6 +18,7 @@
     display: flex;
     justify-content: center;
 }
+
 .vistaCursos{
     padding-left: 2em;
     padding-right: 2em;
@@ -57,4 +58,5 @@
 
 .crearNodoButton {
     text-align-last: end;
-} 
+}
+

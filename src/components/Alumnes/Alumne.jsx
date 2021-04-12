@@ -1,6 +1,11 @@
 import React from "react";
-import { Table } from "semantic-ui-react";
+import { Button, Table } from "semantic-ui-react";
 import DetalleDeAlumne from "./DetalleDeAlumne/DetalleDeAlumne";
+import { Link } from 'react-router-dom';
+import Eliminar from './eliminaAlumne/Eliminar';
+import EditarAlumne from './EditarAlumne';
+import { Label, Message, Search, Dropdown } from 'semantic-ui-react'
+
 
 function Alumne(props) {
   function PrimeraLetraEnMayuscula(nombreCompleto) {
@@ -16,6 +21,8 @@ function Alumne(props) {
   }  
 
   return (
+
+
     <Table.Row>
       <Table.Cell style={{ textAlign: "center" }}>
         <input
@@ -30,6 +37,11 @@ function Alumne(props) {
       </Table.Cell>
       <Table.Cell textAlign='center'>
 				<DetalleDeAlumne id={props.item.id} filtrarAlumne={(id)=> props.filtrarAlumne(id)} ></DetalleDeAlumne>
+			</Table.Cell>
+      <Table.Cell textAlign='center'>
+      <EditarAlumne  id={props.item.id}  nombre={props.item.nombre} apellido={props.item.apellido}
+                    celular={props.item.celular}> </EditarAlumne>
+      <Eliminar  alumneId={props.item.id} curseId={props.cursoId} ></Eliminar>
 			</Table.Cell>
     </Table.Row>
   );
