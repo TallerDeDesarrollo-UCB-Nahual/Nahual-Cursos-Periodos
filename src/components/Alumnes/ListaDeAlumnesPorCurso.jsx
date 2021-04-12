@@ -90,7 +90,7 @@ class ListaDeAlumnesPorCurso extends Component {
 
   mapeoListaAlumnes(listaAlumnes) {
     return listaAlumnes.map((alumne,contador) => {
-      return <Alumne item={alumne.estudiante} filtrarAlumne={(id) => this.filtrarAlumneDeLaLista(id)} key={alumne.estudiante.id} seleccionarAlumne={this.seleccionarAlumne} numeracion={contador+1}/>;
+      return <Alumne item={alumne.estudiante} cursoId={this.state.curso} filtrarAlumne={(id) => this.filtrarAlumneDeLaLista(id)} key={alumne.estudiante.id} seleccionarAlumne={this.seleccionarAlumne} numeracion={contador+1}/>;
     });
   }
 
