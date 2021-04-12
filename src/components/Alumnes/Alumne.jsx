@@ -4,7 +4,7 @@ import DetalleDeAlumne from "./DetalleDeAlumne/DetalleDeAlumne";
 import { Link } from 'react-router-dom';
 import Eliminar from './eliminaAlumne/Eliminar';
 import EditarAlumne from './EditarAlumne';
-import { Label, Button, Message, Table, Search, Dropdown } from 'semantic-ui-react'
+import { Label, Message, Search, Dropdown } from 'semantic-ui-react'
 
 
 function Alumne(props) {
