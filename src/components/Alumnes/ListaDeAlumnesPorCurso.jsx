@@ -1,18 +1,11 @@
 import Axios from "axios";
 import React, { Component } from "react";
 import OpcionesDeCurso from "./OpcionesDeCurso";
-import {
-  Dimmer,
-  Form,
-  Header,
-  Loader,
-  Message,
-  Table,
-  Button
-} from "semantic-ui-react";
+import {Dimmer,Header,Loader,Message,Table} from "semantic-ui-react";
 import Alumne from "./Alumne";
 import ModalCambioEstado from "./ModalCambioEstado.jsx";
 import BotonExportar from "./BotonExportar";
+import BotonImportar from "./BotonImportar";
 
 class ListaDeAlumnesPorCurso extends Component {
   constructor(props) {
@@ -103,6 +96,7 @@ class ListaDeAlumnesPorCurso extends Component {
         content={"Intenta mas tarde. Gracias"}
       />
     ) : (
+      <div>
       <BotonExportar
         seleccionados={this.state.alumnesSeleccionados}
         deseleccionarAlumnes={() => {
@@ -110,6 +104,9 @@ class ListaDeAlumnesPorCurso extends Component {
           this.setState({ alumnesSeleccionados: [] });
         }}
       />
+
+
+      </div>
     );
   }
 
@@ -157,6 +154,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
 
   render() {
     return (
+
       <div>
         {this.iconoDeCarga()}
         <Header as="h2" textAlign="center" content="Lista Alumnes" />
@@ -180,6 +178,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
             <Table.Body>{this.listaAlumnes()}</Table.Body>
           </Table>
           {this.listaVacia()}
+          <BotonImportar cursoActual={this.state.curso}/>
           <ModalCambioEstado alumnes={this.state.alumnesSeleccionados} cambiarEstadoSeleccionable={this.cambiarEstadoSeleccionable} filtrarAlumneDeLaLista={this.filtrarAlumneDeLaLista} />
         </div>
       </div>
