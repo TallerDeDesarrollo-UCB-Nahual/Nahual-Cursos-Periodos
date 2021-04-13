@@ -177,6 +177,7 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
                 </Table.HeaderCell>
                 <Table.HeaderCell>NOMBRE Y APELLIDO</Table.HeaderCell>
                 <Table.HeaderCell textAlign="center"></Table.HeaderCell>
+                <Table.HeaderCell textAlign="center"></Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>{this.listaAlumnes()}</Table.Body>

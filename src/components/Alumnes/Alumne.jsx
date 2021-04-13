@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Eliminar from './eliminaAlumne/Eliminar';
 import EditarAlumne from './EditarAlumne';
 import { Label, Message, Search, Dropdown } from 'semantic-ui-react'
+import styles from "../styles.module.css";
 
 
 function Alumne(props) {
@@ -40,7 +41,7 @@ function Alumne(props) {
 			</Table.Cell>
       <Table.Cell textAlign='center'>
       <EditarAlumne  id={props.item.id}  nombre={props.item.nombre} apellido={props.item.apellido}
-                    celular={props.item.celular}> </EditarAlumne>
+                    celular={props.item.celular} fechaNacimiento={props.item.fechaNacimiento} correo={props.item.correo}> </EditarAlumne>
       <Eliminar  alumneId={props.item.id} curseId={props.cursoId} ></Eliminar>
 			</Table.Cell>
     </Table.Row>

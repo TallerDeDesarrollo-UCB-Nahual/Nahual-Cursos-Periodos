@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Confirm } from "semantic-ui-react";
+import { Button, Confirm, Icon } from "semantic-ui-react";
 import axios from "axios";
 
 function Eliminar({ alumneId, curseId}) {
@@ -39,9 +39,9 @@ function Eliminar({ alumneId, curseId}) {
 
     return (
         <>
-            <Button onClick={onOpen}>
-                <i className="user delete icon"></i>
+            <Button onClick={onOpen} color='red' >
                 <label className="icon-delete">Eliminar</label>
+                <Icon color='white' name='trash' style={{ margin: '0 0 0 10px' }} />
             </Button>
             <Confirm
                 open={abierto}

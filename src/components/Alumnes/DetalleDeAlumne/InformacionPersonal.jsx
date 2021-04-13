@@ -10,7 +10,7 @@ function convertirAMayusculas(palabras) {
 
 function InformacionPersonal({ alumne }) {
   moment.locale("es");
-  const fecha_convertida = moment(alumne.fechaNacimiento).format("DD/MM/yyyy");
+  const fecha_convertida = moment(alumne.fechaNacimiento).add('days',1).format("DD/MM/YYYY");
   return (
     <Item.Group>
       <Item>
