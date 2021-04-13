@@ -12,7 +12,7 @@ const IniciarSesion = () => {
       <Segment vertical textAlign="center" style={{marginTop: "-100px"}}>
         <Header icon textAlign="center" size="huge">
           <Image src={Logo} style={{ width: "200px", height: "200px" }} />
-          <Header>¡Bienvenido!</Header>
+          <Header icon >¡Bienvenido!</Header>
           <Header.Subheader>
             Para continuar debe iniciar sesión.
           </Header.Subheader>

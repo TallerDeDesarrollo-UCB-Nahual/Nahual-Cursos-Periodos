@@ -28,6 +28,7 @@ const NoAutorizado = () => {
         </Reveal>
       </Grid>
       <Header
+        icon
         style={{ marginTop: "45px" }}
         textAlign="center"
         as="h2"

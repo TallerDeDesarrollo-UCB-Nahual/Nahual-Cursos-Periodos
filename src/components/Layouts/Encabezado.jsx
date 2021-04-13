@@ -36,7 +36,8 @@ function Encabezado() {
                   Nodos & Sedes
                 </NavLink>
               </Menu.Item>
-              <Menu.Item style={{ marginRight: "50px" }}>
+
+              <Menu.Item>
                 {" "}
                 <NavLink
                   activeStyle={{
@@ -49,7 +50,8 @@ function Encabezado() {
                   Cursos
                 </NavLink>
               </Menu.Item>
-              <Menu.Item>
+
+              <Menu.Item >
                 {" "}
                 <NavLink
                   activeStyle={{
@@ -57,7 +59,7 @@ function Encabezado() {
                     color: "#81ce32",
                   }}
                   style={{ color: "black" }}
-                  to="/lista-Preinscriptes"
+                  to="/alumnes"
                 >
                   Alumnes
                 </NavLink>

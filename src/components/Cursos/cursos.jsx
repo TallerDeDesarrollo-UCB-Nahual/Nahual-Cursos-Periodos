@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table, Select, Icon, Message, Input, Label, Header } from "semantic-ui-react";
+import { Button, Table, Select, Icon, Message, Input, Header, Image } from "semantic-ui-react";
 import { obtenerCursos } from "../../servicios/cursos";
-import { useHistory } from "react-router-dom";
 import styles from "../styles.module.css";
 import EditarCurso from "./editarCurso";
 import EliminarCurso from "./eliminarCurso";
@@ -74,8 +73,13 @@ export default function Cursos() {
   />
 
   return (
-  <div className={styles.vistaPeriodos}>
-  <Header center="true" as='h1'  image={iconCurso} textAlign="center" content='Cursos'/>
+    
+  <div className={styles.vistaCursos}>
+    <Header as='h1' icon textAlign='center'>
+      <Icon name='university' circular />
+      <Header.Content>Cursos</Header.Content>
+    </Header>
+
     <div className={"opcionesPeriodo"}>
  
     <Input
