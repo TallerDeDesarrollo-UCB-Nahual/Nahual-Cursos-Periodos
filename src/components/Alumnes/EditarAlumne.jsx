@@ -90,8 +90,9 @@ export class EditarAlumne extends Component {
         size="lg"
         closeIcon
         trigger={
-          <Button color='green' className={styles.botonBasurero}>
-            <Icon className={styles.editar} name='edit outline' />
+          <Button color='blue' className={styles.botonBasurero} style={{ margin: '10px 10px' }}>
+            Editar        
+            <Icon className={styles.editar} name='edit outline' style={{ margin: '0 0 0 10px' }} />            
           </Button>}>
             {
                 this.state.alumne.nombre ?
