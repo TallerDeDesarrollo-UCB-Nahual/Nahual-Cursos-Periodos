@@ -18,4 +18,7 @@ function obtenerCursoPorId(id) {
   return axios.get(`${BASE_ROUTE}/cursos/${id}`);
 }
 
-export { obtenerCursos, crearCurso, obtenerCursoPorId, editarCurso, obtenerCurso };
+function eliminarCurso(id) {
+  return axios.delete(`${BASE_ROUTE}/cursos/${id}`);
+}
+export { obtenerCursos, crearCurso, obtenerCursoPorId, eliminarCurso, editarCurso, obtenerCurso };

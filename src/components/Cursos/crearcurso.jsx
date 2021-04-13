@@ -2,20 +2,32 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal, Form, TextArea, Icon,Grid, Image } from "semantic-ui-react";
 import { obtenerSedes } from "../../servicios/sedes";
 import { crearCurso, obtenerCursoPorId } from "../../servicios/cursos";
+import { obtenerModulos } from "../../servicios/modulos";
 import LogoNahual from '../../assets/logo-proyecto-nahual.webp'
 import servicioNotificacion from "../../servicios/notificaciones";
 
-export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, setCursos }) {
+export default function CrearCurso({estaAbierto, setAbierto, cursos, setCursos }) {
+  const [topicos, setTopicos] = useState([]);
   const [sedes, setSedes] = useState([]);
+
+  const [topico, setTopico] = useState(null);
+  const [anio, setAnio] = useState(2021);
+  const [estado, setEstado] = useState(true);
+  const [periodo, setPeriodo] = useState("")
   const [horario, setHorario] = useState("");
   const [sedeNodo, setSedeNodo] = useState(null);
   const [nota, setNota] = useState("");
   const [profesor, setProfesor] = useState("");
+
+  const [validacionTopico, setValidacionTopico] = useState(false)
+  const [validacionPeriodo, setValidacionPeriodo] = useState(false)
   const [validacionProfesor, setValidacionProfesor] = useState(false)
   const [validacionNota, setValidacionNota] = useState(false)
   const [validacionNodo, setValidacionNodo] = useState(false)
   const [validacionHorario, setValidacionHorario] = useState(false)
+
   const [habilitado, setHabilitado] = useState(false)
+
   function inicializarSedes() {
     obtenerSedes()
       .then((response) => response.json())
@@ -28,11 +40,24 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
       });
   }
 
+  function inicializarTopicos() {
+    obtenerModulos()
+      .then((response) => response.json())
+      .then((response) => {
+        setTopicos(response.response);
+        setTopico(response.response[0].id);
+      });
+  }
+
   function resetValores() {
-    setHorario("");
     inicializarSedes();
+    inicializarTopicos();
+    setHorario("");
     setNota("");
     setProfesor("");
+    setAnio(2021);
+    setPeriodo("");
+    setEstado(true);
     setAbierto(!estaAbierto);
     setHabilitado(false);
     setValidacionNota(false);
@@ -40,8 +65,10 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
     setValidacionHorario(false);
     setValidacionProfesor(false);
   }
+
   useEffect(() => {
     inicializarSedes();
+    inicializarTopicos();
   }, []);
 
   function mostrarNotificacion(curso) { 
@@ -53,33 +80,75 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
 
   function validarFormulario(data,tipo){
     switch(tipo){
+      case "anio":
+        setAnio(data)
+      break;
+      case "periodo":
+        setPeriodo(data)
+        if(data.length !== 0)
+          setValidacionPeriodo(true)
+      break;
+      case "topico":
+        setValidacionTopico(true)
+      break;
       case "sede-nodo":
-        setProfesor(data)
-          setValidacionNodo(true)
+        setValidacionNodo(true)
       break;
       case "profesor":
         setProfesor(data)
-        if(data.length != 0)
+        if(data.length !== 0)
           setValidacionProfesor(true)
       break;
       case "nota":
         setNota(data)
-        if(data.length != 0)
+        if(data.length !== 0)
           setValidacionNota(true)
       break;
       case "horario":
         setHorario(data)
-        if(data.length != 0)
+        if(data.length !== 0)
           setValidacionHorario(true)
       break;
+      default:
+      break;
     }
-    if(validacionProfesor && validacionHorario && validacionNota && validacionNodo){
+    if(validacionProfesor && validacionHorario && validacionNota && validacionNodo && validacionPeriodo && validacionTopico){
       setHabilitado(true);
     }
   }
+ 
+  function crear(){
+    crearCurso({                
+      anio: anio,
+      periodo: periodo,
+      estado: estado,
+      TopicoId: topico,
+      ...sedeNodo,
+      horario: horario,
+      profesores: profesor,
+      notas: nota,
+    })
+      .then((x) => {
+        return x.data;
+      })
+      .then((x) => {
+        return x.result;
+      })
+      .then((x) => {
+        return obtenerCursoPorId(x.id);
+      })
+      .then((x) => {
+        return x.data.respuesta;
+      })
+      .then((x) => {
+        setCursos([...cursos, x]);
+        mostrarNotificacion(x);
+      });
+     
+  }
 
   return (
-    <Modal closeIcon open={estaAbierto} onClose={() => setAbierto(!estaAbierto)}>
+    <Modal closeIcon open={estaAbierto} onClose={() => {setAbierto(!estaAbierto); resetValores();}}>
       <Modal.Header>
         <Grid columns='equal'>
           <Grid.Column>
@@ -92,9 +161,60 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
       </Modal.Header>
       <Modal.Content>
         <Form>
+          <Form.Input
+            label="Año"
+            fluid
+            value={anio}
+            type="number"
+            className={"form-control"}
+            onChange={(x, data) => validarFormulario(data.value , "anio")}
+            required={true}
+          />
+          <Form.Input
+            label="Periodo"
+            fluid
+            placeholder = "Ingrese Periodo (1 o 2)"
+            type="text"
+            value={periodo}
+            className={"form-control"}
+            onChange={(x, data) => validarFormulario(data.value , "periodo")}
+            required={true}
+          />
+         <Form.Select
+            label="Estado"
+            fluid
+            value = {estado}
+            placeholder = "Seleccione Estado"
+            options={[
+              { key: "activo", value: true, text: "Activo" },
+              { key: "inactivo", value: false, text: "Inactivo" },
+            ]}
+            onChange={(x, data) => {
+              setEstado(data.value === true);
+            }}
+            required={true}
+          />
+          <Form.Select
+            label="Topico"
+            fluid
+            placeholder = "Seleccione Topico"
+            options={topicos.map((t) => {
+              return {
+                key: `topico-${t.id}`,
+                value: t.id,
+                text: t.nombre,
+              };
+            })}
+            onChange={(e, data) => { 
+              setTopico(data.value);
+              validarFormulario(data.value , "topico");
+            }}
+            required={true}
+          />
           <Form.Select
             fluid
             label="Sede - Nodo"
+            placeholder = "Seleccione Sede - Nodo"
             options={sedes.map((s) => {
               return {
                 key: `sede-${s.id}`,
@@ -110,29 +230,34 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
                 NodoId: selected[0],
               });
             }}
+            required={true}
           />
-            <Form.Input
-              label="Horario"
-              fluid
-              type="text"
-              className={"form-control"}
-              onChange={(x, data) => validarFormulario(data.value , "horario")}
-            />
-            <Form.Input
-              label="Profesor"
-              fluid
-              type="text"
-              class="form-control"
-              onChange={(x, data) => validarFormulario(data.value , "profesor")}
-            />
-            <Form.Input
-              label="Notas"
-              fluid
-              type="text"
-              class="form-control"
-              control={TextArea}
-              onChange={(x, data) => validarFormulario(data.value , "nota")}
-            />
+          <Form.Input
+            label="Horario"
+            fluid
+            type="text"
+            placeholder = "Turno (00:00 - 00:00)"
+            className={"form-control"}
+            onChange={(x, data) => validarFormulario(data.value , "horario")}
+            required={true}
+          />
+          <Form.Input
+            label="Profesor"
+            fluid
+            type="text"
+            class="form-control"
+            onChange={(x, data) => validarFormulario(data.value , "profesor")}
+            required={true}
+          />
+          <Form.Input
+            label="Notas"
+            fluid
+            type="text"
+            class="form-control"
+            control={TextArea}
+            onChange={(x, data) => validarFormulario(data.value , "nota")}
+            required={true}
+          />
         </Form>
       </Modal.Content>
       <Modal.Actions>
@@ -150,29 +275,7 @@ export default function CrearCurso({estaAbierto, setAbierto, idPeriodo, cursos, 
           color="green"
           disabled={!habilitado}
           onClick={() => {
-            crearCurso({                
-              ...sedeNodo,
-              horario: horario,
-              profesores: profesor,
-              notas: nota,
-              PeriodoId: idPeriodo
-            })
-              .then((x) => {
-                return x.data;
-              })
-              .then((x) => {
-                return x.result;
-              })
-              .then((x) => {
-                return obtenerCursoPorId(x.id);
-              })
-              .then((x) => {
-                return x.data.respuesta;
-              })
-              .then((x) => {
-                setCursos([...cursos, x]);
-                mostrarNotificacion(x);
-              });
+            crear();
             resetValores();
           }}
         >

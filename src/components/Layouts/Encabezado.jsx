@@ -36,7 +36,22 @@ function Encabezado() {
                   Nodos & Sedes
                 </NavLink>
               </Menu.Item>
-              <Menu.Item style={{ marginRight: "50px" }}>
+
+              <Menu.Item>
+                {" "}
+                <NavLink
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#81ce32",
+                  }}
+                  style={{ color: "black" }}
+                  to="/cursos"
+                >
+                  Cursos
+                </NavLink>
+              </Menu.Item>
+
+              <Menu.Item >
                 {" "}
                 <NavLink
                   activeStyle={{

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, Icon } from "semantic-ui-react";
+import { Button, Table, Icon, Header } from "semantic-ui-react";
 import {obtenerTopicos} from '../../servicios/topicos';
 import './topicos.css'
 import NuevoTopico from './nuevoTopico';
 import EliminarTopico from './EliminarTopico';
 import EditarTopico from './editarTopico'
+import styles from "../styles.module.css";
+
 export default function Topicos() {
     const [topicos, setTopicos] = useState([]);
     const [topicSelected, setTopicSelected] = useState({id:'',nombre:''});
@@ -38,17 +40,14 @@ export default function Topicos() {
           return (
           
             <Table.Row key={`topico-${topico.id}`}>
-              <Table.Cell>{index}</Table.Cell>
+              <Table.Cell>{index+1}</Table.Cell>
               <Table.Cell>{topico.nombre}</Table.Cell>
               <Table.Cell>
                 <div className={"displayFlex centered columnGap"}>
                   <Button
                     color="yellow"
                     onClick={() => {
-
-                        //console.log('topic',topico);
                         setTopicSelected({id:topico.id,nombre:topico.nombre});
-                        //console.log(topicSelected);
                         setIsOpenModalEditTopic(true);
                         
                     }}
@@ -75,12 +74,17 @@ export default function Topicos() {
 
     return (
         <>
-        <div className="header">
-            <h1>Topicos</h1>
-            <Button color='green' onClick={() => {setIsOpenModal(true)}}>
-            Topico
-                <Icon color='white' name='add circle' style={{ margin: '0 0 0 10px' }} />
+        <div className={styles.vistaCursos}>
+          <Header as='h1' icon textAlign='center'>
+            <Icon name='code' size='tiny' circular  />
+            <Header.Content>Topicos</Header.Content>
+          </Header>
+          <div className={styles.crearNodoButton}>
+            <Button floated="right"  color='green'  onClick={() => {setIsOpenModal(true)}}>
+              Topico
+              <Icon color='white' name='add circle' style={{ margin: '0 0 0 10px',}} />
             </Button>
+          </div>
         </div>
         {listaPeriodos}
         <NuevoTopico isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} updateTopicsTable={fetchDataTopics}/>

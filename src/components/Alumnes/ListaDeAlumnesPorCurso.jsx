@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { Component } from "react";
 import OpcionesDeCurso from "./OpcionesDeCurso";
-import {Dimmer,Header,Loader,Message,Table} from "semantic-ui-react";
+import {Dimmer,Header,Loader,Message,Icon,Table} from "semantic-ui-react";
 import Alumne from "./Alumne";
 import ModalCambioEstado from "./ModalCambioEstado.jsx";
 import BotonExportar from "./BotonExportar";
@@ -157,7 +157,11 @@ seleccionarAlumne = (alumne,estaSeleccionado)=>{
 
       <div>
         {this.iconoDeCarga()}
-        <Header as="h2" textAlign="center" content="Lista Alumnes" />
+        <Header as='h1' icon textAlign='center'>
+          <Icon name='users' circular />
+          {/* <Image src={} circular /> */}
+          <Header.Content>Lista Alumnes</Header.Content>
+        </Header>
         <OpcionesDeCurso cuandoCambiaElCurso={this.cuandoCambiaElCurso} />
         <div style={{ overflowX: "auto" }}>
           <Table singleLine selectable striped unstackable>

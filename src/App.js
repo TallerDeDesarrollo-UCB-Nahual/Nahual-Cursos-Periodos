@@ -1,8 +1,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import EditarAlumne from "./components/Alumnes/EditarAlumne";
-
+import Cursos from "./components/Cursos/cursos";
 import ListarNodos from "./components/Nodos/listarNodos";
 import { Container, Message, Icon } from "semantic-ui-react";
 import ListaDeAlumnesPorCurso from "./components/Alumnes/ListaDeAlumnesPorCurso";
@@ -13,6 +12,7 @@ import PieDePagina from "./components/Layouts/PieDePagina"
 import ValidarInicioSesion from "../src/components/Autenticacion/ValidarInicioSesion";
 import ProtegerRuta from "./components/Autenticacion/ProtegerRuta";
 import Topico from "./components/Topicos/topicos.jsx"
+import EditarAlumne from "./components/Alumnes/EditarAlumne"
 
 function App() {
   return (
@@ -46,7 +46,15 @@ function App() {
             <div className="app__sidebar" />
             <main className="app__content">
               <Switch>
-                <ProtegerRuta exact path="/nodos" component={ListarNodos} />
+                 <ProtegerRuta
+                  exact
+                  path="/cursos"
+                  component={Cursos}
+                />
+                <ProtegerRuta 
+                  exact 
+                  path="/nodos" 
+                  component={ListarNodos} />
                 <ProtegerRuta
                   exact
                   path="/alumnes"

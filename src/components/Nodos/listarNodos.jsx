@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Grid, GridColumn } from 'semantic-ui-react'
+import { Table, Grid, GridColumn, Header, Icon } from 'semantic-ui-react'
 import { obtenerNodos } from "../../servicios/nodos";
 import styles from "../styles.module.css";
 import ListaSedes from "./listaSedes";
@@ -18,8 +18,11 @@ export default function ListarNodos() {
     return (
         <Grid centered columns={2}>
             <GridColumn>
-                <div className={styles.vistaPeriodos}>
-                    <h1>Lista de Nodos y sus Sedes</h1>
+                <div className={styles.vistaCursos}>
+                <Header as='h1' icon textAlign='center'>
+                    <Icon name='map signs' size='tiny' circular  />
+                    <Header.Content>Lista de Nodos - Sedes</Header.Content>
+                </Header>
                     <div className={styles.crearNodoButton}>
                         <CrearNodo open={false} />
                     </div>
