@@ -20,10 +20,11 @@ class OpcionesDeCurso extends Component{
     const API_URL = process.env.REACT_APP_API_URL;
     Axios.get(`${API_URL}/cursos`)
       .then((respuesta) => {
-        this.agregarOpcionesDeFiltrado(respuesta.data.response);
-        this.props.cuandoCambiaElCurso(respuesta.data.response[0].id);
+        var fitroEstado = respuesta.data.response.filter((curso) => curso.estado === true)
+        this.agregarOpcionesDeFiltrado(fitroEstado);
+        this.props.cuandoCambiaElCurso(fitroEstado[0].id);
         this.setState({
-          textoMenu:respuesta.data.response[0].nodo.nombre +" - "+respuesta.data.response[0].sede.nombre + " - " + respuesta.data.response[0].profesores + " - " + respuesta.data.response[0].horario
+          textoMenu:fitroEstado[0].nodo.nombre +" - "+fitroEstado[0].sede.nombre + " - " + fitroEstado[0].profesores + " - " + fitroEstado[0].horario
         });
       })
       .catch(() => {
