@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Modal, Grid, } from 'semantic-ui-react';
-import { CSVReader} from "react-papaparse"
+import { CSVReader } from "react-papaparse"
 import "moment/locale/es";
 import axios from 'axios';
-import Previsualizar from './PrevisualizarTabla'
+import Previsualizar from './PrevisualizarTabla';
+import servicionotificacion from "../../servicios/notificaciones";
 
 var listaNodos = [];
 var listaSedes = [];
@@ -11,7 +12,7 @@ var listaEstudiantes = [];
 
 const findNodo = (datos, nodo) => {
 
-if (datos.find(el => el === nodo)) {
+  if (datos.find(el => el === nodo)) {
     return true
   }
   return false;
@@ -28,12 +29,12 @@ const findSede = (data, sede) => {
 
 const findEstudiante = (listaEstudiantes, correo, numero) => {
   var estudiante = listaEstudiantes.find(el => el.correo === correo && el.celular === numero)
-    if(estudiante !== undefined) {
-      return estudiante
-    }
-    else{
-      return null
-    }
+  if (estudiante !== undefined) {
+    return estudiante
+  }
+  else {
+    return null
+  }
 }
 
 const URL_Estudiantes = `${process.env.REACT_APP_API_URL}/egresades/`;
@@ -78,27 +79,27 @@ class BotonImportar extends Component {
           console.log(error);
         });
   }
-  
-    constructor(props) {
-      super(props);
-      this.obtenerNodosYSedes()
-      this.obtenerEstudiantes()
-      this.state = {
-        open: false,
-        inscriptes: [],
-        contandorInscriptes: 0,
-        mostrarLista: false,
-        respuestaNodos:[]
-      };
-      this.mostrarTabla = this.mostrarTabla.bind(this);
-    }
+
+  constructor(props) {
+    super(props);
+    this.obtenerNodosYSedes()
+    this.obtenerEstudiantes()
+    this.state = {
+      open: false,
+      inscriptes: [],
+      contandorInscriptes: 0,
+      mostrarLista: false,
+      respuestaNodos: []
+    };
+    this.mostrarTabla = this.mostrarTabla.bind(this);
+  }
 
   abrirModal(estado) {
     this.setState({
       open: estado,
-      mostrarLista: false, 
-      inscriptes: [], 
-      contandorInscriptes: 0 
+      mostrarLista: false,
+      inscriptes: [],
+      contandorInscriptes: 0
     })
   }
 
@@ -107,9 +108,9 @@ class BotonImportar extends Component {
       mostrarLista: true,
     });
   }
-  
+
   getDate(date) {
-    if(date){
+    if (date) {
       let splittedDate = date.split("/");
       let preparedDate = splittedDate[1] + '/' + splittedDate[0] + '/' + splittedDate[2];
       return preparedDate;
@@ -126,23 +127,48 @@ class BotonImportar extends Component {
   onSubmit = (onRegistrarCorrectamente) => {
     let curso = this.props.cursoActual;
     let lista = this.state.inscriptes;
-    lista.forEach(inscripte => {
-      var nuevoInscripte = {
-        "estudianteId": inscripte.id,
-        "cursoId": curso
-      }
-      fetch(`${URL_Inscriptos}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Content-Length': JSON.stringify(nuevoInscripte).length.toString()
-        },
-        body: JSON.stringify(nuevoInscripte)
-      })
-    
-    });
+    if (lista.length > 0) {
+      lista.forEach(inscripte => {
+        var nuevoInscripte = {
+          "estudianteId": inscripte.id,
+          "cursoId": curso
+        }
+        fetch(`${URL_Inscriptos}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': JSON.stringify(nuevoInscripte).length.toString()
+          },
+          body: JSON.stringify(nuevoInscripte)
+        }).then(response => {
+          if (response.status == 200) {
+            servicionotificacion.mostrarMensajeExito(
+              "CSV importado con éxito",
+              `Se añadio alumnes con exito`
+            );
+          } else {
+            servicionotificacion.mostrarMensajeError(
+              "Fallo importacion de CSV",
+              `Estado de la peticion: ${response.status}`
+            );
+          }
+        })
+        .catch(function (error) {
+          servicionotificacion.mostrarMensajeError(
+              "Algo salio mal al hacer la peticion",
+              `Ver detalles en la consola del navegador`
+          );
+          console.log(error);
+         } );
+      });
+    }
+    else {
+      servicionotificacion.mostrarMensajeError(
+        "Importacion fallida",
+        `Revise los datos del CSV`
+    );
+    }
     this.abrirModal(false)
-
   }
 
 
@@ -153,11 +179,11 @@ class BotonImportar extends Component {
       var sede = fila.data["SEDE"]
       var correo = fila.data["Mail"]
       var numero = fila.data["Numero de Celular"]
-      var estudiante = findEstudiante(listaEstudiantes,correo, numero)
-      if(estudiante !== null) {
+      var estudiante = findEstudiante(listaEstudiantes, correo, numero)
+      if (estudiante !== null) {
         if ((findNodo(listaNodos, nodo)) && (findSede(listaSedes, sede))) {
           var inscripte = {
-            "id":estudiante.id,
+            "id": estudiante.id,
             "nombre": estudiante.nombre,
             "apellido": estudiante.apellido,
             "estadoId": 1,
@@ -190,7 +216,7 @@ class BotonImportar extends Component {
           this.incrementarContadorInscriptes()
         }
         this.mostrarTabla()
-      }     
+      }
     })
   }
 
@@ -224,25 +250,26 @@ class BotonImportar extends Component {
             </Modal.Header>
 
             <Modal.Content>
-                <Modal.Description>
+              <Modal.Description>
                 <CSVReader
-                    cssClass="csv-reader-input"
-                    config={{
-                      header: true,
-                      skipEmptyLines: 'greedy'}}
-                    onDrop={this.handleOnDrop}
-                    onError={this.handleOnError}
-                    addRemoveButton
-                    onRemoveFile={this.handleOnRemoveFile}>
-                    <span>Arrastra el archivo CSV aqui.</span>
-                    <p> El CSV tiene que tener las cabeceras de "Numero de Celular" y "Mail" para importar</p>
+                  cssClass="csv-reader-input"
+                  config={{
+                    header: true,
+                    skipEmptyLines: 'greedy'
+                  }}
+                  onDrop={this.handleOnDrop}
+                  onError={this.handleOnError}
+                  addRemoveButton
+                  onRemoveFile={this.handleOnRemoveFile}>
+                  <span>Arrastra el archivo CSV aqui.</span>
+                  <p> El CSV tiene que tener las cabeceras de "Numero de Celular" y "Mail" para importar</p>
                 </CSVReader>
-                </Modal.Description>
+              </Modal.Description>
               {this.state.mostrarLista && this.state.inscriptes !== [] ?
-              <Previsualizar json={this.state.inscriptes}/>
-              :
-              <h1 align="center">No se cargo ningun archivo</h1>}
-               
+                <Previsualizar json={this.state.inscriptes} />
+                :
+                <h1 align="center">No se cargo ningun archivo</h1>}
+
             </Modal.Content>
           </Fragment>
         }
@@ -256,4 +283,3 @@ class BotonImportar extends Component {
 }
 
 export default BotonImportar
-  
