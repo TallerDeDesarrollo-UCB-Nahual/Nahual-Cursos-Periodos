@@ -124,50 +124,65 @@ class BotonImportar extends Component {
     this.setState({ contandorInscriptes: this.state.contandorInscriptes + 1 })
   }
 
-  onSubmit = (onRegistrarCorrectamente) => {
+  onSubmit = async (onRegistrarCorrectamente) =>{
     let curso = this.props.cursoActual;
     let lista = this.state.inscriptes;
-    if (lista.length > 0) {
-      lista.forEach(inscripte => {
-        var nuevoInscripte = {
-          "estudianteId": inscripte.id,
-          "cursoId": curso
-        }
-        fetch(`${URL_Inscriptos}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': JSON.stringify(nuevoInscripte).length.toString()
-          },
-          body: JSON.stringify(nuevoInscripte)
-        }).then(response => {
-          if (response.status == 200) {
-            servicionotificacion.mostrarMensajeExito(
-              "CSV importado con éxito",
-              `Se añadio alumnes con exito`
-            );
-          } else {
-            servicionotificacion.mostrarMensajeError(
-              "Fallo importacion de CSV",
-              `Estado de la peticion: ${response.status}`
-            );
-          }
-        })
-        .catch(function (error) {
-          servicionotificacion.mostrarMensajeError(
-              "Algo salio mal al hacer la peticion",
-              `Ver detalles en la consola del navegador`
-          );
-          console.log(error);
-         } );
+    let listaNueva = [];
+    const API_URL = `${process.env.REACT_APP_API_URL}/cursos/${curso}/inscriptes`;
+    await
+    axios
+      .get(`${API_URL}`)
+      .then(response => {
+        listaNueva = response.data.response;
+        listaNueva.forEach(inscripte => {
+          axios
+          .delete(`${process.env.REACT_APP_API_URL}/estudiantes/${inscripte.estudiante.id}?curseId=${curso}`)
+       })
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-    }
-    else {
-      servicionotificacion.mostrarMensajeError(
-        "Importacion fallida",
-        `Revise los datos del CSV`
-    );
-    }
+      if (lista.length > 0) {
+        lista.forEach(inscripte => {
+          var nuevoInscripte = {
+            "estudianteId": inscripte.id,
+            "cursoId": curso
+          }
+          fetch(`${URL_Inscriptos}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Content-Length': JSON.stringify(nuevoInscripte).length.toString()
+            },
+            body: JSON.stringify(nuevoInscripte)
+          }).then(response => {
+            if (response.status == 200) {
+              servicionotificacion.mostrarMensajeExito(
+                "CSV importado con éxito",
+                `Se añadio alumnes con exito`
+              );
+            } else {
+              servicionotificacion.mostrarMensajeError(
+                "Fallo importacion de CSV",
+                `Estado de la peticion: ${response.status}`
+              );
+            }
+          })
+          .catch(function (error) {
+            servicionotificacion.mostrarMensajeError(
+                "Algo salio mal al hacer la peticion",
+                `Ver detalles en la consola del navegador`
+            );
+            console.log(error);
+           } );
+        });
+      }
+      else {
+        servicionotificacion.mostrarMensajeError(
+          "Importacion fallida",
+          `Revise los datos del CSV`
+      );
+      }
     this.abrirModal(false)
   }
 
