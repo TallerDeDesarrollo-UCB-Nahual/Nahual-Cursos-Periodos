@@ -164,6 +164,7 @@ class BotonImportar extends Component {
               "CSV importado con éxito",
               `Se añadio alumnes con exito`
             );
+            window.location.reload(true);
           } else {
             servicionotificacion.mostrarMensajeError(
               "Fallo importacion de CSV",
@@ -188,42 +189,6 @@ class BotonImportar extends Component {
     }
     this.abrirModal(false)
   }
-
-  onSubmit = async (onRegistrarCorrectamente) =>{
-    let curso = this.props.cursoActual;
-    let lista = this.state.inscriptes;
-    let listaNueva = [];
-    const API_URL = `${process.env.REACT_APP_API_URL}/cursos/${curso}/inscriptes`;
-    await
-    axios
-      .get(`${API_URL}`)
-      .then(response => {
-        listaNueva = response.data.response;
-        listaNueva.forEach(inscripte => {
-          axios
-          .delete(`${process.env.REACT_APP_API_URL}/estudiantes/${inscripte.estudiante.id}?curseId=${curso}`)
-       })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    lista.forEach(inscripte => {
-      var nuevoInscripte = {
-        "estudianteId": inscripte.id,
-        "cursoId": curso
-      }
-      fetch(`${URL_Inscriptos}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Content-Length': JSON.stringify(nuevoInscripte).length.toString()
-        },
-        body: JSON.stringify(nuevoInscripte)
-      })
-    });
-    this.abrirModal(false);
-  }
-
 
   handleOnDrop = (data) => {
     this.obtenerEstudiantes()
@@ -283,15 +248,13 @@ class BotonImportar extends Component {
   getResponse(result) {
     this.abrirModal(false)
     console.log(result);
-}
-register=(result)=>
-{
-  if(result==="confirmed")
-  {
-   this.onSubmit();
-   
   }
-}
+  register = (result) => {
+    if (result === "confirmed") {
+      this.onSubmit();
+
+    }
+  }
 
   render() {
     return (
