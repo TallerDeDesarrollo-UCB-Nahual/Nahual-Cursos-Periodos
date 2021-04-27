@@ -25,14 +25,25 @@
 }
 
 .sede{
+    color: red;
     background-color: #E6E6F2 ;
     border-radius: 40px ;
-    padding: 5px 10px ;
+    padding: 50px 100px ;
+    margin-top: 100px;
 }
 
+.botonEditar{
+    display: inline;
+    color: white;
+    background-color: green !important;
+}
+
+
 .botonBasurero{
+    display: inline;
+    color: white;
     padding: 2px 2px !important;
-    background-color: transparent !important;
+    background-color: red !important;
 }
 
 .basurero{
@@ -41,7 +52,6 @@
 
 .editar{
     display: contents !important;
-    color: #2ecc40;
 }
 
 .ui.modal .actions>.ui.primary.button {
