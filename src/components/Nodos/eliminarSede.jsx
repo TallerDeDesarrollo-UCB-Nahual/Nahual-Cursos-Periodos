@@ -19,8 +19,9 @@ function EliminarSede({ id }) {
     
     return (
         <>
-            <Button className={styles.botonBasurero} onClick={onOpen}>
-                <Icon color="red" className={styles.basurero} name='trash alternate outline' />
+            <Button negative color="red" size="small" onClick={onOpen}>
+                <small>Eliminar</small>
+                <Icon className={styles.basurero} name='trash alternate outline' />
             </Button>
             <Confirm
                 open={abierto}

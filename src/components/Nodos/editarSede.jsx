@@ -5,6 +5,7 @@ import styles from "../styles.module.css";
 import BASE_ROUTE from "../../servicios/rutas";
 
 export class EditarSede extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -57,7 +58,8 @@ export class EditarSede extends Component {
                     size="mini"
                     closeIcon
                     trigger={
-                        <Button color='green' className={styles.botonBasurero}>
+                        <Button color="blue" size="mini">
+                            <small>Editar</small>
                             <Icon className={styles.editar} name='edit outline' />
                         </Button>
                     }
@@ -116,6 +118,7 @@ export class EditarSede extends Component {
                         <Button className="confirmButton" onClick={() => this.enConfirmacion()}>Editar</Button>
                     </Modal.Actions>
                 </Modal>
+
             </>
         )
     }

@@ -5,6 +5,7 @@ import styles from "../styles.module.css";
 import ListaSedes from "./listaSedes";
 import CrearNodo from "./crearNodo";
 import CrearSede from "./crearSede";
+import AccionesSedes from "./accionesSedes";
 
 export default function ListarNodos() {
     const [nodos, setNodos] = useState([]);
@@ -16,7 +17,7 @@ export default function ListarNodos() {
     }, [])
 
     return (
-        <Grid centered columns={2}>
+        <Grid centered columns={1}>
             <GridColumn>
                 <div className={styles.vistaCursos}>
                 <Header as='h1' icon textAlign='center'>
@@ -31,6 +32,7 @@ export default function ListarNodos() {
                             <Table.Row>
                                 <Table.HeaderCell>Nodos</Table.HeaderCell>
                                 <Table.HeaderCell>Sedes</Table.HeaderCell>
+                                <Table.HeaderCell></Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
@@ -52,6 +54,9 @@ export default function ListarNodos() {
                                         </Table.Cell>
                                         <Table.Cell verticalAlign='top'>
                                             <ListaSedes nodoId={nodo.id} nodoNombre={nodo.nombre} />
+                                        </Table.Cell>
+                                        <Table.Cell verticalAlign='top'>
+                                            <AccionesSedes nodoId={nodo.id} nodoNombre={nodo.nombre} />
                                         </Table.Cell>
                                     </Table.Row>
                                 )

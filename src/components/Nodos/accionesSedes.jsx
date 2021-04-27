@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { obtenerSedesPorIdNodo } from "../../servicios/nodos";
+import EliminarSede from "./eliminarSede";
+import EditarSede from "./editarSede";
 import { Label, Table } from 'semantic-ui-react'
 import styles from "../styles.module.css";
 
-export default function ListaSedes({ nodoId, nodoNombre }) {
+export default function AccionesSedes({ nodoId, nodoNombre }) {
     const [sedes, setSedes] = useState([]);
 
     const obtener = () => {
@@ -18,18 +20,15 @@ export default function ListaSedes({ nodoId, nodoNombre }) {
         obtener();
     }, []);
 
-    const mystyle = {
-        
-        padding: "12%",
-        width:"100%"
-      };
-
     const listaDeSedes = <div>
         {sedes.map(sede => {
             return (
                 <div>
-                    <Table.Cell style={mystyle}>
-                            <Label className={styles.sede}>• {sede.nombre}</Label>
+                    <Table.Cell align="right">
+                        <div className={'displayFlex centered columnGap'}>
+                            <EditarSede id={sede.id} nombre={sede.nombre} nodoNombre={nodoNombre} nodoId={nodoId}/>
+                            <EliminarSede id={sede.id}/>
+                        </div>
                     </Table.Cell>
                 </div>
             )
